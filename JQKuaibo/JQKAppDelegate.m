@@ -17,6 +17,7 @@
 #import "JQKSystemConfigModel.h"
 #import "JQKPaymentViewController.h"
 #import "JQKMovieViewController.h"
+#import "JQKLaunchView.h"
 
 @interface JQKAppDelegate ()
 
@@ -162,6 +163,8 @@
     [self setupCommonStyles];
     [self.window makeKeyWindow];
     self.window.hidden = NO;
+    JQKLaunchView *launchView = [[JQKLaunchView alloc] init];
+    [launchView show];
     
     if (![JQKUtil isRegistered]) {
         [[JQKActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
