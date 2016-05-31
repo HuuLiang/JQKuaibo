@@ -23,6 +23,10 @@ typedef NS_ENUM(NSInteger, PAYRESULT)
     PAYRESULT_ABANDON   = 2,
     PAYRESULT_UNKNOWN   = 3
 };
+typedef NS_ENUM(NSUInteger, JQKPayPointType) {
+    JQKPayPointTypeNone,
+    JQKPayPointTypeVIP,
+};
 
 // DLog
 #ifdef  DEBUG

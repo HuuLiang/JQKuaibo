@@ -12,6 +12,7 @@
 #import "NSDate+Utilities.h"
 #import "JQKPaymentInfo.h"
 #import "JQKVideo.h"
+#import "JQKApplicationManager.h"
 
 NSString *const kPaymentInfoKeyName = @"jqkuaibov_paymentinfo_keyname";
 
@@ -98,5 +99,19 @@ static NSString *const kUserAccessServicename = @"jqkuaibov_user_access_service"
 + (NSString *)appVersion {
     return [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
 }
+
++ (void)checkAppInstalledWithBundleId:(NSString *)bundleId completionHandler:(void (^)(BOOL))handler {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        BOOL installed = [[[JQKApplicationManager defaultManager] allInstalledAppIdentifiers] bk_any:^BOOL(id obj) {
+            return [bundleId isEqualToString:obj];
+        }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (handler) {
+                handler(installed);
+            }
+        });
+    });
+}
+
 
 @end

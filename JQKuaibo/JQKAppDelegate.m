@@ -10,6 +10,7 @@
 #import "JQKHomeViewController.h"
 #import "JQKHotVideoViewController.h"
 #import "JQKMoreViewController.h"
+#import "JQKSpreadController.h"
 #import "MobClick.h"
 #import "JQKActivateModel.h"
 #import "JQKUserAccessModel.h"
@@ -57,6 +58,11 @@
                                                                            image:[[UIImage imageNamed:@"hot_video_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                                                    selectedImage:[[UIImage imageNamed:@"hot_video_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
+    JQKSpreadController *spreadVC = [[JQKSpreadController alloc] init];
+    spreadVC.title = @"精品";
+    UINavigationController *spreadNav = [[UINavigationController alloc] initWithRootViewController:spreadVC];
+    spreadNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:spreadVC.title image:[UIImage imageNamed:@"tabbar_spread_normal"] selectedImage:[UIImage imageNamed:@"tabbar_spread_normal"]];
+    
     
 //    JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
 //    mineVC.title                         = @"我的";
@@ -75,7 +81,7 @@
                                                                  selectedImage:[[UIImage imageNamed:@"more_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     UITabBarController *tabBarController    = [[UITabBarController alloc] init];
-    tabBarController.viewControllers        = @[homeNav,videoNav,movieNav,moreNav];
+    tabBarController.viewControllers        = @[homeNav,videoNav,movieNav,spreadNav,moreNav];
     tabBarController.tabBar.translucent     = NO;
     tabBarController.tabBar.backgroundImage = [UIImage imageWithColor:[UIColor colorWithWhite:0.95 alpha:1]];
     

@@ -31,6 +31,13 @@
 #define JQK_AGREEMENT_NOTPAID_URL       @"/iosvideo/agreement.html"
 #define JQK_AGREEMENT_PAID_URL          @"/iosvideo/agreement-paid.html"
 
+#define JQK_APP_SPREAD_LIST_URL         @"/iosvideo/appSpreadList.htm"
+#define JQK_STANDBY_APP_SPREAD_LIST_URL @"/static/iosvideo/appSpreadList.json"
+#define JQK_APP_SPREAD_BANNER_URL       @"/iosvideo/appSpreadBanner.htm"
+#define JQK_STANDBY_APP_SPREAD_BANNER_URL   @"/static/iosvideo/appSpreadBanner.json"
+
+
+
 #define JQK_PAYMENT_COMMIT_URL          @"http://pay.iqu8.net/paycenter/qubaPr.json"
 #define JQK_PAYMENT_CONFIG_URL          @"http://pay.iqu8.net/paycenter/payConfig.json"
 #define JQK_STANDBY_PAYMENT_CONFIG_URL  @"http://appcdn.mqu8.com/static/iosvideo/payConfig_%@.json"

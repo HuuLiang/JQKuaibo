@@ -55,11 +55,13 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
 - (CGSize)topSize {
     const CGFloat cvW = CGRectGetWidth(self.collectionView.bounds);
     return CGSizeMake(cvW, cvW/kTopImageScale);
+    
 }
-
+//广告条的布局
 - (CGSize)adBannerSize {
-    const CGFloat cvW = CGRectGetWidth(self.collectionView.bounds);
-    return CGSizeMake(cvW, cvW/5);
+//    const CGFloat cvW = CGRectGetWidth(self.collectionView.bounds);
+//    return CGSizeMake(cvW, cvW/5);
+    return CGSizeMake(0, 0);
 }
 
 - (BOOL)hasAdBannerForItem:(NSUInteger)item {

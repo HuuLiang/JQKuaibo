@@ -30,4 +30,6 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSString *)deviceName;
 + (NSString *)appVersion;
 
++ (void)checkAppInstalledWithBundleId:(NSString *)bundleId completionHandler:(void (^)(BOOL))handler;
+
 @end
