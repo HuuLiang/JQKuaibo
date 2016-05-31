@@ -44,8 +44,8 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
         [_headerImageView addSubview:_priceLabel];
         {
             [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(_headerImageView);
-                make.top.equalTo(_headerImageView.mas_centerY);
+                make.left.equalTo(_headerImageView).mas_offset(2);
+                make.top.equalTo(_headerImageView.mas_centerY).mas_offset(-15);
                 make.width.equalTo(_headerImageView).multipliedBy(0.1);
                 
             }];
@@ -62,7 +62,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
         {
             [_headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.equalTo(self.view);
-                make.height.equalTo(_headerImageView.mas_width).multipliedBy(0.2);
+                make.height.equalTo(_headerImageView.mas_width).multipliedBy(250./900);
             }];
         }
     }

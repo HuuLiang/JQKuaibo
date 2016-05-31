@@ -155,7 +155,7 @@ DefineLazyPropertyInitialization(JQKSpreadModel,appSpreadModel);
                  }
                  
                  if (image) {
-                     NSUInteger showPrice = systemConfigModel.payAmount;
+                     NSUInteger showPrice = systemConfigModel.payAmount *100;
                      BOOL showInteger = showPrice % 100 == 0;
                      self->_priceLabel.text = showInteger ? [NSString stringWithFormat:@"%ld", showPrice/100] : [NSString stringWithFormat:@"%.2f", showPrice/100.];
                  } else {
