@@ -240,7 +240,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
         if (item < self.channelModel.fetchedChannels.count) {
             JQKChannel *channel = self.channelModel.fetchedChannels[item];
             cell.imageURL = [NSURL URLWithString:channel.columnImg];
-            //    cell.title = channel.name;
+                cell.title = channel.name;
             //    cell.subtitle = channel.columnDesc;
         }
     }

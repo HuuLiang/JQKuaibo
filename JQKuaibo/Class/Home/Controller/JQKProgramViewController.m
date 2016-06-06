@@ -42,13 +42,20 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
     // Do any additional setup after loading the view.
     self.title = self.channel.name;
     
-    _layoutTableView = [[UITableView alloc] init];
+    _layoutTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    
+    _layoutTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _layoutTableView.delegate = self;
     _layoutTableView.dataSource = self;
-    _layoutTableView.backgroundColor = [UIColor colorWithWhite:0.05 alpha:1];
-    _layoutTableView.separatorColor = [UIColor colorWithWhite:0.5 alpha:1];
-    _layoutTableView.rowHeight = kScreenHeight * 0.18;
-    _layoutTableView.tableFooterView = [[UIView alloc] init];
+    _layoutTableView.backgroundColor = [UIColor whiteColor];
+    
+//    _layoutTableView.separatorColor = [UIColor colorWithWhite:0.5 alpha:1];
+//    _layoutTableView.rowHeight = kScreenHeight * 0.18;
+    _layoutTableView.rowHeight = kScreenWidth *0.45*0.6+3;
+//    _layoutTableView.tableFooterView = [[UIView alloc] init];
+    // 去掉多余的分割线
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+    [_layoutTableView setTableFooterView:view];
     [_layoutTableView registerClass:[JQKProgramCell class] forCellReuseIdentifier:kProgramCellReusableIdentifier];
     [self.view addSubview:_layoutTableView];
     {
@@ -82,14 +89,15 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
     [self.navigationItem.leftBarButtonItem setTitlePositionAdjustment:UIOffsetMake(5, 0) forBarMetrics:UIBarMetricsDefault];
     
     self.navigationController.navigationBar.barTintColor = _layoutTableView.backgroundColor;
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:20.],
-                                                                    NSForegroundColorAttributeName:[UIColor whiteColor]};
+                                                                    NSForegroundColorAttributeName:[UIColor blackColor]};
     
-    
-    UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.bounds)-1,
-                                                                    CGRectGetWidth(self.navigationController.navigationBar.bounds), 1)];
-    bottomBorder.backgroundColor = _layoutTableView.separatorColor;
-    [self.navigationController.navigationBar addSubview:bottomBorder];
+//    
+//    UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.bounds)-1,
+//                                                                    CGRectGetWidth(self.navigationController.navigationBar.bounds), 1)];
+//    bottomBorder.backgroundColor = _layoutTableView.separatorColor;
+//    [self.navigationController.navigationBar addSubview:bottomBorder];
 }
 
 - (void)loadPrograms {
@@ -127,7 +135,7 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JQKProgramCell *cell = [tableView dequeueReusableCellWithIdentifier:kProgramCellReusableIdentifier
                                                            forIndexPath:indexPath];
-    cell.backgroundColor = tableView.backgroundColor;
+//    cell.backgroundColor = tableView.backgroundColor;
     
     if (indexPath.row < self.programs.count) {
         JQKProgram *program = self.programs[indexPath.row];

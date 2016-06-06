@@ -8,6 +8,7 @@
 
 #import "JQKHomeCell.h"
 
+
 @interface JQKHomeCell ()
 {
     UIImageView *_thumbImageView;
@@ -23,7 +24,12 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        
         _thumbImageView = [[UIImageView alloc] init];
+        _thumbImageView.contentMode = UIViewContentModeScaleAspectFill;
+        //        _thumbImageView.layer.masksToBounds = YES;
+        _thumbImageView.clipsToBounds = YES;
         [self addSubview:_thumbImageView];
         {
             [_thumbImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -55,12 +61,12 @@
     }
     
     _footerView = [[UIView alloc] init];
-    _footerView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    _footerView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
     [self addSubview:_footerView];
     {
         [_footerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.equalTo(self);
-            make.height.mas_equalTo(30);
+            make.height.mas_equalTo(25);
         }];
     }
     return _footerView;
