@@ -48,16 +48,16 @@
         
         const CGFloat imageScale = 140./64.;
         _tagImageView = [[UIImageView alloc] init];
-        [contentView addSubview:_tagImageView];
-        {
-            [_tagImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(_thumbImageView.mas_right).offset(3);
-                //                make.top.equalTo(_thumbImageView).offset(15);
-                make.centerY.mas_equalTo(_thumbImageView).mas_offset(-20/667.*kScreenHeight);
-                make.height.mas_equalTo(14.);
-                make.width.width.equalTo(_tagImageView.mas_height).multipliedBy(imageScale);
-            }];
-        }
+//        [contentView addSubview:_tagImageView];
+//        {
+//            [_tagImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.left.equalTo(_thumbImageView.mas_right).offset(3);
+//                //                make.top.equalTo(_thumbImageView).offset(15);
+//                make.centerY.mas_equalTo(_thumbImageView).mas_offset(-20/667.*kScreenHeight);
+//                make.height.mas_equalTo(14.);
+//                make.width.equalTo(_tagImageView.mas_height).multipliedBy(imageScale);
+//            }];
+//        }
         
         _titleLabel = [[UILabel alloc] init];
         if ([JQKUtil isPaid]) {
@@ -65,12 +65,12 @@
             _titleLabel.numberOfLines = 2;
         }
         _titleLabel.textColor = [UIColor blackColor];
-        _titleLabel.font = [UIFont systemFontOfSize:12.];
+        _titleLabel.font = [UIFont systemFontOfSize:13.];
         [contentView addSubview:_titleLabel];
         {
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(_tagImageView).mas_offset(1);
-                make.left.equalTo(_tagImageView.mas_right).mas_offset(2);
+                make.top.equalTo(_thumbImageView).mas_offset(20/568.*kScreenHeight);
+                make.left.equalTo(_thumbImageView.mas_right).mas_offset(10);
                 make.right.equalTo(self);
             }];
         }
@@ -78,7 +78,7 @@
         _subtitleLabel = [[UILabel alloc] init];
         _subtitleLabel.numberOfLines = 2;
         _subtitleLabel.font = [UIFont systemFontOfSize:10.5];
-        _subtitleLabel.textColor = [UIColor lightGrayColor];
+        _subtitleLabel.textColor = [UIColor colorWithWhite:0.4 alpha:0.8];
         [contentView addSubview:_subtitleLabel];
         {
             [_subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -103,10 +103,10 @@
     return self;
 }
 
-- (void)setTagImage:(UIImage *)tagImage {
-    _tagImage = tagImage;
-    _tagImageView.image = tagImage;
-}
+//- (void)setTagImage:(UIImage *)tagImage {
+//    _tagImage = tagImage;
+//    _tagImageView.image = tagImage;
+//}
 
 - (void)setTitle:(NSString *)title {
     _title = title;

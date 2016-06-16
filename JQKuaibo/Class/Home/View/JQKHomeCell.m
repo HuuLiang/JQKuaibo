@@ -17,6 +17,7 @@
 @property (nonatomic,retain) UILabel *titleLabel;
 @property (nonatomic,retain) UILabel *subtitleLabel;
 @property (nonatomic,retain) UIView *footerView;
+@property (nonatomic,retain) UILabel *freeVideoLabel;
 @end
 
 @implementation JQKHomeCell
@@ -91,6 +92,30 @@
     return _titleLabel;
 }
 
+- (UILabel *)freeVideoLabel {
+    if (_freeVideoLabel) {
+        return _freeVideoLabel;
+    }
+    _freeVideoLabel = [[UILabel alloc] init];
+    _freeVideoLabel.textColor = [UIColor whiteColor];
+    _freeVideoLabel.backgroundColor = [UIColor colorWithHexString:@"#FD2469"];
+    _freeVideoLabel.font = [UIFont systemFontOfSize:12.];
+    _freeVideoLabel.textAlignment = NSTextAlignmentLeft;
+    _freeVideoLabel.layer.cornerRadius = 2.5;
+    _freeVideoLabel.layer.masksToBounds = YES;
+    _freeVideoLabel.text = @" 试播 ";
+    [_thumbImageView addSubview:_freeVideoLabel];
+    {
+    [_freeVideoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_thumbImageView).mas_offset(4);
+        make.right.mas_equalTo(self).mas_offset(-4);
+    }];
+    
+    }
+    return _freeVideoLabel;
+
+}
+
 - (UILabel *)subtitleLabel {
     if (_subtitleLabel) {
         return _subtitleLabel;
@@ -118,12 +143,13 @@
 - (void)setTitle:(NSString *)title {
     _title = title;
     self.titleLabel.text = title;
-    self.footerView.hidden = _title.length == 0 && _subtitle.length == 0;
+    self.footerView.hidden = _title.length == 0;
+    self.freeVideoLabel.hidden = !(title.length == 0);
 }
 
 - (void)setSubtitle:(NSString *)subtitle {
     _subtitle = subtitle;
-    self.subtitleLabel.text = subtitle;
-    self.footerView.hidden = _title.length == 0 && _subtitle.length == 0;
+//    self.subtitleLabel.text = subtitle;
+//    self.footerView.hidden = _title.length == 0 && _subtitle.length == 0;
 }
 @end

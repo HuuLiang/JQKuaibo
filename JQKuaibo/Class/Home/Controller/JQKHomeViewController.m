@@ -233,6 +233,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
         NSUInteger item = indexPath.item - 1;
         if (item < self.videoModel.fetchedVideoPrograms.count) {
             JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item-1];
+            cell.title = @""; 
             cell.imageURL = [NSURL URLWithString:program.coverImg];
         }
     } else {
