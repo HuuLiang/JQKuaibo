@@ -132,7 +132,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     }];
     [_layoutTableView JQK_triggerPullToRefresh];
     
-    [_layoutTableView JQK_addPagingRefreshWithHandler:^{
+    [_layoutTableView JQK_addPagingRefreshWithIsChangeFooter:NO withHandler:^{
         @strongify(self);
         
         NSUInteger currentPage = self.videoModel.fetchedVideos.page.unsignedIntegerValue;

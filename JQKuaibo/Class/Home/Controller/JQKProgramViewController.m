@@ -12,7 +12,7 @@
 #import "JQKChannelProgram.h"
 #import "JQKProgramCell.h"
 
-static const NSUInteger kDefaultPageSize = 20;
+static const NSUInteger kDefaultPageSize = 12;
 static NSString *const kProgramCellReusableIdentifier = @"ProgramCellReusableIdentifier";
 
 @interface JQKProgramViewController () <UITableViewDataSource,UITableViewDelegate>
@@ -49,10 +49,10 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
     _layoutTableView.dataSource = self;
     _layoutTableView.backgroundColor = [UIColor whiteColor];
     
-//    _layoutTableView.separatorColor = [UIColor colorWithWhite:0.5 alpha:1];
-//    _layoutTableView.rowHeight = kScreenHeight * 0.18;
+    //    _layoutTableView.separatorColor = [UIColor colorWithWhite:0.5 alpha:1];
+    //    _layoutTableView.rowHeight = kScreenHeight * 0.18;
     _layoutTableView.rowHeight = kScreenWidth *0.45*0.6+3;
-//    _layoutTableView.tableFooterView = [[UIView alloc] init];
+    //    _layoutTableView.tableFooterView = [[UIView alloc] init];
     // 去掉多余的分割线
     UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
     [_layoutTableView setTableFooterView:view];
@@ -74,18 +74,24 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
     }];
     [_layoutTableView JQK_triggerPullToRefresh];
     
-    [_layoutTableView JQK_addPagingRefreshWithHandler:^{
+    [_layoutTableView JQK_addPagingRefreshWithIsChangeFooter:YES withHandler:^{
         @strongify(self);
-        [self loadPrograms];
+        if ([JQKUtil isPaid]) {
+            
+            [self loadPrograms];
+        }else {
+            [_layoutTableView JQK_endPullToRefresh];
+            [self payForProgram:nil];
+        }
     }];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回"
                                                                                 style:UIBarButtonItemStylePlain
                                                                               handler:^(id sender)
-    {
-        @strongify(self);
-        [self.navigationController dismissViewControllerAnimated:NO completion:nil];
-    }];
+                                             {
+                                                 @strongify(self);
+                                                 [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+                                             }];
     [self.navigationItem.leftBarButtonItem setTitlePositionAdjustment:UIOffsetMake(5, 0) forBarMetrics:UIBarMetricsDefault];
     
     self.navigationController.navigationBar.barTintColor = _layoutTableView.backgroundColor;
@@ -93,11 +99,11 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:20.],
                                                                     NSForegroundColorAttributeName:[UIColor blackColor]};
     
-//    
-//    UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.bounds)-1,
-//                                                                    CGRectGetWidth(self.navigationController.navigationBar.bounds), 1)];
-//    bottomBorder.backgroundColor = _layoutTableView.separatorColor;
-//    [self.navigationController.navigationBar addSubview:bottomBorder];
+    //    
+    //    UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.bounds)-1,
+    //                                                                    CGRectGetWidth(self.navigationController.navigationBar.bounds), 1)];
+    //    bottomBorder.backgroundColor = _layoutTableView.separatorColor;
+    //    [self.navigationController.navigationBar addSubview:bottomBorder];
 }
 
 - (void)loadPrograms {
@@ -135,7 +141,7 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JQKProgramCell *cell = [tableView dequeueReusableCellWithIdentifier:kProgramCellReusableIdentifier
                                                            forIndexPath:indexPath];
-//    cell.backgroundColor = tableView.backgroundColor;
+    //    cell.backgroundColor = tableView.backgroundColor;
     
     if (indexPath.row < self.programs.count) {
         JQKProgram *program = self.programs[indexPath.row];

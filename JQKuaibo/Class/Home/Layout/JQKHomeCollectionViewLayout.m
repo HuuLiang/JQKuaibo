@@ -31,13 +31,14 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
 - (CGSize)bigSize {
     const CGFloat cvW = CGRectGetWidth(self.collectionView.bounds);
     const CGFloat bigH = (2*(cvW-_interItemSpacing)+_interItemSpacing*kSmallImageScale) / (2*kBigImageScale+kSmallImageScale);
-    const CGFloat bigW = bigH * kBigImageScale;
+    const CGFloat bigW = (cvW-_interItemSpacing)/2; //bigH * kBigImageScale;
     return CGSizeMake(bigW, bigH);
 }
 
 - (CGSize)smallSize {
+      const CGFloat cvW = CGRectGetWidth(self.collectionView.bounds);
     const CGFloat smallH = (self.bigSize.height-_interItemSpacing) / 2;
-    const CGFloat smallW = smallH * kSmallImageScale;
+    const CGFloat smallW = (cvW-_interItemSpacing)/2; //smallH * kSmallImageScale;
     return CGSizeMake(smallW, smallH);
 }
 

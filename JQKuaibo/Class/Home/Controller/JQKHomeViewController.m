@@ -60,7 +60,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     _bannerView.backgroundColor = [UIColor whiteColor];
     
     JQKHomeCollectionViewLayout *layout = [[JQKHomeCollectionViewLayout alloc] init];
-    layout.interItemSpacing = 8;
+    layout.interItemSpacing = 3;
     layout.delegate = self;
     
     _layoutCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
