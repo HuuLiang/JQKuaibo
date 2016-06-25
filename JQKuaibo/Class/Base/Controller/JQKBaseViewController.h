@@ -13,10 +13,22 @@
 
 @interface JQKBaseViewController : UIViewController
 
-- (void)switchToPlayProgram:(JQKProgram *)program;
+//- (void)switchToPlayProgram:(JQKProgram *)program;
+//- (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment;
+//- (void)payForProgram:(JQKProgram *)program;
+
+- (void)switchToPlayProgram:(JQKProgram *)program
+            programLocation:(NSUInteger)programLocation
+                  inChannel:(JQKChannels *)channel;
 - (void)playVideo:(JQKVideo *)video;
-- (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment;
-- (void)payForProgram:(JQKProgram *)program;
+
+- (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment withProgramLocation:(NSInteger)programLocation inChannel:(JQKChannels *)channel;
+
+- (void)payForProgram:(JQKProgram *)program
+      programLocation:(NSUInteger)programLocation
+            inChannel:(JQKChannels *)channel;
 - (void)onPaidNotification:(NSNotification *)notification;
+
+- (NSUInteger)currentIndex;
 
 @end

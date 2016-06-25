@@ -18,14 +18,15 @@ static NSString *const kSpreadCellIdentifier = @"kspreadcellidentifer";
     UIImageView *_headerImageView;//头部视图
     UILabel *_priceLabel;
     UICollectionView *_layoutCollectionView;
+    
 }
 @property (nonatomic,retain)JQKSpreadModel *appSpreadModel;
-
+@property (nonatomic) NSArray *fetchedSpreads;
 @end
 
 @implementation JQKSpreadController
 DefineLazyPropertyInitialization(JQKSpreadModel,appSpreadModel);
-
+DefineLazyPropertyInitialization(NSArray, fetchedSpreads)
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPaidNotification) name:kPaidNotificationName object:nil];
@@ -111,7 +112,7 @@ DefineLazyPropertyInitialization(JQKSpreadModel,appSpreadModel);
 - (void)payForPayPointType:(JQKPayPointType)payPointType {
     JQKProgram *program = [[JQKProgram alloc] init];
     program.payPointType = @(payPointType);
-    [self payForProgram:program];
+    [self payForProgram:program programLocation:0 inChannel:nil];
 }
 //获取模型数据
 - (void)loadSpreadModel {
@@ -125,6 +126,7 @@ DefineLazyPropertyInitialization(JQKSpreadModel,appSpreadModel);
         [self->_layoutCollectionView JQK_endPullToRefresh];
         
         if (success) {
+            _fetchedSpreads = _appSpreadModel.appSpreadResponse.programList;
             [self->_layoutCollectionView reloadData];
         }
     }];
@@ -166,10 +168,12 @@ DefineLazyPropertyInitialization(JQKSpreadModel,appSpreadModel);
     }];
 }
 
-
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:0 forSlideCount:1];
+}
 #pragma mark _collectionView Datasource Delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return _appSpreadModel.fetchedSpreads.count;
+    return self.fetchedSpreads.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -177,8 +181,8 @@ DefineLazyPropertyInitialization(JQKSpreadModel,appSpreadModel);
     JQKSpreadCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kSpreadCellIdentifier forIndexPath:indexPath];
     cell.backgroundColor = collectionView.backgroundColor;
     
-    if (indexPath.item < self.appSpreadModel.fetchedSpreads.count) {
-        JQKProgram *appSpread = self.appSpreadModel.fetchedSpreads[indexPath.item];
+    if (indexPath.item < self.fetchedSpreads.count) {
+        JQKProgram *appSpread = self.fetchedSpreads[indexPath.item];
         cell.imageURL = [NSURL URLWithString:appSpread.coverImg];
         cell.isInstalled = NO;
         
@@ -204,8 +208,9 @@ DefineLazyPropertyInitialization(JQKSpreadModel,appSpreadModel);
     return CGSizeMake(fullWidth, fullWidth * 0.4);
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    JQKProgram *program = _appSpreadModel.fetchedSpreads[indexPath.item];
+    JQKProgram *program = self.fetchedSpreads[indexPath.item];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:program.videoUrl]];
+    [[JQKStatsManager sharedManager] statsCPCWithProgram:(JQKProgram *)program programLocation:indexPath.row inChannel:(JQKChannels*)_appSpreadModel.appSpreadResponse andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
 }
 
 @end

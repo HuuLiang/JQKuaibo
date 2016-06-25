@@ -58,6 +58,18 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     _bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     _bannerView.delegate = self;
     _bannerView.backgroundColor = [UIColor whiteColor];
+    @weakify(self);
+    [_bannerView aspect_hookSelector:@selector(scrollViewDidEndDragging:willDecelerate:)
+                         withOptions:AspectPositionAfter
+                          usingBlock:^(id<AspectInfo> aspectInfo, UIScrollView *scrollView, BOOL decelerate)
+     {
+         @strongify(self);
+         [[JQKStatsManager sharedManager] statsTabIndex:[JQKUtil currentTabPageIndex]
+                                            subTabIndex:[JQKUtil currentSubTabPageIndex]
+                                              forBanner:self.channelModel.fetchedChannels.firstObject.columnId
+                                         withSlideCount:1];
+     } error:nil];
+    
     
     JQKHomeCollectionViewLayout *layout = [[JQKHomeCollectionViewLayout alloc] init];
     layout.interItemSpacing = 3;
@@ -76,7 +88,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
         }];
     }
     
-    @weakify(self);
+    //    @weakify(self);
     [_layoutCollectionView JQK_addPullToRefreshWithHandler:^{
         @strongify(self);
         [self loadChannels];
@@ -195,7 +207,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     }
     
     _rightAdView = [[JQKAdView alloc] initWithImageURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadRightImage]
-                                                adURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadRightUrl]];
+                                                 adURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadRightUrl]];
     @weakify(self);
     _rightAdView.closeAction = ^(id obj) {
         @strongify(self);
@@ -209,6 +221,11 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:0 forSlideCount:1];
 }
 
 #pragma mark - UICollectionViewDataSource,UICollectionViewDelegate
@@ -241,7 +258,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
         if (item < self.channelModel.fetchedChannels.count) {
             JQKChannel *channel = self.channelModel.fetchedChannels[item];
             cell.imageURL = [NSURL URLWithString:channel.columnImg];
-                cell.title = channel.name;
+            cell.title = channel.name;
             //    cell.subtitle = channel.columnDesc;
         }
     }
@@ -257,14 +274,21 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     if (indexPath.item < kFreeVideoItemOffset) {
         return ;
     }
-    
+   
     if (indexPath.item >= kFreeVideoItemOffset && indexPath.item < kChannelItemOffset) {
         if (indexPath.item - kFreeVideoItemOffset < self.videoModel.fetchedVideoPrograms.count) {
             JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item - kFreeVideoItemOffset];
-            [self playVideo:program withTimeControl:NO shouldPopPayment:YES];
+//            [self playVideo:program withTimeControl:NO shouldPopPayment:YES];
+            JQKChannels *channel = self.videoModel.fetchedPrograms.lastObject;
+            
+            [self playVideo:program withTimeControl:NO shouldPopPayment:YES withProgramLocation:(indexPath.item -kFreeVideoItemOffset) inChannel:channel];
+            
+             [[JQKStatsManager sharedManager] statsCPCWithProgram:program programLocation:(indexPath.item - kFreeVideoItemOffset) inChannel:channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
         }
     } else if (indexPath.item - kChannelItemOffset < self.channelModel.fetchedChannels.count) {
         JQKChannel *selectedChannel = self.channelModel.fetchedChannels[indexPath.item - kChannelItemOffset];
+        
+        [[JQKStatsManager sharedManager] statsCPCWithChannel:selectedChannel inTabIndex:self.tabBarController.selectedIndex];
         
         if (selectedChannel.type.unsignedIntegerValue == JQKChannelTypeSpread) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:selectedChannel.spreadUrl]];
@@ -286,10 +310,13 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     JQKProgram *bannerProgram = self.videoModel.fetchedBannerPrograms[index];
+    JQKChannels *banenrchannel = self.videoModel.bannerChannels[0];
     if (bannerProgram.type.unsignedIntegerValue == JQKProgramTypeVideo) {
-        [self switchToPlayProgram:bannerProgram];
+        [self switchToPlayProgram:bannerProgram programLocation:index inChannel:banenrchannel];
     } else if (bannerProgram.type.unsignedIntegerValue == JQKProgramTypeSpread) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:bannerProgram.videoUrl]];
     }
+    [[JQKStatsManager sharedManager] statsCPCWithProgram:bannerProgram programLocation:index inChannel:banenrchannel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
+    
 }
 @end

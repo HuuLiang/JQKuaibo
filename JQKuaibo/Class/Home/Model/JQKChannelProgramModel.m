@@ -30,7 +30,7 @@
     {
         @strongify(self);
         
-        JQKChannelPrograms *programs;
+        JQKChannels *programs;
         if (respStatus == JQKURLResponseSuccess) {
             programs = (JQKChannelProgramResponse *)self.response;
             self.fetchedPrograms = programs;

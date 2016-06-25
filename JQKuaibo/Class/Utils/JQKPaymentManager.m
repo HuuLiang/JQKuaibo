@@ -53,17 +53,19 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     //    [WXApi handleOpenURL:url delegate:self];
 }
 
-- (BOOL)startPaymentWithType:(JQKPaymentType)type
+- (JQKPaymentInfo *)startPaymentWithType:(JQKPaymentType)type
                      subType:(JQKPaymentType)subType
                        price:(NSUInteger)price
                   forProgram:(JQKProgram *)program
+             programLocation:(NSUInteger)programLocation
+                   inChannel:(JQKChannels *)channel
            completionHandler:(JQKPaymentCompletionHandler)handler
 {
     if (type == JQKPaymentTypeNone || (type == JQKPaymentTypeIAppPay && subType == JQKPaymentTypeNone)) {
         if (self.completionHandler) {
             self.completionHandler(PAYRESULT_FAIL, nil);
         }
-        return NO;
+        return nil;
     }
 //    price  =  1;
     NSString *channelNo = JQK_CHANNEL_NO;
@@ -72,6 +74,10 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
     
     JQKPaymentInfo *paymentInfo = [[JQKPaymentInfo alloc] init];
+    paymentInfo.contentLocation = @(programLocation+1);
+    paymentInfo.columnId = channel.realColumnId;
+    paymentInfo.columnType = channel.type;
+    
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);
     paymentInfo.contentId = program.programId;
@@ -105,7 +111,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                                              @(JQKPaymentTypeWeChatPay):@(IapppayAlphaKitWeChatPayType)};
         NSNumber *payType = paymentTypeMapping[@(subType)];
         if (!payType) {
-            return NO;
+            return nil;
         }
         
         IapppayAlphaOrderUtils *order = [[IapppayAlphaOrderUtils alloc] init];
@@ -133,7 +139,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         }
     }
     
-    return success;
+    return success ? paymentInfo : nil;
 }
 
 - (void)checkPayment {

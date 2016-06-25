@@ -8,10 +8,16 @@
 
 #import "JQKSpreadModel.h"
 
+@implementation JQKAppProgram
+
+
+@end
+
+
 @implementation JQKAppSpreadResponse
 
 - (Class)programListElementClass {
-    return [JQKProgram class];
+    return [JQKAppProgram class];
 }
 @end
 
@@ -31,8 +37,9 @@
                     NSArray *fetchedSpreads;
                     if (respStatus == JQKURLResponseSuccess) {
                         JQKAppSpreadResponse *resp = self.response;
-                        _fetchedSpreads = resp.programList;
-                        fetchedSpreads = _fetchedSpreads;
+                        _appSpreadResponse = resp;
+                        fetchedSpreads = _appSpreadResponse.programList;
+//                        fetchedSpreads = _fetchedSpreads;
                     }
                     
                     if (handler) {

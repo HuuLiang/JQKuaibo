@@ -18,7 +18,7 @@ typedef void (^JQKFetchChannelsCompletionHandler)(BOOL success, NSArray<JQKChann
 
 @interface JQKChannelModel : JQKEncryptedURLRequest
 
-@property (nonatomic,retain,readonly) NSArray *fetchedChannels;
+@property (nonatomic,retain,readonly) NSArray <JQKChannel*>*fetchedChannels;
 
 - (BOOL)fetchChannelsWithCompletionHandler:(JQKFetchChannelsCompletionHandler)handler;
 

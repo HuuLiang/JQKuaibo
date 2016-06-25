@@ -19,6 +19,7 @@ static NSString *const kMovieCellReusableIdentifier = @"MovieCellReusableIdentif
 @property (nonatomic,retain) JQKMovieModel *movieModel;
 @property (nonatomic,retain) NSOperationQueue *operationQueue;
 @property (nonatomic,retain) NSMutableArray<JQKVideo *> *videos;
+@property (nonatomic,retain) JQKVideos *fetchVideos;
 @end
 
 @implementation JQKMovieViewController
@@ -76,6 +77,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
             }
             
             JQKVideos *videos = obj;
+            _fetchVideos = videos;
             if (videos.programList) {
                 [self.videos addObjectsFromArray:videos.programList];
                 [self->_layoutCollectionView reloadData];
@@ -93,6 +95,10 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:0 forSlideCount:1];
+}
 #pragma mark - UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -119,6 +125,9 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     JQKVideo *video = self.videos[indexPath.item];
-    [self switchToPlayProgram:(JQKProgram *)video];
+//    [self switchToPlayProgram:(JQKProgram *)video];
+    [self switchToPlayProgram:(JQKProgram *)video programLocation:indexPath.item inChannel:_fetchVideos];
+    
+    [[JQKStatsManager sharedManager] statsCPCWithProgram:(JQKProgram *)video programLocation:indexPath.item inChannel:_fetchVideos andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
 }
 @end

@@ -36,7 +36,10 @@
 #define JQK_APP_SPREAD_BANNER_URL       @"/iosvideo/appSpreadBanner.htm"
 #define JQK_STANDBY_APP_SPREAD_BANNER_URL   @"/static/iosvideo/appSpreadBanner.json"
 
-
+#define JQK_STATS_BASE_URL              @"http://stats.iqu8.cn"//@"http://120.24.252.114"//
+#define JQK_STATS_CPC_URL               @"/stats/cpcs.service"
+#define JQK_STATS_TAB_URL               @"/stats/tabStat.service"
+#define JQK_STATS_PAY_URL               @"/stats/payRes.service"
 
 #define JQK_PAYMENT_COMMIT_URL          @"http://pay.iqu8.net/paycenter/qubaPr.json"
 #define JQK_PAYMENT_CONFIG_URL          @"http://pay.iqu8.net/paycenter/payConfig.json"
@@ -54,5 +57,7 @@
 #define JQK_SYSTEM_CONFIG_SPREAD_RIGHT_URL      @"SPREAD_RIGHT_URL"
 
 #define JQK_UMENG_APP_ID         @"567d010667e58e2c8200223a"
+
+
 
 #endif /* JQKConfig_h */

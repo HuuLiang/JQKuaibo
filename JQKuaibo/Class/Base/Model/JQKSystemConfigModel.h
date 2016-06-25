@@ -31,6 +31,8 @@ typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic) NSString *spreadRightUrl;
 
 @property (nonatomic,readonly) BOOL loaded;
+@property (nonatomic) NSUInteger statsTimeInterval;
+
 
 + (instancetype)sharedModel;
 

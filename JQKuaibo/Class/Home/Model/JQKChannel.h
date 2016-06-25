@@ -19,15 +19,15 @@ typedef NS_ENUM(NSUInteger, JQKChannelType) {
 
 @end
 
-@interface JQKChannel : NSObject
+@interface JQKChannel : JQKChannels
 
-@property (nonatomic) NSNumber *columnId;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *columnImg;
-@property (nonatomic) NSString *columnDesc;
-@property (nonatomic) NSString *spreadUrl;
-@property (nonatomic) NSNumber *type;
-@property (nonatomic) NSNumber *showNumber;
+//@property (nonatomic) NSNumber *columnId;
+//@property (nonatomic) NSString *name;
+//@property (nonatomic) NSString *columnImg;
+//@property (nonatomic) NSString *columnDesc;
+//@property (nonatomic) NSString *spreadUrl;
+//@property (nonatomic) NSNumber *type;
+//@property (nonatomic) NSNumber *showNumber;
 //@property (nonatomic) NSNumber *items;
 //@property (nonatomic) NSNumber *page;
 //@property (nonatomic) NSNumber *pageSize;

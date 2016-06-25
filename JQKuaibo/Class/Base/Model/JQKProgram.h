@@ -41,17 +41,17 @@ typedef NS_ENUM(NSUInteger, JQKProgramType) {
 
 @end
 
-@protocol JQKPrograms <NSObject>
-
-@end
-
-@interface JQKPrograms : JQKURLResponse
-@property (nonatomic) NSNumber *columnId;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *columnImg;
-@property (nonatomic) NSString *columnDesc;
-@property (nonatomic) NSNumber *type; // 1、视频 2、图片
-@property (nonatomic) NSNumber *showNumber;
-@property (nonatomic,retain) NSArray<JQKProgram> *programList;
-@end
+//@protocol JQKPrograms <NSObject>
+//
+//@end
+//
+//@interface JQKPrograms : JQKURLResponse
+//@property (nonatomic) NSNumber *columnId;
+//@property (nonatomic) NSString *name;
+//@property (nonatomic) NSString *columnImg;
+//@property (nonatomic) NSString *columnDesc;
+//@property (nonatomic) NSNumber *type; // 1、视频 2、图片
+//@property (nonatomic) NSNumber *showNumber;
+//@property (nonatomic,retain) NSArray<JQKProgram> *programList;
+//@end
 

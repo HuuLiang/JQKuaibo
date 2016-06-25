@@ -8,10 +8,10 @@
 
 #import "JQKProgram.h"
 
-@interface JQKVideos : JQKPrograms
+@interface JQKVideos : JQKChannels
 
-@property (nonatomic) NSNumber *items;
-@property (nonatomic) NSNumber *page;
-@property (nonatomic) NSNumber *pageSize;
+//@property (nonatomic) NSNumber *items;
+//@property (nonatomic) NSNumber *page;
+//@property (nonatomic) NSNumber *pageSize;
 
 @end

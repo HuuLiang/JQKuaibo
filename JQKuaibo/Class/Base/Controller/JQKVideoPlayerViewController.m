@@ -58,10 +58,12 @@
         [self->_videoPlayer pause];
         
         if (_shouldPopupPaymentIfNotPaid && ![JQKUtil isPaid]) {
-            [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view forProgram:(JQKProgram *)self.video withCompletionHandler:^{
-                @strongify(self);
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }];
+            [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view forProgram:(JQKProgram *)self.video
+                                                           programLocation:_programLocation
+                                                                 inChannel:_channel withCompletionHandler:^{
+                                                                     @strongify(self);
+                                                                     [self dismissViewControllerAnimated:YES completion:nil];
+                                                                 }];
         } else {
             [self dismissViewControllerAnimated:YES completion:nil];
         }
@@ -87,13 +89,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

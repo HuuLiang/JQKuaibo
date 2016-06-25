@@ -12,7 +12,7 @@
 #import "JQKChannelProgram.h"
 #import "JQKProgramCell.h"
 
-static const NSUInteger kDefaultPageSize = 12;
+static const NSUInteger kDefaultPageSize = 18;
 static NSString *const kProgramCellReusableIdentifier = @"ProgramCellReusableIdentifier";
 
 @interface JQKProgramViewController () <UITableViewDataSource,UITableViewDelegate>
@@ -81,7 +81,7 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
             [self loadPrograms];
         }else {
             [_layoutTableView JQK_endPullToRefresh];
-            [self payForProgram:nil];
+            [self payForProgram:nil programLocation:0 inChannel:nil];
         }
     }];
     
@@ -111,7 +111,7 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
     [self.programModel fetchProgramsWithColumnId:self.channel.columnId
                                           pageNo:++self.currentPage
                                         pageSize:kDefaultPageSize
-                               completionHandler:^(BOOL success, JQKChannelPrograms *programs) {
+                               completionHandler:^(BOOL success, JQKChannels *programs) {
                                    @strongify(self);
                                    
                                    if (!self) {
@@ -136,6 +136,10 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:0 forSlideCount:1];
+}
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -165,11 +169,13 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     JQKProgram *program = self.programs[indexPath.row];
-    [self switchToPlayProgram:program];
+//    [self switchToPlayProgram:program];
+    [self switchToPlayProgram:program programLocation:indexPath.row inChannel:_programModel.fetchedPrograms];
+    [[JQKStatsManager sharedManager] statsCPCWithProgram:program programLocation:indexPath.row inChannel:self.programModel.fetchedPrograms andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
     
-    if (![JQKUtil isPaid]) {
-        [self.navigationController dismissViewControllerAnimated:NO completion:nil];
-    }
+//    if (![JQKUtil isPaid]) {
+//        [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+//    }
 }
 
 @end

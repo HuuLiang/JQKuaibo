@@ -11,7 +11,7 @@
 @implementation JQKHomeProgramResponse
 
 - (Class)columnListElementClass {
-    return [JQKPrograms class];
+    return [JQKChannels class];
 }
 @end
 
@@ -37,28 +37,28 @@
 }
 
 - (void)filterProgramTypes {
-    NSArray<JQKPrograms *> *videoProgramList = [self.fetchedPrograms bk_select:^BOOL(id obj)
+    NSArray<JQKChannels *> *videoProgramList = [self.fetchedPrograms bk_select:^BOOL(id obj)
                                      {
-                                         JQKProgramType type = ((JQKPrograms *)obj).type.unsignedIntegerValue;
+                                         JQKProgramType type = ((JQKChannels *)obj).type.unsignedIntegerValue;
                                          return type == JQKProgramTypeVideo;
                                      }];
     
     NSMutableArray *videoPrograms = [NSMutableArray array];
-    [videoProgramList enumerateObjectsUsingBlock:^(JQKPrograms * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [videoProgramList enumerateObjectsUsingBlock:^(JQKChannels * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.programList.count > 0) {
             [videoPrograms addObjectsFromArray:obj.programList];
         }
     }];
     _fetchedVideoPrograms = videoPrograms;
     
-    NSArray<JQKPrograms *> *bannerProgramList = [self.fetchedPrograms bk_select:^BOOL(id obj)
+    NSArray<JQKChannels *> *bannerProgramList = [self.fetchedPrograms bk_select:^BOOL(id obj)
                                                 {
-                                                    JQKProgramType type = ((JQKPrograms *)obj).type.unsignedIntegerValue;
+                                                    JQKProgramType type = ((JQKChannels *)obj).type.unsignedIntegerValue;
                                                     return type == JQKProgramTypeBanner;
                                                 }];
-    
+    _bannerChannels = bannerProgramList;
     NSMutableArray *bannerPrograms = [NSMutableArray array];
-    [bannerProgramList enumerateObjectsUsingBlock:^(JQKPrograms * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [bannerProgramList enumerateObjectsUsingBlock:^(JQKChannels * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.programList.count > 0) {
             [bannerPrograms addObjectsFromArray:obj.programList];
         }

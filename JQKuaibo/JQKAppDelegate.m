@@ -20,7 +20,7 @@
 #import "JQKMovieViewController.h"
 #import "JQKLaunchView.h"
 
-@interface JQKAppDelegate ()
+@interface JQKAppDelegate ()<UITabBarControllerDelegate>
 
 @end
 
@@ -64,13 +64,13 @@
     spreadNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:spreadVC.title image:[UIImage imageNamed:@"tabbar_spread_normal"] selectedImage:[UIImage imageNamed:@"tabbar_spread_normal"]];
     
     
-//    JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
-//    mineVC.title                         = @"我的";
-//    
-//    UINavigationController *mineNav      = [[UINavigationController alloc] initWithRootViewController:mineVC];
-//    mineNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:mineVC.title
-//                                                                          image:[[UIImage imageNamed:@"mine_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-//                                                                 selectedImage:[[UIImage imageNamed:@"mine_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    //    JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
+    //    mineVC.title                         = @"我的";
+    //    
+    //    UINavigationController *mineNav      = [[UINavigationController alloc] initWithRootViewController:mineVC];
+    //    mineNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:mineVC.title
+    //                                                                          image:[[UIImage imageNamed:@"mine_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+    //                                                                 selectedImage:[[UIImage imageNamed:@"mine_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     JQKMoreViewController *moreVC        = [[JQKMoreViewController alloc] init];
     moreVC.title                         = @"更多";
@@ -84,7 +84,7 @@
     tabBarController.viewControllers        = @[homeNav,videoNav,movieNav,spreadNav,moreNav];
     tabBarController.tabBar.translucent     = NO;
     tabBarController.tabBar.backgroundImage = [UIImage imageWithColor:[UIColor colorWithWhite:0.95 alpha:1]];
-    
+    tabBarController.delegate = self;
     _window.rootViewController              = tabBarController;
     return _window;
 }
@@ -102,19 +102,19 @@
                                    thisVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回" style:UIBarButtonItemStylePlain handler:nil];
                                } error:nil];
     
-//    [UINavigationController aspect_hookSelector:@selector(preferredStatusBarStyle)
-//                                    withOptions:AspectPositionInstead
-//                                     usingBlock:^(id<AspectInfo> aspectInfo){
-//                                         UIStatusBarStyle statusBarStyle = UIStatusBarStyleLightContent;
-//                                         [[aspectInfo originalInvocation] setReturnValue:&statusBarStyle];
-//                                     } error:nil];
-//    
-//    [UIViewController aspect_hookSelector:@selector(preferredStatusBarStyle)
-//                              withOptions:AspectPositionInstead
-//                               usingBlock:^(id<AspectInfo> aspectInfo){
-//                                   UIStatusBarStyle statusBarStyle = UIStatusBarStyleLightContent;
-//                                   [[aspectInfo originalInvocation] setReturnValue:&statusBarStyle];
-//                               } error:nil];
+    //    [UINavigationController aspect_hookSelector:@selector(preferredStatusBarStyle)
+    //                                    withOptions:AspectPositionInstead
+    //                                     usingBlock:^(id<AspectInfo> aspectInfo){
+    //                                         UIStatusBarStyle statusBarStyle = UIStatusBarStyleLightContent;
+    //                                         [[aspectInfo originalInvocation] setReturnValue:&statusBarStyle];
+    //                                     } error:nil];
+    //    
+    //    [UIViewController aspect_hookSelector:@selector(preferredStatusBarStyle)
+    //                              withOptions:AspectPositionInstead
+    //                               usingBlock:^(id<AspectInfo> aspectInfo){
+    //                                   UIStatusBarStyle statusBarStyle = UIStatusBarStyleLightContent;
+    //                                   [[aspectInfo originalInvocation] setReturnValue:&statusBarStyle];
+    //                               } error:nil];
     
     [UITabBarController aspect_hookSelector:@selector(shouldAutorotate)
                                 withOptions:AspectPositionInstead
@@ -162,11 +162,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [JQKUtil accumateLaunchSeq];
     
     [[JQKPaymentManager sharedManager] setup];
     [[JQKErrorHandler sharedHandler] initialize];
     [self setupMobStatistics];
     [self setupCommonStyles];
+    [[JQKNetworkInfo sharedInfo] startMonitoring];
+    
     [self.window makeKeyWindow];
     self.window.hidden = NO;
     JQKLaunchView *launchView = [[JQKLaunchView alloc] init];
@@ -185,10 +188,19 @@
     
     [[JQKPaymentModel sharedModel] startRetryingToCommitUnprocessedOrders];
     [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+        NSUInteger statsTimeInterval = 180;
+        if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
+            statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;
+        }
+        statsTimeInterval = 20;
+        [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+        //        if ([JQKSystemConfigModel sharedModel].notificationLaunchSeq >0) {
+        //            [self registerUserNotification];
+        //        }
+        
         if (!success) {
             return ;
         }
-        
         if ([JQKSystemConfigModel sharedModel].startupInstall.length == 0
             || [JQKSystemConfigModel sharedModel].startupPrompt.length == 0) {
             return ;
@@ -231,6 +243,17 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
     [[JQKPaymentManager sharedManager] handleOpenURL:url];
+    return YES;
+}
+
+#pragma mark - UITabBarControllerDelegate
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    [[JQKStatsManager sharedManager] statsTabIndex:tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex] forClickCount:1];
+}
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    [[JQKStatsManager sharedManager] statsStopDurationAtTabIndex:tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
     return YES;
 }
 @end

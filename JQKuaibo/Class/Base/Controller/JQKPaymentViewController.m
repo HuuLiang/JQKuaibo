@@ -20,6 +20,9 @@
 @property (nonatomic,retain) JQKPaymentPopView *popView;
 @property (nonatomic) NSNumber *payAmount;
 
+@property (nonatomic) NSUInteger programLocationToPayFor;
+@property (nonatomic,retain) JQKChannels *channelToPayFor;
+
 @property (nonatomic,retain) JQKProgram *programToPayFor;
 @property (nonatomic,retain) JQKPaymentInfo *paymentInfo;
 
@@ -80,10 +83,19 @@
             Pay(useBuildInAlipay?JQKPaymentTypeAlipay:JQKPaymentTypeIAppPay, useBuildInAlipay?JQKPaymentTypeNone:JQKPaymentTypeAlipay);
         }];
     }
-
+    
     _popView.closeAction = ^(id sender){
         @strongify(self);
         [self hidePayment];
+        [[JQKStatsManager sharedManager] statsPayWithOrderNo:nil
+                                                   payAction:JQKStatsPayActionClose
+                                                   payResult:PAYRESULT_UNKNOWN
+                                                  forProgram:self.programToPayFor
+                                             programLocation:self.programLocationToPayFor
+                                                   inChannel:self.channelToPayFor
+                                                 andTabIndex:[JQKUtil currentTabPageIndex]
+                                                 subTabIndex:[JQKUtil currentSubTabPageIndex]];
+        
     };
     return _popView;
 }
@@ -103,7 +115,11 @@
     }
 }
 
-- (void)popupPaymentInView:(UIView *)view forProgram:(JQKProgram *)program withCompletionHandler:(void (^)(void))completionHandler {
+- (void)popupPaymentInView:(UIView *)view
+                forProgram:(JQKProgram *)program
+           programLocation:(NSUInteger)programLocation
+                 inChannel:(JQKChannels *)channel
+     withCompletionHandler:(void (^)(void))completionHandler {
     self.completionHandler = completionHandler;
     
     if (self.view.superview) {
@@ -112,6 +128,8 @@
     
     self.payAmount = nil;
     self.programToPayFor = program;
+    self.programLocationToPayFor = programLocation;
+    self.channelToPayFor = channel;
     self.view.frame = view.bounds;
     self.view.alpha = 0;
     
@@ -156,6 +174,9 @@
             self.completionHandler();
             self.completionHandler = nil;
         }
+        self.programToPayFor = nil;
+        self.programLocationToPayFor = 0;
+        self.channelToPayFor = nil;
     }];
 }
 
@@ -165,14 +186,22 @@
        paymentSubType:(JQKPaymentType)paymentSubType
 {
     @weakify(self);
-    [[JQKPaymentManager sharedManager] startPaymentWithType:paymentType
-                                                    subType:paymentSubType
-                                                      price:price*100
-                                                 forProgram:program
-                                          completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
-                                              @strongify(self);
-                                              [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
-                                          }];
+    JQKPaymentInfo *paymentInfo = [[JQKPaymentManager sharedManager] startPaymentWithType:paymentType
+                                                                                  subType:paymentSubType
+                                                                                    price:price*100
+                                                                               forProgram:program
+                                                                          programLocation:_programLocationToPayFor
+                                                                                inChannel:_channelToPayFor
+                                   
+                                                                        completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
+                                                                            @strongify(self);
+                                                                            [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
+                                                                        }];
+    if (paymentInfo) {
+        [[JQKStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo forPayAction:JQKStatsPayActionGoToPay andTabIndex:[JQKUtil currentTabPageIndex] subTabIndex:[JQKUtil currentSubTabPageIndex]];
+    }
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -204,6 +233,11 @@
     }
     
     [[JQKPaymentModel sharedModel] commitPaymentInfo:paymentInfo];
+    
+    [[JQKStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo
+                                                forPayAction:JQKStatsPayActionPayBack
+                                                 andTabIndex:[JQKUtil currentTabPageIndex]
+                                                 subTabIndex:[JQKUtil currentSubTabPageIndex]];
 }
 
 @end

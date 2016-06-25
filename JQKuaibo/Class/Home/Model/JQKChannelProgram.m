@@ -6,12 +6,12 @@
 //  Copyright (c) 2015年 kuaibov. All rights reserved.
 //
 
-#import "JQKChannelProgram.h"
+//#import "JQKChannelProgram.h"
 
-@implementation JQKChannelProgram
+//@implementation JQKChannelProgram
+//
+//@end
 
-@end
-
-@implementation JQKChannelPrograms
-
-@end
+//@implementation JQKChannelPrograms
+//
+//@end

@@ -214,6 +214,11 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:0 forSlideCount:1];
+}
+
 #pragma mark - UICollectionViewDataSource, UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.videos.count;
@@ -243,9 +248,11 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [[JQKStatsManager sharedManager] statsCPCWithProgram:self.videos[indexPath.item] programLocation:indexPath.item inChannel:_videoModel.fetchedVideos andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
+    
     if (indexPath.row < self.videos.count) {
         JQKProgram *video = self.videos[indexPath.item];
-        [self switchToPlayProgram:video];
+        [self switchToPlayProgram:video programLocation:indexPath.item inChannel:_videoModel.fetchedVideos];
     }
 }
 

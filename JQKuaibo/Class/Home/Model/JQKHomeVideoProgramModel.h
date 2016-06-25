@@ -10,14 +10,16 @@
 #import "JQKProgram.h"
 
 @interface JQKHomeProgramResponse : JQKURLResponse
-@property (nonatomic,retain) NSArray<JQKPrograms> *columnList;
+@property (nonatomic,retain) NSArray<JQKChannels*> *columnList;
 @end
 
 @interface JQKHomeVideoProgramModel : JQKEncryptedURLRequest
 
-@property (nonatomic,retain,readonly) NSArray<JQKPrograms *> *fetchedPrograms;
+@property (nonatomic,retain,readonly) NSArray<JQKChannels *> *fetchedPrograms;
 @property (nonatomic,retain,readonly) NSArray<JQKProgram *> *fetchedBannerPrograms;
 @property (nonatomic,retain,readonly) NSArray<JQKProgram *> *fetchedVideoPrograms;
+
+@property (nonatomic,retain,readonly) NSArray <JQKChannels*> *bannerChannels;
 
 - (BOOL)fetchProgramsWithCompletionHandler:(JQKCompletionHandler)handler;
 

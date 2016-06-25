@@ -20,10 +20,10 @@
 
 @end
 
-@implementation JQKPrograms
+//@implementation JQKPrograms
+//
+//- (Class)programListElementClass {
+//    return [JQKProgram class];
+//}
 
-- (Class)programListElementClass {
-    return [JQKProgram class];
-}
-
-@end
+//@end

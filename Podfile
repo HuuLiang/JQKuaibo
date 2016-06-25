@@ -11,3 +11,4 @@ pod 'Aspects','~>1.4.1'
 pod 'SFHFKeychainUtils', '~> 0.0.1'
 
 pod 'SDCycleScrollView', '~> 1.3'
+pod 'FMDB', '~> 2.6.2'

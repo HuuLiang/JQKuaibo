@@ -23,6 +23,10 @@
 
 @implementation JQKBaseViewController
 
+- (NSUInteger)currentIndex {
+    return NSNotFound;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -34,19 +38,21 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)switchToPlayProgram:(JQKProgram *)program {
+- (void)switchToPlayProgram:(JQKProgram *)program
+            programLocation:(NSUInteger)programLocation
+                  inChannel:(JQKChannels *)channel{
     if (![JQKUtil isPaid]) {
-        [self payForProgram:program];
+        [self payForProgram:program programLocation:programLocation inChannel:channel];
     } else if (program.type.unsignedIntegerValue == JQKProgramTypeVideo) {
         [self playVideo:program];
     }
 }
 
 - (void)playVideo:(JQKVideo *)video {
-    [self playVideo:video withTimeControl:YES shouldPopPayment:NO];
+    [self playVideo:video withTimeControl:YES shouldPopPayment:NO withProgramLocation:0 inChannel:nil];
 }
 
-- (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment {
+- (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment withProgramLocation:(NSInteger)programLocation inChannel:(JQKChannels *)channel{
     if (hasTimeControl) {
         UIViewController *videoPlayVC = [self playerVCWithVideo:video];
         videoPlayVC.hidesBottomBarWhenPushed = YES;
@@ -54,16 +60,21 @@
     } else {
         JQKVideoPlayerViewController *playerVC = [[JQKVideoPlayerViewController alloc] initWithVideo:video];
         playerVC.hidesBottomBarWhenPushed = YES;
+        playerVC.programLocation = programLocation;
+        playerVC.channel = channel;
         [self presentViewController:playerVC animated:YES completion:nil];
     }
 }
 
-- (void)payForProgram:(JQKProgram *)program {
-    [self payForProgram:program inView:self.view.window];
+- (void)payForProgram:(JQKProgram *)program
+      programLocation:(NSUInteger)programLocation
+            inChannel:(JQKChannels *)channel{
+    [self payForProgram:program inView:self.view.window programLocation:programLocation inChannel:channel];
 }
 
-- (void)payForProgram:(JQKProgram *)program inView:(UIView *)view {
-    [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:view forProgram:program withCompletionHandler:nil];
+- (void)payForProgram:(JQKProgram *)program inView:(UIView *)view      programLocation:(NSUInteger)programLocation
+            inChannel:(JQKChannels *)channel{
+    [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:view forProgram:program programLocation:programLocation inChannel:channel withCompletionHandler:nil];
 }
 
 - (void)onPaidNotification:(NSNotification *)notification {}
@@ -111,13 +122,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -13,12 +13,15 @@
 #import "JQKPaymentInfo.h"
 #import "JQKVideo.h"
 #import "JQKApplicationManager.h"
+#import "JQKBaseViewController.h"
 
 NSString *const kPaymentInfoKeyName = @"jqkuaibov_paymentinfo_keyname";
 
 static NSString *const kRegisterKeyName = @"jqkuaibov_register_keyname";
 static NSString *const kUserAccessUsername = @"jqkuaibov_user_access_username";
 static NSString *const kUserAccessServicename = @"jqkuaibov_user_access_service";
+static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
+
 
 @implementation JQKUtil
 
@@ -78,6 +81,7 @@ static NSString *const kUserAccessServicename = @"jqkuaibov_user_access_service"
 }
 
 + (BOOL)isPaid {
+//    return YES;
     return [self successfulPaymentInfo] != nil;
 }
 
@@ -113,5 +117,40 @@ static NSString *const kUserAccessServicename = @"jqkuaibov_user_access_service"
     });
 }
 
++ (NSUInteger)launchSeq {
+    NSNumber *launchSeq = [[NSUserDefaults standardUserDefaults] objectForKey:kLaunchSeqKeyName];
+    return launchSeq.unsignedIntegerValue;
+}
+
++ (void)accumateLaunchSeq {
+    NSUInteger launchSeq = [self launchSeq];
+    [[NSUserDefaults standardUserDefaults] setObject:@(launchSeq+1) forKey:kLaunchSeqKeyName];
+}
+
+
+
++ (NSUInteger)currentTabPageIndex {
+    UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([rootVC isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabVC = (UITabBarController *)rootVC;
+        return tabVC.selectedIndex;
+    }
+    return 0;
+}
+
++ (NSUInteger)currentSubTabPageIndex {
+    UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([rootVC isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabVC = (UITabBarController *)rootVC;
+        if ([tabVC.selectedViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navVC = (UINavigationController *)tabVC.selectedViewController;
+            if ([navVC.visibleViewController isKindOfClass:[JQKBaseViewController class]]) {
+                JQKBaseViewController *baseVC = (JQKBaseViewController *)navVC.visibleViewController;
+                return [baseVC currentIndex];
+            }
+        }
+    }
+    return NSNotFound;
+}
 
 @end

@@ -7,17 +7,17 @@
 //
 
 #import "JQKEncryptedURLRequest.h"
-#import "JQKChannelProgram.h"
+//#import "JQKChannelProgram.h"
 
-@interface JQKChannelProgramResponse : JQKChannelPrograms
+@interface JQKChannelProgramResponse : JQKChannels
 
 @end
 
-typedef void (^JQKFetchChannelProgramCompletionHandler)(BOOL success, JQKChannelPrograms *programs);
+typedef void (^JQKFetchChannelProgramCompletionHandler)(BOOL success, JQKChannels *programs);
 
 @interface JQKChannelProgramModel : JQKEncryptedURLRequest
 
-@property (nonatomic,retain) JQKChannelPrograms *fetchedPrograms;
+@property (nonatomic,retain) JQKChannels *fetchedPrograms;
 
 - (BOOL)fetchProgramsWithColumnId:(NSNumber *)columnId
                            pageNo:(NSUInteger)pageNo
