@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		10E473000B295B14FB89B2AE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8BD9636ED759BEEB9A13D09 /* libPods.a */; };
 		B33BCC9D1D052E9800D8E62F /* UITableView+Separator.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCC9C1D052E9800D8E62F /* UITableView+Separator.m */; };
+		B35BB6351D1A9E2D003CF5B6 /* NSObject+DictionaryRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB6341D1A9E2D003CF5B6 /* NSObject+DictionaryRepresentation.m */; };
+		B35BB6381D1A9EBE003CF5B6 /* JQKChannels.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB6371D1A9EBE003CF5B6 /* JQKChannels.m */; };
+		B35BB6411D1A9F9E003CF5B6 /* DBHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB63B1D1A9F9E003CF5B6 /* DBHandler.m */; };
+		B35BB6421D1A9F9E003CF5B6 /* DBPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB63E1D1A9F9E003CF5B6 /* DBPersistence.m */; };
+		B35BB6431D1A9F9E003CF5B6 /* DBTableVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB6401D1A9F9E003CF5B6 /* DBTableVersion.m */; };
+		B35BB64D1D1A9FCA003CF5B6 /* JQKCPCStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB6461D1A9FCA003CF5B6 /* JQKCPCStatsModel.m */; };
+		B35BB64E1D1A9FCA003CF5B6 /* JQKPayStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB6481D1A9FCA003CF5B6 /* JQKPayStatsModel.m */; };
+		B35BB64F1D1A9FCA003CF5B6 /* JQKStatsBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB64A1D1A9FCA003CF5B6 /* JQKStatsBaseModel.m */; };
+		B35BB6501D1A9FCA003CF5B6 /* JQKTabStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB64C1D1A9FCA003CF5B6 /* JQKTabStatsModel.m */; };
+		B35BB6551D1AA15F003CF5B6 /* JQKNetworkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB6521D1AA15F003CF5B6 /* JQKNetworkInfo.m */; };
+		B35BB6561D1AA15F003CF5B6 /* JQKStatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB6541D1AA15F003CF5B6 /* JQKStatsManager.m */; };
 		B374B9C61CFD6CBA0063C1C6 /* JQKSpreadController.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9C51CFD6CBA0063C1C6 /* JQKSpreadController.m */; };
 		B374B9C91CFD70100063C1C6 /* JQKSpreadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9C81CFD70100063C1C6 /* JQKSpreadModel.m */; };
 		B374B9CC1CFD72E70063C1C6 /* JQKSpreadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9CB1CFD72E70063C1C6 /* JQKSpreadCell.m */; };
@@ -121,6 +132,29 @@
 		A8BD9636ED759BEEB9A13D09 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B33BCC9B1D052E9800D8E62F /* UITableView+Separator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Separator.h"; sourceTree = "<group>"; };
 		B33BCC9C1D052E9800D8E62F /* UITableView+Separator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Separator.m"; sourceTree = "<group>"; };
+		B35BB6331D1A9E2D003CF5B6 /* NSObject+DictionaryRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DictionaryRepresentation.h"; sourceTree = "<group>"; };
+		B35BB6341D1A9E2D003CF5B6 /* NSObject+DictionaryRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DictionaryRepresentation.m"; sourceTree = "<group>"; };
+		B35BB6361D1A9EBE003CF5B6 /* JQKChannels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKChannels.h; sourceTree = "<group>"; };
+		B35BB6371D1A9EBE003CF5B6 /* JQKChannels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKChannels.m; sourceTree = "<group>"; };
+		B35BB63A1D1A9F9E003CF5B6 /* DBHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHandler.h; sourceTree = "<group>"; };
+		B35BB63B1D1A9F9E003CF5B6 /* DBHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHandler.m; sourceTree = "<group>"; };
+		B35BB63C1D1A9F9E003CF5B6 /* DBMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMigration.h; sourceTree = "<group>"; };
+		B35BB63D1D1A9F9E003CF5B6 /* DBPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPersistence.h; sourceTree = "<group>"; };
+		B35BB63E1D1A9F9E003CF5B6 /* DBPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPersistence.m; sourceTree = "<group>"; };
+		B35BB63F1D1A9F9E003CF5B6 /* DBTableVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTableVersion.h; sourceTree = "<group>"; };
+		B35BB6401D1A9F9E003CF5B6 /* DBTableVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBTableVersion.m; sourceTree = "<group>"; };
+		B35BB6451D1A9FCA003CF5B6 /* JQKCPCStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKCPCStatsModel.h; sourceTree = "<group>"; };
+		B35BB6461D1A9FCA003CF5B6 /* JQKCPCStatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKCPCStatsModel.m; sourceTree = "<group>"; };
+		B35BB6471D1A9FCA003CF5B6 /* JQKPayStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPayStatsModel.h; sourceTree = "<group>"; };
+		B35BB6481D1A9FCA003CF5B6 /* JQKPayStatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPayStatsModel.m; sourceTree = "<group>"; };
+		B35BB6491D1A9FCA003CF5B6 /* JQKStatsBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKStatsBaseModel.h; sourceTree = "<group>"; };
+		B35BB64A1D1A9FCA003CF5B6 /* JQKStatsBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKStatsBaseModel.m; sourceTree = "<group>"; };
+		B35BB64B1D1A9FCA003CF5B6 /* JQKTabStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKTabStatsModel.h; sourceTree = "<group>"; };
+		B35BB64C1D1A9FCA003CF5B6 /* JQKTabStatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKTabStatsModel.m; sourceTree = "<group>"; };
+		B35BB6511D1AA15F003CF5B6 /* JQKNetworkInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKNetworkInfo.h; sourceTree = "<group>"; };
+		B35BB6521D1AA15F003CF5B6 /* JQKNetworkInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKNetworkInfo.m; sourceTree = "<group>"; };
+		B35BB6531D1AA15F003CF5B6 /* JQKStatsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKStatsManager.h; sourceTree = "<group>"; };
+		B35BB6541D1AA15F003CF5B6 /* JQKStatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKStatsManager.m; sourceTree = "<group>"; };
 		B374B9C41CFD6CBA0063C1C6 /* JQKSpreadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKSpreadController.h; sourceTree = "<group>"; };
 		B374B9C51CFD6CBA0063C1C6 /* JQKSpreadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKSpreadController.m; sourceTree = "<group>"; };
 		B374B9C71CFD70100063C1C6 /* JQKSpreadModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKSpreadModel.h; sourceTree = "<group>"; };
@@ -352,6 +386,35 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B35BB6391D1A9F9E003CF5B6 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				B35BB63A1D1A9F9E003CF5B6 /* DBHandler.h */,
+				B35BB63B1D1A9F9E003CF5B6 /* DBHandler.m */,
+				B35BB63C1D1A9F9E003CF5B6 /* DBMigration.h */,
+				B35BB63D1D1A9F9E003CF5B6 /* DBPersistence.h */,
+				B35BB63E1D1A9F9E003CF5B6 /* DBPersistence.m */,
+				B35BB63F1D1A9F9E003CF5B6 /* DBTableVersion.h */,
+				B35BB6401D1A9F9E003CF5B6 /* DBTableVersion.m */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		B35BB6441D1A9FCA003CF5B6 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				B35BB6451D1A9FCA003CF5B6 /* JQKCPCStatsModel.h */,
+				B35BB6461D1A9FCA003CF5B6 /* JQKCPCStatsModel.m */,
+				B35BB6471D1A9FCA003CF5B6 /* JQKPayStatsModel.h */,
+				B35BB6481D1A9FCA003CF5B6 /* JQKPayStatsModel.m */,
+				B35BB6491D1A9FCA003CF5B6 /* JQKStatsBaseModel.h */,
+				B35BB64A1D1A9FCA003CF5B6 /* JQKStatsBaseModel.m */,
+				B35BB64B1D1A9FCA003CF5B6 /* JQKTabStatsModel.h */,
+				B35BB64C1D1A9FCA003CF5B6 /* JQKTabStatsModel.m */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
 		B374B9C01CFD6C7E0063C1C6 /* Spread */ = {
 			isa = PBXGroup;
 			children = (
@@ -478,6 +541,7 @@
 		BC3872391C2D278C00CBE88A /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				B35BB6391D1A9F9E003CF5B6 /* DataBase */,
 				BC3872DD1C2D336300CBE88A /* Vendor */,
 				BC3872941C2D2DFA00CBE88A /* Utils */,
 				BC38723D1C2D28BF00CBE88A /* Base */,
@@ -503,6 +567,7 @@
 		BC38725C1C2D290F00CBE88A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B35BB6441D1A9FCA003CF5B6 /* Stats */,
 				BC38732F1C2D402B00CBE88A /* JQKURLRequest.h */,
 				BC3873301C2D402B00CBE88A /* JQKURLRequest.m */,
 				BC3873211C2D402B00CBE88A /* JQKEncryptedURLRequest.h */,
@@ -511,6 +576,8 @@
 				BC3873321C2D402B00CBE88A /* JQKURLResponse.m */,
 				BC3873291C2D402B00CBE88A /* JQKProgram.h */,
 				BC38732A1C2D402B00CBE88A /* JQKProgram.m */,
+				B35BB6361D1A9EBE003CF5B6 /* JQKChannels.h */,
+				B35BB6371D1A9EBE003CF5B6 /* JQKChannels.m */,
 				BC3873351C2D402B00CBE88A /* JQKVideo.h */,
 				BC3873361C2D402B00CBE88A /* JQKVideo.m */,
 				BC6116DB1C8EFCA800A66155 /* JQKVideos.h */,
@@ -626,6 +693,10 @@
 				B374B9D41CFD867D0063C1C6 /* JQKApplication.m */,
 				B374B9D01CFD86690063C1C6 /* JQKApplicationManager.h */,
 				B374B9D11CFD86690063C1C6 /* JQKApplicationManager.m */,
+				B35BB6511D1AA15F003CF5B6 /* JQKNetworkInfo.h */,
+				B35BB6521D1AA15F003CF5B6 /* JQKNetworkInfo.m */,
+				B35BB6531D1AA15F003CF5B6 /* JQKStatsManager.h */,
+				B35BB6541D1AA15F003CF5B6 /* JQKStatsManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -644,6 +715,8 @@
 				BC38729D1C2D2E3E00CBE88A /* NSObject+Properties.m */,
 				B374B9D61CFD86B20063C1C6 /* NSObject+PropertyAccessInspecting.h */,
 				B374B9D71CFD86B20063C1C6 /* NSObject+PropertyAccessInspecting.m */,
+				B35BB6331D1A9E2D003CF5B6 /* NSObject+DictionaryRepresentation.h */,
+				B35BB6341D1A9E2D003CF5B6 /* NSObject+DictionaryRepresentation.m */,
 				BC38729E1C2D2E3E00CBE88A /* NSString+crypt.h */,
 				BC38729F1C2D2E3E00CBE88A /* NSString+crypt.m */,
 				BC3872A01C2D2E3E00CBE88A /* NSString+FilterHTML.h */,
@@ -1048,7 +1121,10 @@
 				BC3873411C2D402B00CBE88A /* JQKURLRequest.m in Sources */,
 				BC38727E1C2D299D00CBE88A /* JQKBaseViewController.m in Sources */,
 				BC6116D71C8ED17700A66155 /* JQKMovieCell.m in Sources */,
+				B35BB6431D1A9F9E003CF5B6 /* DBTableVersion.m in Sources */,
 				BC2C027B1C2E5F5A00D10677 /* JQKHotVideoCell.m in Sources */,
+				B35BB6351D1A9E2D003CF5B6 /* NSObject+DictionaryRepresentation.m in Sources */,
+				B35BB64D1D1A9FCA003CF5B6 /* JQKCPCStatsModel.m in Sources */,
 				B374B9CC1CFD72E70063C1C6 /* JQKSpreadCell.m in Sources */,
 				BC3873021C2D33C200CBE88A /* payRequsestHandler.mm in Sources */,
 				BC3873481C2D411700CBE88A /* NSDictionary+JQKSign.m in Sources */,
@@ -1070,10 +1146,13 @@
 				BC2C02771C2E5C1A00D10677 /* JQKHotVideoModel.m in Sources */,
 				B374B9D21CFD86690063C1C6 /* JQKApplicationManager.m in Sources */,
 				BC3872BA1C2D2E3E00CBE88A /* NSString+crypt.m in Sources */,
+				B35BB6411D1A9F9E003CF5B6 /* DBHandler.m in Sources */,
 				BC3872BC1C2D2E3E00CBE88A /* NSString+length.m in Sources */,
 				BC3873541C2D4CD500CBE88A /* JQKHomeCell.m in Sources */,
+				B35BB6421D1A9F9E003CF5B6 /* DBPersistence.m in Sources */,
 				BC38733A1C2D402B00CBE88A /* JQKEncryptedURLRequest.m in Sources */,
 				BC3872081C2D273100CBE88A /* main.m in Sources */,
+				B35BB6551D1AA15F003CF5B6 /* JQKNetworkInfo.m in Sources */,
 				BC38733F1C2D402B00CBE88A /* JQKSystemConfig.m in Sources */,
 				BC3873011C2D33C200CBE88A /* ApiXml.mm in Sources */,
 				BC38733C1C2D402B00CBE88A /* JQKPaymentModel.m in Sources */,
@@ -1084,15 +1163,19 @@
 				BC3872B81C2D2E3E00CBE88A /* NSMutableDictionary+SafeCoding.m in Sources */,
 				BC3872C21C2D2E3E00CBE88A /* UIScrollView+Refresh.m in Sources */,
 				BC3873091C2D38D000CBE88A /* JQKErrorHandler.m in Sources */,
+				B35BB6501D1A9FCA003CF5B6 /* JQKTabStatsModel.m in Sources */,
 				BC3873391C2D402B00CBE88A /* JQKActivateModel.m in Sources */,
 				BC69A4831C9988D30010FA89 /* JQKPaymentManager.m in Sources */,
 				BC64E2571C4E171200450C1B /* JQKAdView.m in Sources */,
 				BC38733B1C2D402B00CBE88A /* JQKPaymentInfo.m in Sources */,
 				BC38723C1C2D27D600CBE88A /* JQKAppDelegate.m in Sources */,
+				B35BB64E1D1A9FCA003CF5B6 /* JQKPayStatsModel.m in Sources */,
+				B35BB6561D1AA15F003CF5B6 /* JQKStatsManager.m in Sources */,
 				BC6116D41C8ECE9B00A66155 /* JQKMovieViewController.m in Sources */,
 				BC3872D21C2D307400CBE88A /* JQKUtil.m in Sources */,
 				BC3873751C2D80D500CBE88A /* JQKProgramCell.m in Sources */,
 				BC3872B61C2D2E3E00CBE88A /* NSDate+Utilities.m in Sources */,
+				B35BB64F1D1A9FCA003CF5B6 /* JQKStatsBaseModel.m in Sources */,
 				BC3873691C2D56A300CBE88A /* JQKChannel.m in Sources */,
 				BC38736A1C2D56A300CBE88A /* JQKChannelModel.m in Sources */,
 				BC38734C1C2D4A6C00CBE88A /* UIImage+color.m in Sources */,
@@ -1105,6 +1188,7 @@
 				BC38736C1C2D56A300CBE88A /* JQKChannelProgramModel.m in Sources */,
 				BC6FC39F1CA3EC2500856F0B /* WeChatPayQueryOrderRequest.m in Sources */,
 				BC3872B91C2D2E3E00CBE88A /* NSObject+Properties.m in Sources */,
+				B35BB6381D1A9EBE003CF5B6 /* JQKChannels.m in Sources */,
 				BC3872BB1C2D2E3E00CBE88A /* NSString+FilterHTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1236,8 +1320,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/iAppPay/DependenceSDK",
@@ -1252,7 +1336,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4b0ab9ef-6709-4b29-acfb-e8a89c6075c5";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1263,8 +1347,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/iAppPay/DependenceSDK",
@@ -1279,7 +1363,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4b0ab9ef-6709-4b29-acfb-e8a89c6075c5";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
