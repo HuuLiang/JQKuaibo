@@ -37,4 +37,6 @@ extern NSString *const kPaymentInfoKeyName;
 
 + (void)checkAppInstalledWithBundleId:(NSString *)bundleId completionHandler:(void (^)(BOOL))handler;
 
++ (UIViewController *)currentVisibleViewController;
+
 @end
