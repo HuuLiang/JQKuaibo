@@ -79,6 +79,26 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     }
 }
 
+- (JQKPaymentType)wechatPaymentType {
+    if ([JQKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JQKSubPayTypeWeChat) {
+        return JQKPaymentTypeVIAPay;
+    } else if ([JQKPaymentConfig sharedConfig].wftPayInfo) {
+        return JQKPaymentTypeSPay;
+    } else if ([JQKPaymentConfig sharedConfig].iappPayInfo) {
+        return JQKPaymentTypeIAppPay;
+    } else if ([JQKPaymentConfig sharedConfig].haitunPayInfo) {
+        return JQKPaymentTypeHTPay;
+    }
+    return JQKPaymentTypeNone;
+}
+
+- (JQKPaymentType)alipayPaymentType {
+    if ([JQKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JQKSubPayTypeAlipay) {
+        return JQKPaymentTypeVIAPay;
+    }
+    return JQKPaymentTypeNone;
+}
+
 
 - (void)handleOpenURL:(NSURL *)url  {
     [[PayUitls getIntents] paytoAli:url];
@@ -137,22 +157,24 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                 self.completionHandler(payResult, self.paymentInfo);
             }
         }];
-    } else if (type == JQKPaymentTypeHTPay && subType == JQKPaymentTypeWeChatPay) {
-        //海豚    微信
-        @weakify(self);
-        [[HTPayManager sharedManager] payWithOrderId:orderNo
-                                           orderName:@"会员VIP"
-                                               price:price
-                               withCompletionHandler:^(BOOL success, id obj)
-         {
-             @strongify(self);
-             PAYRESULT payResult = success ? PAYRESULT_SUCCESS : PAYRESULT_FAIL;
-             if (self.completionHandler) {
-                 self.completionHandler(payResult, self.paymentInfo);
-             }
-         }];
-        
-    } else if (type == JQKPaymentTypeVIAPay && subType == JQKPaymentTypeAlipay) {
+    }
+//    else if (type == JQKPaymentTypeHTPay && subType == JQKPaymentTypeWeChatPay) {
+//        //海豚    微信
+//        @weakify(self);
+//        [[HTPayManager sharedManager] payWithOrderId:orderNo
+//                                           orderName:@"会员VIP"
+//                                               price:price
+//                               withCompletionHandler:^(BOOL success, id obj)
+//         {
+//             @strongify(self);
+//             PAYRESULT payResult = success ? PAYRESULT_SUCCESS : PAYRESULT_FAIL;
+//             if (self.completionHandler) {
+//                 self.completionHandler(payResult, self.paymentInfo);
+//             }
+//         }];
+//        
+//    }
+    else if (type == JQKPaymentTypeVIAPay && subType == JQKPaymentTypeAlipay) {
         //首游时空  支付宝
 //        NSString *tradeName = [NSString stringWithFormat:@"%@",paymentInfo.payPointType];
         [[PayUitls getIntents]   gotoPayByFee:@(price).stringValue
@@ -164,6 +186,16 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                              andViewControler:[JQKUtil currentVisibleViewController]];
         
         
+    } else if (type == JQKPaymentTypeVIAPay && subType == JQKPaymentTypeWeChatPay) {
+        //首游时空    微信
+        [[PayUitls getIntents]   gotoPayByFee:@(price).stringValue
+                                 andTradeName:@"会员VIP"
+                              andGoodsDetails:@"会员VIP"
+                                    andScheme:kAlipaySchemeUrl
+                            andchannelOrderId:[orderNo stringByAppendingFormat:@"$%@", JQK_REST_APP_ID]
+                                      andType:@"2"
+                             andViewControler:[JQKUtil currentVisibleViewController]];
+
     }
 //    else if (type == JQKPaymentTypeIAppPay) {
 //        NSDictionary *paymentTypeMapping = @{@(JQKPaymentTypeAlipay):@(IapppayAlphaKitAlipayPayType),
@@ -231,7 +263,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     if (paymentResult == PAYRESULT_FAIL) {
         DLog(@"首游时空支付失败：%@", sender[@"info"]);
         //    } else if (paymentResult == PAYRESULT_SUCCESS) {
-        //        UIViewController *currentController = [YYKUtil currentVisibleViewController];
+        //        UIViewController *currentController = [JQKUtil currentVisibleViewController];
         //        if ([currentController isKindOfClass:NSClassFromString(@"SZFViewController")]) {
         //            [currentController dismissViewControllerAnimated:YES completion:nil];
         //        }

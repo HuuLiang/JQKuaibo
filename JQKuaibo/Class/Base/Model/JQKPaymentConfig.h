@@ -8,10 +8,10 @@
 
 #import "JQKURLResponse.h"
 
-typedef NS_ENUM(NSUInteger, JQKIAppPayType) {
-    JQKIAppPayTypeUnknown = 0,
-    JQKIAppPayTypeWeChat = 1 << 0,
-    JQKIAppPayTypeAlipay = 1 << 1
+typedef NS_ENUM(NSUInteger, JQKSubPayType) {
+    JQKSubPayTypeUnknown = 0,
+    JQKSubPayTypeWeChat = 1 << 0,
+    JQKSubPayTypeAlipay = 1 << 1
 };
 
 @interface JQKWeChatPaymentConfig : NSObject
