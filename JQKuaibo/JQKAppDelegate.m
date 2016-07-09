@@ -223,13 +223,16 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+ 
+    [[JQKPaymentManager sharedManager] applicationWillEnterForeground];
+    //    if (![JQKUtil isPaid]) {
+    //        [[JQKPaymentManager sharedManager] checkPayment];
+    //    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    if (![JQKUtil isPaid]) {
-        [[JQKPaymentManager sharedManager] checkPayment];
-    }
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -246,6 +249,10 @@
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+   [[JQKPaymentManager sharedManager] handleOpenURL:url];
+    return YES;
+}
 #pragma mark - UITabBarControllerDelegate
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {

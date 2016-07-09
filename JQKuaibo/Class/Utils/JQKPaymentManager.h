@@ -32,6 +32,10 @@ typedef void (^JQKPaymentCompletionHandler)(PAYRESULT payResult, JQKPaymentInfo 
                        completionHandler:(JQKPaymentCompletionHandler)handler;
 
 - (void)handleOpenURL:(NSURL *)url;
-- (void)checkPayment;
+//- (void)checkPayment;
+
+- (JQKPaymentType)wechatPaymentType;
+- (JQKPaymentType)alipayPaymentType;
+- (void)applicationWillEnterForeground;
 
 @end

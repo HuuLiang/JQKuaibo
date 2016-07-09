@@ -33,6 +33,10 @@ typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic,readonly) BOOL loaded;
 @property (nonatomic) NSUInteger statsTimeInterval;
 
+@property (nonatomic) NSString *contact;
+@property (nonatomic) NSInteger notificationLaunchSeq;
+
+
 
 + (instancetype)sharedModel;
 

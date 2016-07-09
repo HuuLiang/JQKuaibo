@@ -60,26 +60,26 @@ static NSString *const kPaymentEncryptionPassword = @"wdnxs&*@#!*qb)*&qiang";
                      standbyURLPath:[NSString stringWithFormat:JQK_STANDBY_PAYMENT_CONFIG_URL, JQK_REST_APP_ID]
                          withParams:@{@"appId":JQK_REST_APP_ID, @"channelNo":JQK_CHANNEL_NO, @"pV":JQK_PAYMENT_PV}
                     responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
-    {
-        @strongify(self);
-        if (!self) {
-            return ;
-        }
-        
-        JQKPaymentConfig *config;
-        if (respStatus == JQKURLResponseSuccess) {
-            self->_loaded = YES;
-            
-            config = self.response;
-            [config setAsCurrentConfig];
-            
-            DLog(@"Payment config loaded!");
-        }
-        
-        if (handler) {
-            handler(respStatus == JQKURLResponseSuccess, config);
-        }
-    }];
+                {
+                    @strongify(self);
+                    if (!self) {
+                        return ;
+                    }
+                    
+                    JQKPaymentConfig *config;
+                    if (respStatus == JQKURLResponseSuccess) {
+                        self->_loaded = YES;
+                        
+                        config = self.response;
+                        [config setAsCurrentConfig];
+                        
+                        DLog(@"Payment config loaded!");
+                    }
+                    
+                    if (handler) {
+                        handler(respStatus == JQKURLResponseSuccess, config);
+                    }
+                }];
     return ret;
 }
 @end

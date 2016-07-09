@@ -74,16 +74,23 @@
 //        Pay(JQKPaymentTypeHTPay, JQKPaymentTypeWeChatPay);
 //    }];
     
+    JQKPaymentType wechatPaymentType = [[JQKPaymentManager sharedManager] wechatPaymentType];
+    if (wechatPaymentType != JQKPaymentTypeNone) {
+         //微信支付
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信支付" available:YES action:^(id sender) {
+            Pay(wechatPaymentType, JQKPaymentTypeWeChatPay);
+        }];
+    }
+    JQKPaymentType aliPaymentType = [[JQKPaymentManager sharedManager] alipayPaymentType];
+    if (aliPaymentType != JQKPaymentTypeNone) {
+        //支付宝支付
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
+            Pay(aliPaymentType, JQKPaymentTypeAlipay);
+        }];
+        
+    }
+   
     
-    //微信支付    首游时空
-    [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信客户端支付" available:YES action:^(id sender) {
-        Pay(JQKPaymentTypeVIAPay, JQKPaymentTypeWeChatPay);
-    }];
-    
-    //支付宝支付  首游时空
-    [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-        Pay(JQKPaymentTypeVIAPay, JQKPaymentTypeAlipay);
-    }];
     
 //    if (([JQKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & JQKIAppPayTypeWeChat)
 //        || [JQKPaymentConfig sharedConfig].weixinInfo) {

@@ -49,6 +49,7 @@ PODS:
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
   - SFHFKeychainUtils (0.0.1)
+  - XMLReader-Arc (1.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6.0)
@@ -62,6 +63,7 @@ DEPENDENCIES:
   - SDCycleScrollView (~> 1.3)
   - SDWebImage (~> 3.7.3)
   - SFHFKeychainUtils (~> 0.0.1)
+  - XMLReader-Arc (~> 1.1)
 
 SPEC CHECKSUMS:
   AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
@@ -75,5 +77,8 @@ SPEC CHECKSUMS:
   SDCycleScrollView: a002d85b30cfa9d0ac74069cd3973ca19ff4f22f
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SFHFKeychainUtils: 9576b411a79a058f4d5381ace6f3242b9a62e664
+  XMLReader-Arc: 7832c527346fc26511fd6c05ebcee18008c34d6d
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: e9288a80f230b31a1116eda6568556e01ac8a28c
+
+COCOAPODS: 1.0.1

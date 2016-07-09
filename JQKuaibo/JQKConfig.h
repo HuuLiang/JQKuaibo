@@ -42,8 +42,8 @@
 #define JQK_STATS_TAB_URL               @"/stats/tabStat.service"
 #define JQK_STATS_PAY_URL               @"/stats/payRes.service"
 
-#define JQK_PAYMENT_COMMIT_URL          @"http://pay.iqu8.net/paycenter/qubaPr.json"//@"http://120.24.252.114:8084/paycenter/qubaPr.json"
-#define JQK_PAYMENT_CONFIG_URL          @"http://pay.iqu8.net/paycenter/payConfig.json"//@"http://120.24.252.114:8084/paycenter/payConfig.json"
+#define JQK_PAYMENT_COMMIT_URL          @"http://pay.iqu8.net/paycenter/qubaPr.json"//@"http://120.24.252.114:8084/paycenter/qubaPr.json"//
+#define JQK_PAYMENT_CONFIG_URL          @"http://pay.iqu8.net/paycenter/payConfig.json"//@"http://120.24.252.114:8084/paycenter/payConfig.json"//
 #define JQK_STANDBY_PAYMENT_CONFIG_URL  @"http://appcdn.mqu8.com/static/iosvideo/payConfig_%@.json"
 
 #define JQK_SYSTEM_CONFIG_PAY_AMOUNT            @"PAY_AMOUNT"
@@ -56,6 +56,10 @@
 #define JQK_SYSTEM_CONFIG_SPREAD_LEFT_URL       @"SPREAD_LEFT_URL"
 #define JQK_SYSTEM_CONFIG_SPREAD_RIGHT_IMAGE    @"SPREAD_RIGHT_IMG"
 #define JQK_SYSTEM_CONFIG_SPREAD_RIGHT_URL      @"SPREAD_RIGHT_URL"
+#define JQK_SYSTEM_CONFIG_CONTACT               @"CONTACT"
+#define JQK_SYSTEM_CONFIG_NOTIFICATION_LAUNCH_SEQ       @"NOTIFICATION_LAUNCH_SEQ"
+
+
 
 #define JQK_UMENG_APP_ID         @"567d010667e58e2c8200223a"
 

@@ -39,4 +39,6 @@ extern NSString *const kPaymentInfoKeyName;
 
 + (UIViewController *)currentVisibleViewController;
 
++ (NSString *)getIPAddress;
+
 @end
