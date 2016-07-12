@@ -49,7 +49,7 @@
 - (BOOL)fetchSystemConfigWithCompletionHandler:(JQKFetchSystemConfigCompletionHandler)handler {
     @weakify(self);
     BOOL success = [self requestURLPath:JQK_SYSTEM_CONFIG_URL
-                             withParams:nil
+                             withParams:@{@"type" : @([JQKUtil deviceType])}
                         responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
