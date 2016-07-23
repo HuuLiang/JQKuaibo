@@ -22,6 +22,7 @@
 
 #import "SPayUtil.h"
 #import "JQKSystemConfigModel.h"
+#import "IappPayMananger.h"
 
 static NSString *const kAlipaySchemeUrl = @"comjqkuaibo2016appalipayurlscheme";
 
@@ -61,6 +62,10 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                                      notifyUrl:[JQKPaymentConfig sharedConfig].haitunPayInfo.notifyUrl
                                      channelNo:JQK_CHANNEL_NO
                                          appId:JQK_REST_APP_ID];
+//        [[IapppayKit sharedInstance] setAppAlipayScheme:kAlipaySchemeUrl];
+//        [[IapppayKit sharedInstance] setAppId:[JQKPaymentConfig sharedConfig].iappPayInfo.appid mACID:JQK_CHANNEL_NO];
+        
+        
         
     }];
     
@@ -106,6 +111,12 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     return JQKPaymentTypeNone;
 }
 
+- (JQKPaymentType)cardPayPaymentType {
+    if ([JQKPaymentConfig sharedConfig].iappPayInfo) {
+        return JQKPaymentTypeIAppPay;
+    }
+    return JQKPaymentTypeNone;
+}
 
 - (void)handleOpenURL:(NSURL *)url  {
     [[PayUitls getIntents] paytoAli:url];
@@ -119,13 +130,13 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                                inChannel:(JQKChannels *)channel
                        completionHandler:(JQKPaymentCompletionHandler)handler
 {
-    if (type == JQKPaymentTypeNone || (type == JQKPaymentTypeIAppPay && subType == JQKPaymentTypeNone)) {
+    if (type == JQKPaymentTypeNone ) {
         if (self.completionHandler) {
             self.completionHandler(PAYRESULT_FAIL, nil);
         }
         return nil;
     }
-//        price  =  1;
+    //        price  =  1;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
@@ -193,7 +204,25 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
             
         }];
         
-    }else {
+    }else if (type == JQKPaymentTypeIAppPay){
+        IappPayMananger *iAppMgr = [IappPayMananger sharedMananger];
+        iAppMgr.appId = [JQKPaymentConfig sharedConfig].iappPayInfo.appid;
+        iAppMgr.privateKey = [JQKPaymentConfig sharedConfig].iappPayInfo.privateKey;
+        iAppMgr.waresid = [JQKPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
+        iAppMgr.appUserId = [JQKUtil userId].md5 ?: @"UnregisterUser";
+        iAppMgr.privateInfo = JQK_PAYMENT_RESERVE_DATA;
+        iAppMgr.notifyUrl = [JQKPaymentConfig sharedConfig].iappPayInfo.notifyUrl;
+        iAppMgr.publicKey = [JQKPaymentConfig sharedConfig].iappPayInfo.publicKey;
+        @weakify(self);
+        [iAppMgr payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
+            @strongify(self);
+            if (self.completionHandler) {
+                self.completionHandler(payResult, self.paymentInfo);
+            }
+            
+        }];
+        
+    } else {
         success = NO;
         
         if (self.completionHandler) {
@@ -301,4 +330,6 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         [[WeChatPayManager sharedInstance] sendNotificationByResult:payResult];
     }
 }
+
+
 @end

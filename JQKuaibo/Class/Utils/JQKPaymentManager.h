@@ -36,6 +36,7 @@ typedef void (^JQKPaymentCompletionHandler)(PAYRESULT payResult, JQKPaymentInfo 
 
 - (JQKPaymentType)wechatPaymentType;
 - (JQKPaymentType)alipayPaymentType;
+- (JQKPaymentType)cardPayPaymentType;
 - (void)applicationWillEnterForeground;
 
 @end
