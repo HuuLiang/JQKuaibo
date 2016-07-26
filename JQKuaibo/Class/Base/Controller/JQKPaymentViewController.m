@@ -48,7 +48,7 @@
     }
     
     @weakify(self);
-    void (^Pay)(JQKPaymentType type, JQKPaymentType subType) = ^(JQKPaymentType type, JQKPaymentType subType)
+    void (^Pay)(JQKPaymentType type, JQKSubPayType subType) = ^(JQKPaymentType type, JQKSubPayType subType)
     {
         @strongify(self);
         if (!self.payAmount) {
@@ -68,32 +68,37 @@
     _popView.headerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"payment_background" ofType:@"jpg"]];
     _popView.footerImage = [UIImage imageNamed:@"payment_footer"];
     
-    
-    //    //微信支付    海豚
-    //    [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信客户端支付" available:YES action:^(id sender) {
-    //        Pay(JQKPaymentTypeHTPay, JQKPaymentTypeWeChatPay);
-    //    }];
+
     
     JQKPaymentType cardType = [[JQKPaymentManager sharedManager] cardPayPaymentType];
     
-    if (cardType != JQKPaymentTypeNone) {
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"iaaPaySide_icon"] title:@"购卡支付" available:YES action:^(id sender) {
-            Pay(cardType,JQKPaymentTypeNone);
-        }];
-    }
-    
+  
     JQKPaymentType wechatPaymentType = [[JQKPaymentManager sharedManager] wechatPaymentType];
     if (wechatPaymentType != JQKPaymentTypeNone) {
         //微信支付
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信支付" available:YES action:^(id sender) {
-            Pay(wechatPaymentType, JQKPaymentTypeWeChatPay);
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon-1"] title:@"微信支付" subtitle:nil backgroundColor:[UIColor colorWithHexString:@"#05c30b"] action:^(id sender) {
+            Pay(wechatPaymentType, JQKSubPayTypeWeChat);
         }];
     }
     JQKPaymentType aliPaymentType = [[JQKPaymentManager sharedManager] alipayPaymentType];
     if (aliPaymentType != JQKPaymentTypeNone) {
         //支付宝支付
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-            Pay(aliPaymentType, JQKPaymentTypeAlipay);
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon-1"] title:@"支付宝" subtitle:nil backgroundColor:[UIColor colorWithHexString:@"#02a0e9"] action:^(id sender) {
+            Pay(aliPaymentType, JQKSubPayTypeAlipay);
+        }];
+        
+    }
+    JQKPaymentType qqPaymentType = [[JQKPaymentManager sharedManager] qqPaymentType];
+    if (qqPaymentType != JQKPaymentTypeNone) {
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"qq_icon"] title:@"QQ钱包" subtitle:nil backgroundColor:[UIColor redColor] action:^(id sender) {
+            Pay(aliPaymentType, JQKSubPayTypeQQ);
+        }];
+    }
+    
+    if (cardType != JQKPaymentTypeNone) {
+        
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon"] title:@"购卡支付" subtitle:@"支持微信和支付宝" backgroundColor:[UIColor darkPink] action:^(id obj) {
+            Pay(cardType,JQKSubPayTypeUnknown);
         }];
         
     }
@@ -140,8 +145,11 @@
         [self.popView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self.view);
             
-            const CGFloat width = kScreenWidth * 0.95;
-            make.size.mas_equalTo(CGSizeMake(width, [self.popView viewHeightRelativeToWidth:width]));
+            make.centerX.equalTo(self.view);
+            const CGFloat width = MAX(kScreenWidth * 0.85, 275);
+            const CGFloat height = [self.popView viewHeightRelativeToWidth:width];
+            make.size.mas_equalTo(CGSizeMake(width, height));
+            make.centerY.equalTo(self.view).offset(-height/20);
         }];
     }
 }
@@ -214,7 +222,7 @@
 - (void)payForProgram:(JQKProgram *)program
                 price:(double)price
           paymentType:(JQKPaymentType)paymentType
-       paymentSubType:(JQKPaymentType)paymentSubType
+       paymentSubType:(JQKSubPayType)paymentSubType
 {
     @weakify(self);
     JQKPaymentInfo *paymentInfo = [[JQKPaymentManager sharedManager] startPaymentWithType:paymentType

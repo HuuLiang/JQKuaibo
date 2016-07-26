@@ -34,6 +34,6 @@
 #import "DBHandler.h"
 #import "JQKNetworkInfo.h"
 #import "JQKStatsManager.h"
-#import "PayUtils.h"
+//#import "PayUtils.h"
 
 #endif /* JQKPrefixHeader_pch */

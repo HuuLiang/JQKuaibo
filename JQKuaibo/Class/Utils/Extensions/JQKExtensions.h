@@ -17,5 +17,6 @@
 #import "NSMutableDictionary+SafeCoding.h"
 #import "NSDictionary+JQKSign.h"
 #import "UIView+Loading.h"
+#import "UIColor+FeaturedColor.h"
 
 #endif /* JQKExtensions_h */

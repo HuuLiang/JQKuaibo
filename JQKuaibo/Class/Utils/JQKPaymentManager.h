@@ -24,7 +24,7 @@ typedef void (^JQKPaymentCompletionHandler)(PAYRESULT payResult, JQKPaymentInfo 
 //           completionHandler:(JQKPaymentCompletionHandler)handler;
 
 - (JQKPaymentInfo *)startPaymentWithType:(JQKPaymentType)type
-                                 subType:(JQKPaymentType)subType
+                                 subType:(JQKSubPayType)subType
                                    price:(NSUInteger)price
                               forProgram:(JQKProgram *)program
                          programLocation:(NSUInteger)programLocation
@@ -37,6 +37,7 @@ typedef void (^JQKPaymentCompletionHandler)(PAYRESULT payResult, JQKPaymentInfo 
 - (JQKPaymentType)wechatPaymentType;
 - (JQKPaymentType)alipayPaymentType;
 - (JQKPaymentType)cardPayPaymentType;
+- (JQKPaymentType)qqPaymentType ;
 - (void)applicationWillEnterForeground;
 
 @end
