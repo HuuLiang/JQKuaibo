@@ -68,11 +68,11 @@
     _popView.headerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"payment_background" ofType:@"jpg"]];
     _popView.footerImage = [UIImage imageNamed:@"payment_footer"];
     
-
+    
     
     JQKPaymentType cardType = [[JQKPaymentManager sharedManager] cardPayPaymentType];
     
-  
+    
     JQKPaymentType wechatPaymentType = [[JQKPaymentManager sharedManager] wechatPaymentType];
     if (wechatPaymentType != JQKPaymentTypeNone) {
         //微信支付
@@ -91,7 +91,7 @@
     JQKPaymentType qqPaymentType = [[JQKPaymentManager sharedManager] qqPaymentType];
     if (qqPaymentType != JQKPaymentTypeNone) {
         [_popView addPaymentWithImage:[UIImage imageNamed:@"qq_icon"] title:@"QQ钱包" subtitle:nil backgroundColor:[UIColor redColor] action:^(id sender) {
-            Pay(aliPaymentType, JQKSubPayTypeQQ);
+            Pay(qqPaymentType, JQKSubPayTypeQQ);
         }];
     }
     
@@ -197,9 +197,9 @@
 }
 
 - (void)setPayAmount:(NSNumber *)payAmount {
-#ifdef DEBUG
-    payAmount = @(0.01);
-#endif
+//#ifdef DEBUG
+//    payAmount = @(0.01);
+//#endif
     _payAmount = payAmount;
     self.popView.showPrice = payAmount;
 }

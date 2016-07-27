@@ -22,6 +22,8 @@
 
 static NSString *const kAlipaySchemeUrl = @"comjqkuaibo2016appalipayurlscheme";
 
+static NSString *const kIappPaySchemeUrl =@"comjqkuaibo2016appiaapayurlscheme";
+
 @interface JQKPaymentManager () <WXApiDelegate,stringDelegate>//
 @property (nonatomic,retain) JQKPaymentInfo *paymentInfo;
 @property (nonatomic,copy) JQKPaymentCompletionHandler completionHandler;
@@ -52,9 +54,9 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
 - (void)setup {
     [[PayUitls getIntents] initSdk];
     [paySender getIntents].delegate = self;
-    
+    [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;;
     [[JQKPaymentConfigModel sharedModel] fetchConfigWithCompletionHandler:^(BOOL success, id obj) {
-      
+        
     }];
     
     Class class = NSClassFromString(@"VIASZFViewController");
@@ -83,13 +85,13 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
     if ([JQKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JQKSubPayTypeWeChat) {
         return JQKPaymentTypeVIAPay;
     }
-//    else if ([JQKPaymentConfig sharedConfig].wftPayInfo) {
-//        return JQKPaymentTypeSPay;
-//    } else if ([JQKPaymentConfig sharedConfig].iappPayInfo) {
-//        return JQKPaymentTypeIAppPay;
-//    } else if ([JQKPaymentConfig sharedConfig].haitunPayInfo) {
-//        return JQKPaymentTypeHTPay;
-//    }
+    //    else if ([JQKPaymentConfig sharedConfig].wftPayInfo) {
+    //        return JQKPaymentTypeSPay;
+    //    } else if ([JQKPaymentConfig sharedConfig].iappPayInfo) {
+    //        return JQKPaymentTypeIAppPay;
+    //    } else if ([JQKPaymentConfig sharedConfig].haitunPayInfo) {
+    //        return JQKPaymentTypeHTPay;
+    //    }
     return JQKPaymentTypeNone;
 }
 
@@ -132,7 +134,10 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
         }
         return nil;
     }
-//            price  =  1;
+#ifdef DEBUG
+    price  =  200;
+#endif
+//        price  =  200;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
@@ -237,7 +242,7 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
 //}
 
 - (void)applicationWillEnterForeground {
-//    [[SPayUtil sharedInstance] applicationWillEnterForeground];
+    //    [[SPayUtil sharedInstance] applicationWillEnterForeground];
 }
 
 #pragma mark - stringDelegate

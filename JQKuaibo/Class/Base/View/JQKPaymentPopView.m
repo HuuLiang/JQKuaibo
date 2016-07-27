@@ -291,9 +291,7 @@ DefineLazyPropertyInitialization(NSMutableArray, paymentTypeItems)
         }
         return _paymentTypeCell;
         
-    }
-    
-    else {
+    } else {
         return self.cells[indexPath];
     }
     
