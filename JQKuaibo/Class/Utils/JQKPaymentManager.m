@@ -117,8 +117,13 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
 }
 
 - (void)handleOpenURL:(NSURL *)url  {
-    [[PayUitls getIntents] paytoAli:url];
-    [[IappPayMananger sharedMananger] handleOpenURL:url];
+    if ([url.absoluteString rangeOfString:kIappPaySchemeUrl].location == 0) {
+        [[IappPayMananger sharedMananger] handleOpenURL:url];
+    } else if ([url.absoluteString rangeOfString:kAlipaySchemeUrl].location == 0) {
+        [[PayUitls getIntents] paytoAli:url];
+    }
+//    [[PayUitls getIntents] paytoAli:url];
+//    [[IappPayMananger sharedMananger] handleOpenURL:url];
 }
 
 - (JQKPaymentInfo *)startPaymentWithType:(JQKPaymentType)type
@@ -138,7 +143,6 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
 #ifdef DEBUG
     price  =  200;
 #endif
-    //        price  =  200;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
