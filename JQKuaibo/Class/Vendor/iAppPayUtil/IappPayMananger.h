@@ -21,5 +21,5 @@
 
 + (instancetype)sharedMananger;
 - (void)payWithPaymentInfo:(JQKPaymentInfo *)paymentInfo completionHandler:(JQKPaymentCompletionHandler)completionHandler;
-
+- (void)handleOpenURL:(NSURL *)url;
 @end
