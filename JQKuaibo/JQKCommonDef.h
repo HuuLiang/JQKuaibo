@@ -76,6 +76,9 @@ if (block) block(__VA_ARGS__);
 #define kScreenHeight     [ [ UIScreen mainScreen ] bounds ].size.height
 #define kScreenWidth      [ [ UIScreen mainScreen ] bounds ].size.width
 
+#define kWidth(width)   kScreenWidth  * width  / 750
+#define kHeight(height) kScreenHeight * height / 1334.
+
 #define kPaidNotificationName @"jqkuaibo_paid_notification"
 #define kDefaultDateFormat    @"yyyyMMddHHmmss"
 

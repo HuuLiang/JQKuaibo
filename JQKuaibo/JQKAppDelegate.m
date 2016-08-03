@@ -43,7 +43,7 @@
                                                                  selectedImage:[[UIImage imageNamed:@"home_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     JQKHotVideoViewController *videoVC   = [[JQKHotVideoViewController alloc] init];
-    videoVC.title                        = @"主播秀";
+    videoVC.title                        = @"热门";
     
     UINavigationController *videoNav     = [[UINavigationController alloc] initWithRootViewController:videoVC];
     videoNav.tabBarItem                = [[UITabBarItem alloc] initWithTitle:videoVC.title
@@ -73,7 +73,7 @@
     //                                                                 selectedImage:[[UIImage imageNamed:@"mine_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     JQKMoreViewController *moreVC        = [[JQKMoreViewController alloc] init];
-    moreVC.title                         = @"更多";
+    moreVC.title                         = @"我的";
     
     UINavigationController *moreNav      = [[UINavigationController alloc] initWithRootViewController:moreVC];
     moreNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:moreVC.title
@@ -81,7 +81,7 @@
                                                                  selectedImage:[[UIImage imageNamed:@"more_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     UITabBarController *tabBarController    = [[UITabBarController alloc] init];
-    tabBarController.viewControllers        = @[homeNav,videoNav,movieNav,spreadNav,moreNav];
+    tabBarController.viewControllers        = @[homeNav,videoNav,spreadNav,moreNav];
     tabBarController.tabBar.translucent     = NO;
     tabBarController.tabBar.backgroundImage = [UIImage imageWithColor:[UIColor colorWithWhite:0.95 alpha:1]];
     tabBarController.delegate = self;
@@ -90,6 +90,7 @@
 }
 
 - (void)setupCommonStyles {
+    
     [UIViewController aspect_hookSelector:@selector(viewDidLoad)
                               withOptions:AspectPositionAfter
                                usingBlock:^(id<AspectInfo> aspectInfo){

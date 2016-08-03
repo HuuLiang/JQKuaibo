@@ -58,6 +58,11 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
     return CGSizeMake(cvW, cvW/kTopImageScale);
     
 }
+
+- (CGSize)headerViewSize {
+
+    return CGSizeMake(kScreenWidth, kWidth(50.));
+}
 //广告条的布局
 - (CGSize)adBannerSize {
 //    const CGFloat cvW = CGRectGetWidth(self.collectionView.bounds);
@@ -96,6 +101,9 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
     const CGFloat halfH = halfSize.height;
     const CGFloat halfW = halfSize.width;
     
+    const CGFloat headerWidth = [self headerViewSize].width;
+    const CGFloat headerHeight = [self headerViewSize].height;
+    
     CGRect lastLayerFrame;
     NSUInteger picIndex = 0;
     for (NSUInteger i = 0;  i < numberOfItems; ++i) {
@@ -106,11 +114,17 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
         } else if (picIndex == 0) {
             layoutAttribs.frame = CGRectMake(0, 0, topWidth, topHeight);
             ++picIndex;
-        } else if (picIndex == 1 || picIndex == 2) {
-            layoutAttribs.frame = CGRectMake(picIndex==1?0:halfW+_interItemSpacing, topHeight+_interItemSpacing, halfW, halfH);
+        }else if (picIndex == 1){
+            layoutAttribs.frame = CGRectMake(0,topHeight+_interItemSpacing, headerWidth, headerHeight);
             ++picIndex;
-        } else {
-            NSUInteger subIndex = (picIndex-3)%7;
+        
+        }
+//        else if (picIndex == 3 || picIndex == 2) {
+//            layoutAttribs.frame = CGRectMake(picIndex==1?0:halfW+_interItemSpacing, topHeight+_interItemSpacing+headerHeight, halfW, halfH);
+//            ++picIndex;
+//        }
+        else {
+            NSUInteger subIndex = (picIndex-2)%5;
             
             CGFloat x = 0, y = 0;
             switch (subIndex) {

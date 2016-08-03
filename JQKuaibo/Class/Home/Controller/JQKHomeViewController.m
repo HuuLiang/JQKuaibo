@@ -15,12 +15,17 @@
 #import "JQKSystemConfigModel.h"
 #import <SDCycleScrollView.h>
 #import "JQKHomeVideoProgramModel.h"
+#import "JQKHomeHeaderViewCell.h"
 
 static NSString *const kHomeCellReusableIdentifier = @"HomeCellReusableIdentifier";
 static NSString *const kBannerCellReusableIdentifier = @"BannerCellReusableIdentifier";
 
+static NSString *const kHomeHeaderCellIdentifier = @"homeheadercellidentifier";
+
 static const NSUInteger kFreeVideoItemOffset = 1;
-static const NSUInteger kChannelItemOffset = 3;
+static const NSUInteger kHeaderViewOffset = 2;
+
+static const NSUInteger kChannelItemOffset = 4;
 
 @interface JQKHomeViewController () <UICollectionViewDataSource,UICollectionViewDelegate,JQKHomeCollectionViewLayoutDelegate,SDCycleScrollViewDelegate>
 {
@@ -31,8 +36,8 @@ static const NSUInteger kChannelItemOffset = 3;
 }
 @property (nonatomic,retain) JQKChannelModel *channelModel;
 @property (nonatomic,retain) JQKHomeVideoProgramModel *videoModel;
-@property (nonatomic,retain) JQKAdView *leftAdView;
-@property (nonatomic,retain) JQKAdView *rightAdView;
+//@property (nonatomic,retain) JQKAdView *leftAdView;
+//@property (nonatomic,retain) JQKAdView *rightAdView;
 @property (nonatomic,retain) dispatch_group_t dataDispatchGroup;
 @end
 
@@ -72,7 +77,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     
     
     JQKHomeCollectionViewLayout *layout = [[JQKHomeCollectionViewLayout alloc] init];
-    layout.interItemSpacing = 3;
+    layout.interItemSpacing = 5;
     layout.delegate = self;
     
     _layoutCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
@@ -81,10 +86,11 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     _layoutCollectionView.dataSource = self;
     [_layoutCollectionView registerClass:[JQKHomeCell class] forCellWithReuseIdentifier:kHomeCellReusableIdentifier];
     [_layoutCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBannerCellReusableIdentifier];
+    [_layoutCollectionView registerClass:[JQKHomeHeaderViewCell class] forCellWithReuseIdentifier:kHomeHeaderCellIdentifier];
     [self.view addSubview:_layoutCollectionView];
     {
         [_layoutCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(layout.interItemSpacing, layout.interItemSpacing, layout.interItemSpacing, layout.interItemSpacing));
+            make.edges.equalTo(self.view);//.insets(UIEdgeInsetsMake(layout.interItemSpacing, layout.interItemSpacing, layout.interItemSpacing, layout.interItemSpacing));
         }];
     }
     
@@ -95,7 +101,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     }];
     [_layoutCollectionView JQK_triggerPullToRefresh];
     
-    [self loadAds];
+    //    [self loadAds];
 }
 
 - (void)loadChannels {
@@ -131,47 +137,47 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     });
 }
 
-- (void)loadAds {
-    void (^AdBlock)(void) = ^{
-        if ([JQKSystemConfigModel sharedModel].spreadLeftImage.length > 0) {
-            [self.view addSubview:self.leftAdView];
-            {
-                [self.leftAdView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.centerY.equalTo(self.view);
-                    make.width.equalTo(self.view).dividedBy(4);
-                    make.height.equalTo(self.leftAdView.mas_width).multipliedBy(3);
-                }];
-            }
-        } else if (_leftAdView) {
-            [self.leftAdView removeFromSuperview];
-            self.leftAdView = nil;
-        }
-        
-        if ([JQKSystemConfigModel sharedModel].spreadRightImage.length > 0) {
-            [self.view addSubview:self.rightAdView];
-            {
-                [self.rightAdView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.right.centerY.equalTo(self.view);
-                    make.width.equalTo(self.view).dividedBy(4);
-                    make.height.equalTo(self.rightAdView.mas_width).multipliedBy(3);
-                }];
-            }
-        } else if (_rightAdView) {
-            [self.rightAdView removeFromSuperview];
-            self.rightAdView = nil;
-        }
-    };
-    
-    if ([JQKSystemConfigModel sharedModel].loaded) {
-        AdBlock();
-    } else {
-        [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
-            if (success) {
-                AdBlock();
-            }
-        }];
-    }
-}
+//- (void)loadAds {
+//    void (^AdBlock)(void) = ^{
+//        if ([JQKSystemConfigModel sharedModel].spreadLeftImage.length > 0) {
+//            [self.view addSubview:self.leftAdView];
+//            {
+//                [self.leftAdView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.left.centerY.equalTo(self.view);
+//                    make.width.equalTo(self.view).dividedBy(4);
+//                    make.height.equalTo(self.leftAdView.mas_width).multipliedBy(3);
+//                }];
+//            }
+//        } else if (_leftAdView) {
+//            [self.leftAdView removeFromSuperview];
+//            self.leftAdView = nil;
+//        }
+//        
+//        if ([JQKSystemConfigModel sharedModel].spreadRightImage.length > 0) {
+//            [self.view addSubview:self.rightAdView];
+//            {
+//                [self.rightAdView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.right.centerY.equalTo(self.view);
+//                    make.width.equalTo(self.view).dividedBy(4);
+//                    make.height.equalTo(self.rightAdView.mas_width).multipliedBy(3);
+//                }];
+//            }
+//        } else if (_rightAdView) {
+//            [self.rightAdView removeFromSuperview];
+//            self.rightAdView = nil;
+//        }
+//    };
+//    
+//    if ([JQKSystemConfigModel sharedModel].loaded) {
+//        AdBlock();
+//    } else {
+//        [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+//            if (success) {
+//                AdBlock();
+//            }
+//        }];
+//    }
+//}
 
 - (void)refreshBannerView {
     NSMutableArray *imageUrlGroup = [NSMutableArray array];
@@ -184,39 +190,39 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     _bannerView.titlesGroup = titlesGroup;
 }
 
-- (JQKAdView *)leftAdView {
-    if (_leftAdView) {
-        return _leftAdView;
-    }
-    
-    _leftAdView = [[JQKAdView alloc] initWithImageURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadLeftImage]
-                                                adURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadLeftUrl]];
-    @weakify(self);
-    _leftAdView.closeAction = ^(id obj) {
-        @strongify(self);
-        
-        [self.leftAdView removeFromSuperview];
-        self.leftAdView = nil;
-    };
-    return _leftAdView;
-}
-
-- (JQKAdView *)rightAdView {
-    if (_rightAdView) {
-        return _rightAdView;
-    }
-    
-    _rightAdView = [[JQKAdView alloc] initWithImageURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadRightImage]
-                                                 adURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadRightUrl]];
-    @weakify(self);
-    _rightAdView.closeAction = ^(id obj) {
-        @strongify(self);
-        
-        [self.rightAdView removeFromSuperview];
-        self.rightAdView = nil;
-    };
-    return _rightAdView;
-}
+//- (JQKAdView *)leftAdView {
+//    if (_leftAdView) {
+//        return _leftAdView;
+//    }
+//    
+//    _leftAdView = [[JQKAdView alloc] initWithImageURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadLeftImage]
+//                                                adURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadLeftUrl]];
+//    @weakify(self);
+//    _leftAdView.closeAction = ^(id obj) {
+//        @strongify(self);
+//        
+//        [self.leftAdView removeFromSuperview];
+//        self.leftAdView = nil;
+//    };
+//    return _leftAdView;
+//}
+//
+//- (JQKAdView *)rightAdView {
+//    if (_rightAdView) {
+//        return _rightAdView;
+//    }
+//    
+//    _rightAdView = [[JQKAdView alloc] initWithImageURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadRightImage]
+//                                                 adURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadRightUrl]];
+//    @weakify(self);
+//    _rightAdView.closeAction = ^(id obj) {
+//        @strongify(self);
+//        
+//        [self.rightAdView removeFromSuperview];
+//        self.rightAdView = nil;
+//    };
+//    return _rightAdView;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -244,18 +250,24 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
         return _bannerCell;
     }
     
+    JQKHomeHeaderViewCell *headerCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeHeaderCellIdentifier forIndexPath:indexPath];
+    
+    if (indexPath.item < kHeaderViewOffset) {
+        return headerCell;
+    }
+    
     JQKHomeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellReusableIdentifier forIndexPath:indexPath];
     
-    if (indexPath.item < kChannelItemOffset) {
-        NSUInteger item = indexPath.item - 1;
-        if (item < self.videoModel.fetchedVideoPrograms.count) {
-            JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item-1];
-            cell.title = @""; 
-            cell.imageURL = [NSURL URLWithString:program.coverImg];
-        }
-    } else {
-        NSUInteger item = indexPath.item - kChannelItemOffset;
-        if (item < self.channelModel.fetchedChannels.count) {
+    if (indexPath.item >= kHeaderViewOffset && indexPath.item <=self.channelModel.fetchedChannels.count +kHeaderViewOffset) {
+        NSUInteger item = indexPath.item -kHeaderViewOffset;
+        //        if (item < self.videoModel.fetchedVideoPrograms.count) {
+        //            JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item-1];
+        //            cell.title = @""; 
+        //            cell.imageURL = [NSURL URLWithString:program.coverImg];
+        //        }
+        //    } else {
+        //        NSUInteger item = indexPath.item - kChannelItemOffset;
+        if (item < self.channelModel.fetchedChannels.count +kHeaderViewOffset) {
             JQKChannel *channel = self.channelModel.fetchedChannels[item];
             cell.imageURL = [NSURL URLWithString:channel.columnImg];
             cell.title = channel.name;
@@ -267,26 +279,27 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.channelModel.fetchedChannels.count + kChannelItemOffset;
+    return self.channelModel.fetchedChannels.count + kHeaderViewOffset;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < kFreeVideoItemOffset) {
         return ;
     }
-   
-    if (indexPath.item >= kFreeVideoItemOffset && indexPath.item < kChannelItemOffset) {
-        if (indexPath.item - kFreeVideoItemOffset < self.videoModel.fetchedVideoPrograms.count) {
-            JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item - kFreeVideoItemOffset];
-//            [self playVideo:program withTimeControl:NO shouldPopPayment:YES];
-            JQKChannels *channel = self.videoModel.fetchedPrograms.lastObject;
-            
-            [self playVideo:program withTimeControl:NO shouldPopPayment:YES withProgramLocation:(indexPath.item -kFreeVideoItemOffset) inChannel:channel];
-            
-             [[JQKStatsManager sharedManager] statsCPCWithProgram:program programLocation:(indexPath.item - kFreeVideoItemOffset) inChannel:channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
-        }
-    } else if (indexPath.item - kChannelItemOffset < self.channelModel.fetchedChannels.count) {
-        JQKChannel *selectedChannel = self.channelModel.fetchedChannels[indexPath.item - kChannelItemOffset];
+    
+    //    if (indexPath.item >= kFreeVideoItemOffset && indexPath.item < kChannelItemOffset) {
+    //        if (indexPath.item - kFreeVideoItemOffset < self.videoModel.fetchedVideoPrograms.count) {
+    //            JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item - kFreeVideoItemOffset];
+    ////            [self playVideo:program withTimeControl:NO shouldPopPayment:YES];
+    //            JQKChannels *channel = self.videoModel.fetchedPrograms.lastObject;
+    //            
+    //            [self playVideo:program withTimeControl:NO shouldPopPayment:YES withProgramLocation:(indexPath.item -kFreeVideoItemOffset) inChannel:channel];
+    //            
+    //             [[JQKStatsManager sharedManager] statsCPCWithProgram:program programLocation:(indexPath.item - kFreeVideoItemOffset) inChannel:channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
+    //        }
+    //    } else
+    if (indexPath.item - kHeaderViewOffset < self.channelModel.fetchedChannels.count) {
+        JQKChannel *selectedChannel = self.channelModel.fetchedChannels[indexPath.item - kHeaderViewOffset];
         
         [[JQKStatsManager sharedManager] statsCPCWithChannel:selectedChannel inTabIndex:self.tabBarController.selectedIndex];
         
@@ -301,6 +314,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout hasAdBannerForItem:(NSUInteger)item {
+    
     if (item >= kChannelItemOffset && item-kChannelItemOffset < self.channelModel.fetchedChannels.count) {
         JQKChannel *channel = self.channelModel.fetchedChannels[item-kChannelItemOffset];
         return channel.type.unsignedIntegerValue == JQKChannelTypeSpread && channel.spreadUrl.length > 0;

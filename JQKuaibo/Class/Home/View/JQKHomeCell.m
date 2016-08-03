@@ -106,14 +106,14 @@
     _freeVideoLabel.text = @" 试播 ";
     [_thumbImageView addSubview:_freeVideoLabel];
     {
-    [_freeVideoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_thumbImageView).mas_offset(4);
-        make.right.mas_equalTo(self).mas_offset(-4);
-    }];
-    
+        [_freeVideoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_thumbImageView).mas_offset(4);
+            make.right.mas_equalTo(self).mas_offset(-4);
+        }];
+        
     }
     return _freeVideoLabel;
-
+    
 }
 
 - (UILabel *)subtitleLabel {
@@ -149,7 +149,7 @@
 
 - (void)setSubtitle:(NSString *)subtitle {
     _subtitle = subtitle;
-//    self.subtitleLabel.text = subtitle;
-//    self.footerView.hidden = _title.length == 0 && _subtitle.length == 0;
+    //    self.subtitleLabel.text = subtitle;
+    //    self.footerView.hidden = _title.length == 0 && _subtitle.length == 0;
 }
 @end
