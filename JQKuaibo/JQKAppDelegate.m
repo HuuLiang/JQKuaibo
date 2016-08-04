@@ -9,7 +9,6 @@
 #import "JQKAppDelegate.h"
 #import "JQKHomeViewController.h"
 #import "JQKHotVideoViewController.h"
-#import "JQKMoreViewController.h"
 #import "JQKSpreadController.h"
 #import "MobClick.h"
 #import "JQKActivateModel.h"
@@ -19,6 +18,7 @@
 #import "JQKPaymentViewController.h"
 #import "JQKMovieViewController.h"
 #import "JQKLaunchView.h"
+#import "JQKMinViewController.h"
 
 @interface JQKAppDelegate ()<UITabBarControllerDelegate>
 
@@ -72,7 +72,7 @@
     //                                                                          image:[[UIImage imageNamed:@"mine_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
     //                                                                 selectedImage:[[UIImage imageNamed:@"mine_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    JQKMoreViewController *moreVC        = [[JQKMoreViewController alloc] init];
+    JQKMinViewController *moreVC        = [[JQKMinViewController alloc] init];
     moreVC.title                         = @"我的";
     
     UINavigationController *moreNav      = [[UINavigationController alloc] initWithRootViewController:moreVC];
@@ -99,8 +99,8 @@
                                    thisVC.navigationController.navigationBar.barTintColor = [UIColor colorWithWhite:0.95 alpha:1];
                                    thisVC.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:20.]};
                                    
-                                   thisVC.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-                                   thisVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回" style:UIBarButtonItemStylePlain handler:nil];
+                                   thisVC.navigationController.navigationBar.tintColor = [UIColor blackColor];
+                                   thisVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回" style:UIBarButtonItemStyleBordered handler:nil];
                                } error:nil];
     
     //    [UINavigationController aspect_hookSelector:@selector(preferredStatusBarStyle)

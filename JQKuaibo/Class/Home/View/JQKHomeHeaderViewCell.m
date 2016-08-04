@@ -45,14 +45,12 @@
                 make.centerY.mas_equalTo(channelLabel);
                 make.right.mas_equalTo(channelLabel.mas_left).mas_offset(-kWidth(10.));
             }];
-        
+            
             [rightView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(channelLabel);
                 make.left.mas_equalTo(channelLabel.mas_right).mas_offset(kWidth(10.));
             }];
-        }
-        
-        
+        }   
     }
     
     return self;

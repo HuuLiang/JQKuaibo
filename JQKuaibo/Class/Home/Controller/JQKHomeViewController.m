@@ -13,14 +13,16 @@
 #import "JQKProgramViewController.h"
 #import "JQKAdView.h"
 #import "JQKSystemConfigModel.h"
-#import <SDCycleScrollView.h>
+#import "SDCycleScrollView.h"
 #import "JQKHomeVideoProgramModel.h"
 #import "JQKHomeHeaderViewCell.h"
+#import "JQKHomeBigCell.h"
 
 static NSString *const kHomeCellReusableIdentifier = @"HomeCellReusableIdentifier";
 static NSString *const kBannerCellReusableIdentifier = @"BannerCellReusableIdentifier";
 
 static NSString *const kHomeHeaderCellIdentifier = @"homeheadercellidentifier";
+static NSString *const kHomeBigCellIdentifier = @"homebigcellidentifier";
 
 static const NSUInteger kFreeVideoItemOffset = 1;
 static const NSUInteger kHeaderViewOffset = 2;
@@ -60,6 +62,11 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     // Do any additional setup after loading the view.
     _bannerView = [[SDCycleScrollView alloc] init];
     _bannerView.autoScrollTimeInterval = 3;
+    _bannerView.titleLabelHeight = kWidth(30.);
+    _bannerView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
+    _bannerView .titleLabelTextFont = [UIFont fontWithName:@"PingFangSC-Regular" size:kWidth(15.)];
+    //    _bannerView.currentPageDotImage = [UIImage imageNamed:@"current"];
+    //    _bannerView.pageDotImage = [UIImage imageNamed:@"moren"];
     _bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     _bannerView.delegate = self;
     _bannerView.backgroundColor = [UIColor whiteColor];
@@ -77,7 +84,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     
     
     JQKHomeCollectionViewLayout *layout = [[JQKHomeCollectionViewLayout alloc] init];
-    layout.interItemSpacing = 5;
+    layout.interItemSpacing = 6.;
     layout.delegate = self;
     
     _layoutCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
@@ -87,6 +94,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     [_layoutCollectionView registerClass:[JQKHomeCell class] forCellWithReuseIdentifier:kHomeCellReusableIdentifier];
     [_layoutCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBannerCellReusableIdentifier];
     [_layoutCollectionView registerClass:[JQKHomeHeaderViewCell class] forCellWithReuseIdentifier:kHomeHeaderCellIdentifier];
+    [_layoutCollectionView registerClass:[JQKHomeBigCell class] forCellWithReuseIdentifier:kHomeBigCellIdentifier];
     [self.view addSubview:_layoutCollectionView];
     {
         [_layoutCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -241,9 +249,10 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
         if (!_bannerCell) {
             _bannerCell = [collectionView dequeueReusableCellWithReuseIdentifier:kBannerCellReusableIdentifier forIndexPath:indexPath];
             [_bannerCell.contentView addSubview:_bannerView];
+                        
             {
                 [_bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.edges.equalTo(_bannerCell.contentView);
+                    make.edges.equalTo(_bannerCell);
                 }];
             }
         }
@@ -269,6 +278,12 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
         //        NSUInteger item = indexPath.item - kChannelItemOffset;
         if (item < self.channelModel.fetchedChannels.count +kHeaderViewOffset) {
             JQKChannel *channel = self.channelModel.fetchedChannels[item];
+            if (item %5 == 0) {
+                JQKHomeBigCell *bigCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeBigCellIdentifier forIndexPath:indexPath];
+                bigCell.imageURL = [NSURL URLWithString:channel.columnImg];
+                bigCell.title = channel.name;
+                return bigCell;
+            }
             cell.imageURL = [NSURL URLWithString:channel.columnImg];
             cell.title = channel.name;
             //    cell.subtitle = channel.columnDesc;
@@ -307,8 +322,9 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:selectedChannel.spreadUrl]];
         } else {
             JQKProgramViewController *programVC = [[JQKProgramViewController alloc] initWithChannel:selectedChannel];
-            UINavigationController *programNav = [[UINavigationController alloc] initWithRootViewController:programVC];
-            [self presentViewController:programNav animated:NO completion:nil];
+            //            UINavigationController *programNav = [[UINavigationController alloc] initWithRootViewController:programVC];
+            //            [self presentViewController:programNav animated:NO completion:nil];
+            [self.navigationController pushViewController:programVC animated:YES];
         }
     }
 }
@@ -325,7 +341,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     JQKProgram *bannerProgram = self.videoModel.fetchedBannerPrograms[index];
     JQKChannels *banenrchannel = self.videoModel.bannerChannels[0];
-    if (bannerProgram.type.unsignedIntegerValue == JQKProgramTypeVideo) {
+    if (bannerProgram.type.unsignedIntegerValue == 5) {
         [self switchToPlayProgram:bannerProgram programLocation:index inChannel:banenrchannel];
     } else if (bannerProgram.type.unsignedIntegerValue == JQKProgramTypeSpread) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:bannerProgram.videoUrl]];

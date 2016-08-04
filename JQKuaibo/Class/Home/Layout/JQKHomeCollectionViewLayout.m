@@ -55,7 +55,7 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
 
 - (CGSize)topSize {
     const CGFloat cvW = CGRectGetWidth(self.collectionView.bounds);
-    return CGSizeMake(cvW, cvW/kTopImageScale);
+    return CGSizeMake(cvW, kWidth(188.));//cvW/kTopImageScale
     
 }
 
@@ -115,7 +115,7 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
             layoutAttribs.frame = CGRectMake(0, 0, topWidth, topHeight);
             ++picIndex;
         }else if (picIndex == 1){
-            layoutAttribs.frame = CGRectMake(0,topHeight+_interItemSpacing, headerWidth, headerHeight);
+            layoutAttribs.frame = CGRectMake(0,topHeight, headerWidth, headerHeight);
             ++picIndex;
         
         }

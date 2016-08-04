@@ -85,19 +85,19 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
         }
     }];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回"
-                                                                                style:UIBarButtonItemStylePlain
-                                                                              handler:^(id sender)
-                                             {
-                                                 @strongify(self);
-                                                 [self.navigationController dismissViewControllerAnimated:NO completion:nil];
-                                             }];
-    [self.navigationItem.leftBarButtonItem setTitlePositionAdjustment:UIOffsetMake(5, 0) forBarMetrics:UIBarMetricsDefault];
-    
-    self.navigationController.navigationBar.barTintColor = _layoutTableView.backgroundColor;
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:20.],
-                                                                    NSForegroundColorAttributeName:[UIColor blackColor]};
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回"
+//                                                                                style:UIBarButtonItemStylePlain
+//                                                                              handler:^(id sender)
+//                                             {
+//                                                 @strongify(self);
+//                                                 [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+//                                             }];
+//    [self.navigationItem.leftBarButtonItem setTitlePositionAdjustment:UIOffsetMake(5, 0) forBarMetrics:UIBarMetricsDefault];
+//    
+//    self.navigationController.navigationBar.barTintColor = _layoutTableView.backgroundColor;
+//    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+//    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:20.],
+//                                                                    NSForegroundColorAttributeName:[UIColor blackColor]};
     
     //    
     //    UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.bounds)-1,

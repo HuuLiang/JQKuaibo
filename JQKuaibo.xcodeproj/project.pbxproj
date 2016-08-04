@@ -10,6 +10,13 @@
 		8575D848DA658933FA08A635 /* libPods-JQKuaibo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C00B2137A7D7B22C563C826 /* libPods-JQKuaibo.a */; };
 		B331B14B1D30CE9D00865369 /* IappPayMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = B331B14A1D30CE9D00865369 /* IappPayMananger.m */; };
 		B33BCC9D1D052E9800D8E62F /* UITableView+Separator.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCC9C1D052E9800D8E62F /* UITableView+Separator.m */; };
+		B34B95491D5357B700292EEC /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = B34B953C1D5357B700292EEC /* TAAbstractDotView.m */; };
+		B34B954A1D5357B700292EEC /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = B34B953E1D5357B700292EEC /* TAAnimatedDotView.m */; };
+		B34B954B1D5357B700292EEC /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = B34B95401D5357B700292EEC /* TADotView.m */; };
+		B34B954C1D5357B700292EEC /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B34B95421D5357B700292EEC /* TAPageControl.m */; };
+		B34B954D1D5357B700292EEC /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B34B95441D5357B700292EEC /* SDCollectionViewCell.m */; };
+		B34B954E1D5357B700292EEC /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B34B95461D5357B700292EEC /* SDCycleScrollView.m */; };
+		B34B954F1D5357B700292EEC /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B34B95481D5357B700292EEC /* UIView+SDExtension.m */; };
 		B34DC29F1D51EFCC00D48B12 /* JQKHomeHeaderViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B34DC29E1D51EFCC00D48B12 /* JQKHomeHeaderViewCell.m */; };
 		B34DC2A31D52091100D48B12 /* NSArray+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = B34DC2A21D52091100D48B12 /* NSArray+Log.m */; };
 		B35BB6351D1A9E2D003CF5B6 /* NSObject+DictionaryRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB6341D1A9E2D003CF5B6 /* NSObject+DictionaryRepresentation.m */; };
@@ -61,6 +68,11 @@
 		B38BD92C1D43545B00AA34EA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B38BD92B1D43545B00AA34EA /* libc++.tbd */; };
 		B3EC58A61CF59AE900AC74F4 /* JQKLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */; };
 		B3EC58A81CF59B3600AC74F4 /* launch_image2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B3EC58A71CF59B3600AC74F4 /* launch_image2.jpg */; };
+		B3FEDAD61D53293B007CBB55 /* JQKHomeBigCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEDAD51D53293B007CBB55 /* JQKHomeBigCell.m */; };
+		B3FEDADA1D5330B8007CBB55 /* JQKLayoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEDAD91D5330B8007CBB55 /* JQKLayoutViewController.m */; };
+		B3FEDADD1D533262007CBB55 /* JQKMinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEDADC1D533262007CBB55 /* JQKMinViewController.m */; };
+		B3FEDAE31D533320007CBB55 /* JQKTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEDAE21D533320007CBB55 /* JQKTableViewCell.m */; };
+		B3FEDAE61D5334D1007CBB55 /* JQKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEDAE51D5334D1007CBB55 /* JQKWebViewController.m */; };
 		BC2C02771C2E5C1A00D10677 /* JQKHotVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2C02761C2E5C1A00D10677 /* JQKHotVideoModel.m */; };
 		BC2C027B1C2E5F5A00D10677 /* JQKHotVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2C027A1C2E5F5A00D10677 /* JQKHotVideoCell.m */; };
 		BC2C027E1C2E744700D10677 /* JQKPaymentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2C027D1C2E744700D10677 /* JQKPaymentPopView.m */; };
@@ -72,7 +84,6 @@
 		BC38727E1C2D299D00CBE88A /* JQKBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC38727D1C2D299D00CBE88A /* JQKBaseViewController.m */; };
 		BC3872831C2D29F000CBE88A /* JQKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872821C2D29F000CBE88A /* JQKHomeViewController.m */; };
 		BC3872881C2D2BC100CBE88A /* JQKHotVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872871C2D2BC100CBE88A /* JQKHotVideoViewController.m */; };
-		BC3872921C2D2CD500CBE88A /* JQKMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872911C2D2CD500CBE88A /* JQKMoreViewController.m */; };
 		BC3872B61C2D2E3E00CBE88A /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872971C2D2E3E00CBE88A /* NSDate+Utilities.m */; };
 		BC3872B81C2D2E3E00CBE88A /* NSMutableDictionary+SafeCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = BC38729B1C2D2E3E00CBE88A /* NSMutableDictionary+SafeCoding.m */; };
 		BC3872B91C2D2E3E00CBE88A /* NSObject+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = BC38729D1C2D2E3E00CBE88A /* NSObject+Properties.m */; };
@@ -167,6 +178,20 @@
 		B331B14A1D30CE9D00865369 /* IappPayMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IappPayMananger.m; sourceTree = "<group>"; };
 		B33BCC9B1D052E9800D8E62F /* UITableView+Separator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Separator.h"; sourceTree = "<group>"; };
 		B33BCC9C1D052E9800D8E62F /* UITableView+Separator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Separator.m"; sourceTree = "<group>"; };
+		B34B953B1D5357B700292EEC /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
+		B34B953C1D5357B700292EEC /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
+		B34B953D1D5357B700292EEC /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
+		B34B953E1D5357B700292EEC /* TAAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAnimatedDotView.m; sourceTree = "<group>"; };
+		B34B953F1D5357B700292EEC /* TADotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADotView.h; sourceTree = "<group>"; };
+		B34B95401D5357B700292EEC /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
+		B34B95411D5357B700292EEC /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
+		B34B95421D5357B700292EEC /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
+		B34B95431D5357B700292EEC /* SDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCollectionViewCell.h; sourceTree = "<group>"; };
+		B34B95441D5357B700292EEC /* SDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCollectionViewCell.m; sourceTree = "<group>"; };
+		B34B95451D5357B700292EEC /* SDCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCycleScrollView.h; sourceTree = "<group>"; };
+		B34B95461D5357B700292EEC /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
+		B34B95471D5357B700292EEC /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
+		B34B95481D5357B700292EEC /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
 		B34DC29D1D51EFCC00D48B12 /* JQKHomeHeaderViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKHomeHeaderViewCell.h; sourceTree = "<group>"; };
 		B34DC29E1D51EFCC00D48B12 /* JQKHomeHeaderViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKHomeHeaderViewCell.m; sourceTree = "<group>"; };
 		B34DC2A11D52091100D48B12 /* NSArray+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Log.h"; sourceTree = "<group>"; };
@@ -251,6 +276,16 @@
 		B3EC58A41CF59AE900AC74F4 /* JQKLaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKLaunchView.h; sourceTree = "<group>"; };
 		B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKLaunchView.m; sourceTree = "<group>"; };
 		B3EC58A71CF59B3600AC74F4 /* launch_image2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch_image2.jpg; sourceTree = "<group>"; };
+		B3FEDAD41D53293B007CBB55 /* JQKHomeBigCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKHomeBigCell.h; sourceTree = "<group>"; };
+		B3FEDAD51D53293B007CBB55 /* JQKHomeBigCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKHomeBigCell.m; sourceTree = "<group>"; };
+		B3FEDAD81D5330B8007CBB55 /* JQKLayoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKLayoutViewController.h; sourceTree = "<group>"; };
+		B3FEDAD91D5330B8007CBB55 /* JQKLayoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKLayoutViewController.m; sourceTree = "<group>"; };
+		B3FEDADB1D533262007CBB55 /* JQKMinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKMinViewController.h; sourceTree = "<group>"; };
+		B3FEDADC1D533262007CBB55 /* JQKMinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKMinViewController.m; sourceTree = "<group>"; };
+		B3FEDAE11D533320007CBB55 /* JQKTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKTableViewCell.h; sourceTree = "<group>"; };
+		B3FEDAE21D533320007CBB55 /* JQKTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKTableViewCell.m; sourceTree = "<group>"; };
+		B3FEDAE41D5334D1007CBB55 /* JQKWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKWebViewController.h; sourceTree = "<group>"; };
+		B3FEDAE51D5334D1007CBB55 /* JQKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKWebViewController.m; sourceTree = "<group>"; };
 		BC2C02751C2E5C1A00D10677 /* JQKHotVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKHotVideoModel.h; sourceTree = "<group>"; };
 		BC2C02761C2E5C1A00D10677 /* JQKHotVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKHotVideoModel.m; sourceTree = "<group>"; };
 		BC2C02791C2E5F5A00D10677 /* JQKHotVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKHotVideoCell.h; sourceTree = "<group>"; };
@@ -275,8 +310,6 @@
 		BC3872821C2D29F000CBE88A /* JQKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKHomeViewController.m; sourceTree = "<group>"; };
 		BC3872861C2D2BC100CBE88A /* JQKHotVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKHotVideoViewController.h; sourceTree = "<group>"; };
 		BC3872871C2D2BC100CBE88A /* JQKHotVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKHotVideoViewController.m; sourceTree = "<group>"; };
-		BC3872901C2D2CD500CBE88A /* JQKMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKMoreViewController.h; sourceTree = "<group>"; };
-		BC3872911C2D2CD500CBE88A /* JQKMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKMoreViewController.m; sourceTree = "<group>"; };
 		BC3872931C2D2D7C00CBE88A /* JQKPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JQKPrefixHeader.pch; sourceTree = "<group>"; };
 		BC3872961C2D2E3E00CBE88A /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
 		BC3872971C2D2E3E00CBE88A /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
@@ -498,6 +531,35 @@
 			path = iAppPay;
 			sourceTree = "<group>";
 		};
+		B34B95391D5357B700292EEC /* SDCycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				B34B953A1D5357B700292EEC /* PageControl */,
+				B34B95431D5357B700292EEC /* SDCollectionViewCell.h */,
+				B34B95441D5357B700292EEC /* SDCollectionViewCell.m */,
+				B34B95451D5357B700292EEC /* SDCycleScrollView.h */,
+				B34B95461D5357B700292EEC /* SDCycleScrollView.m */,
+				B34B95471D5357B700292EEC /* UIView+SDExtension.h */,
+				B34B95481D5357B700292EEC /* UIView+SDExtension.m */,
+			);
+			path = SDCycleScrollView;
+			sourceTree = "<group>";
+		};
+		B34B953A1D5357B700292EEC /* PageControl */ = {
+			isa = PBXGroup;
+			children = (
+				B34B953B1D5357B700292EEC /* TAAbstractDotView.h */,
+				B34B953C1D5357B700292EEC /* TAAbstractDotView.m */,
+				B34B953D1D5357B700292EEC /* TAAnimatedDotView.h */,
+				B34B953E1D5357B700292EEC /* TAAnimatedDotView.m */,
+				B34B953F1D5357B700292EEC /* TADotView.h */,
+				B34B95401D5357B700292EEC /* TADotView.m */,
+				B34B95411D5357B700292EEC /* TAPageControl.h */,
+				B34B95421D5357B700292EEC /* TAPageControl.m */,
+			);
+			path = PageControl;
+			sourceTree = "<group>";
+		};
 		B34DC2A01D52091100D48B12 /* Log */ = {
 			isa = PBXGroup;
 			children = (
@@ -630,6 +692,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B3FEDAD71D532FD6007CBB55 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BC2C02711C2E47BC00D10677 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -718,6 +787,7 @@
 		BC3872391C2D278C00CBE88A /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				B34B95391D5357B700292EEC /* SDCycleScrollView */,
 				B35BB6391D1A9F9E003CF5B6 /* DataBase */,
 				BC3872DD1C2D336300CBE88A /* Vendor */,
 				BC3872941C2D2DFA00CBE88A /* Utils */,
@@ -784,10 +854,14 @@
 			children = (
 				BC38727C1C2D299D00CBE88A /* JQKBaseViewController.h */,
 				BC38727D1C2D299D00CBE88A /* JQKBaseViewController.m */,
+				B3FEDAD81D5330B8007CBB55 /* JQKLayoutViewController.h */,
+				B3FEDAD91D5330B8007CBB55 /* JQKLayoutViewController.m */,
 				BC3873151C2D3E5300CBE88A /* JQKPaymentViewController.h */,
 				BC3873161C2D3E5300CBE88A /* JQKPaymentViewController.m */,
 				BC8A2AC41C902DFB00DF2AE2 /* JQKVideoPlayerViewController.h */,
 				BC8A2AC51C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m */,
+				B3FEDAE41D5334D1007CBB55 /* JQKWebViewController.h */,
+				B3FEDAE51D5334D1007CBB55 /* JQKWebViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -836,6 +910,7 @@
 		BC38728E1C2D2CA500CBE88A /* More */ = {
 			isa = PBXGroup;
 			children = (
+				B3FEDAD71D532FD6007CBB55 /* View */,
 				BC38728F1C2D2CBA00CBE88A /* Controller */,
 			);
 			path = More;
@@ -844,8 +919,8 @@
 		BC38728F1C2D2CBA00CBE88A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				BC3872901C2D2CD500CBE88A /* JQKMoreViewController.h */,
-				BC3872911C2D2CD500CBE88A /* JQKMoreViewController.m */,
+				B3FEDADB1D533262007CBB55 /* JQKMinViewController.h */,
+				B3FEDADC1D533262007CBB55 /* JQKMinViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -982,6 +1057,8 @@
 		BC3873181C2D3F0B00CBE88A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B3FEDAE11D533320007CBB55 /* JQKTableViewCell.h */,
+				B3FEDAE21D533320007CBB55 /* JQKTableViewCell.m */,
 				B35F64631D475B4F00E03202 /* JQKPaymentButton.h */,
 				B35F64641D475B4F00E03202 /* JQKPaymentButton.m */,
 				B35F64601D475B1600E03202 /* JQKPaymentTypeCell.h */,
@@ -1029,6 +1106,8 @@
 			children = (
 				BC3873521C2D4CD500CBE88A /* JQKHomeCell.h */,
 				BC3873531C2D4CD500CBE88A /* JQKHomeCell.m */,
+				B3FEDAD41D53293B007CBB55 /* JQKHomeBigCell.h */,
+				B3FEDAD51D53293B007CBB55 /* JQKHomeBigCell.m */,
 				BC3873731C2D80D500CBE88A /* JQKProgramCell.h */,
 				BC3873741C2D80D500CBE88A /* JQKProgramCell.m */,
 				B34DC29D1D51EFCC00D48B12 /* JQKHomeHeaderViewCell.h */,
@@ -1312,12 +1391,15 @@
 				BC6116DA1C8EF3A800A66155 /* JQKMovieModel.m in Sources */,
 				B374B9C91CFD70100063C1C6 /* JQKSpreadModel.m in Sources */,
 				BC8A2AC61C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m in Sources */,
+				B34B954A1D5357B700292EEC /* TAAnimatedDotView.m in Sources */,
 				BC38736B1C2D56A300CBE88A /* JQKChannelProgram.m in Sources */,
 				B34DC29F1D51EFCC00D48B12 /* JQKHomeHeaderViewCell.m in Sources */,
 				B374B9D81CFD86B20063C1C6 /* NSObject+PropertyAccessInspecting.m in Sources */,
 				B3EC58A61CF59AE900AC74F4 /* JQKLaunchView.m in Sources */,
 				B35F62621D4706F900E03202 /* base64.m in Sources */,
+				B3FEDAE61D5334D1007CBB55 /* JQKWebViewController.m in Sources */,
 				BC5BCE991C51EF8C0034F532 /* JQKConfiguration.m in Sources */,
+				B34B954E1D5357B700292EEC /* SDCycleScrollView.m in Sources */,
 				BC3873411C2D402B00CBE88A /* JQKURLRequest.m in Sources */,
 				B35F64681D475EF400E03202 /* UIColor+FeaturedColor.m in Sources */,
 				BC38727E1C2D299D00CBE88A /* JQKBaseViewController.m in Sources */,
@@ -1336,16 +1418,20 @@
 				B35F62661D4706F900E03202 /* NSDataEx.m in Sources */,
 				BC38733E1C2D402B00CBE88A /* JQKProgram.m in Sources */,
 				BC6FC39B1CA3EBEE00856F0B /* JQKPaymentConfig.m in Sources */,
+				B34B95491D5357B700292EEC /* TAAbstractDotView.m in Sources */,
+				B34B954D1D5357B700292EEC /* SDCollectionViewCell.m in Sources */,
 				BC3872BF1C2D2E3E00CBE88A /* UIColor+hexColor.m in Sources */,
 				BC3873431C2D402B00CBE88A /* JQKUserAccessModel.m in Sources */,
 				BC3872BD1C2D2E3E00CBE88A /* NSString+md5.m in Sources */,
 				BC38730A1C2D38D000CBE88A /* JQKHudManager.m in Sources */,
 				B33BCC9D1D052E9800D8E62F /* UITableView+Separator.m in Sources */,
 				BC3873501C2D4BAD00CBE88A /* JQKHomeCollectionViewLayout.m in Sources */,
+				B3FEDADA1D5330B8007CBB55 /* JQKLayoutViewController.m in Sources */,
 				B35F64651D475B4F00E03202 /* JQKPaymentButton.m in Sources */,
 				BC3872C51C2D2E3E00CBE88A /* UIViewExt.m in Sources */,
 				BC3873171C2D3E5300CBE88A /* JQKPaymentViewController.m in Sources */,
 				B35F62681D4706F900E03202 /* RSADataSigner.m in Sources */,
+				B3FEDAE31D533320007CBB55 /* JQKTableViewCell.m in Sources */,
 				BC6116DD1C8EFCA800A66155 /* JQKVideos.m in Sources */,
 				BC3872BE1C2D2E3E00CBE88A /* NSString+meltutils.m in Sources */,
 				B374B9C61CFD6CBA0063C1C6 /* JQKSpreadController.m in Sources */,
@@ -1353,6 +1439,7 @@
 				BC2C02771C2E5C1A00D10677 /* JQKHotVideoModel.m in Sources */,
 				B374B9D21CFD86690063C1C6 /* JQKApplicationManager.m in Sources */,
 				BC3872BA1C2D2E3E00CBE88A /* NSString+crypt.m in Sources */,
+				B3FEDADD1D533262007CBB55 /* JQKMinViewController.m in Sources */,
 				B35BB6411D1A9F9E003CF5B6 /* DBHandler.m in Sources */,
 				B35F62691D4706F900E03202 /* RSADataVerifier.m in Sources */,
 				BC3872BC1C2D2E3E00CBE88A /* NSString+length.m in Sources */,
@@ -1379,7 +1466,9 @@
 				B34DC2A31D52091100D48B12 /* NSArray+Log.m in Sources */,
 				BC64E2571C4E171200450C1B /* JQKAdView.m in Sources */,
 				BC38733B1C2D402B00CBE88A /* JQKPaymentInfo.m in Sources */,
+				B34B954B1D5357B700292EEC /* TADotView.m in Sources */,
 				BC38723C1C2D27D600CBE88A /* JQKAppDelegate.m in Sources */,
+				B3FEDAD61D53293B007CBB55 /* JQKHomeBigCell.m in Sources */,
 				B35BB64E1D1A9FCA003CF5B6 /* JQKPayStatsModel.m in Sources */,
 				B35BB6561D1AA15F003CF5B6 /* JQKStatsManager.m in Sources */,
 				BC6116D41C8ECE9B00A66155 /* JQKMovieViewController.m in Sources */,
@@ -1395,11 +1484,12 @@
 				B35F62641D4706F900E03202 /* DataVerifier.m in Sources */,
 				BC3872C01C2D2E3E00CBE88A /* UIImage+crop.m in Sources */,
 				BC6FC39C1CA3EBEE00856F0B /* JQKPaymentConfigModel.m in Sources */,
-				BC3872921C2D2CD500CBE88A /* JQKMoreViewController.m in Sources */,
 				BC3873401C2D402B00CBE88A /* JQKSystemConfigModel.m in Sources */,
 				BC3872CD1C2D2ECA00CBE88A /* RACEXTRuntimeExtensions.m in Sources */,
+				B34B954F1D5357B700292EEC /* UIView+SDExtension.m in Sources */,
 				BC38736C1C2D56A300CBE88A /* JQKChannelProgramModel.m in Sources */,
 				BC6FC39F1CA3EC2500856F0B /* WeChatPayQueryOrderRequest.m in Sources */,
+				B34B954C1D5357B700292EEC /* TAPageControl.m in Sources */,
 				BC3872B91C2D2E3E00CBE88A /* NSObject+Properties.m in Sources */,
 				B35BB6381D1A9EBE003CF5B6 /* JQKChannels.m in Sources */,
 				BC3872BB1C2D2E3E00CBE88A /* NSString+FilterHTML.m in Sources */,

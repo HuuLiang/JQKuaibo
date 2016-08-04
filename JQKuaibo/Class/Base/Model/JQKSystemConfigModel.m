@@ -83,6 +83,10 @@
                                     self.contact = config.value;
                                 }else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_NOTIFICATION_LAUNCH_SEQ]) {
                                     self.notificationLaunchSeq = config.value.integerValue;
+                                }else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_KTVIP_URL]){
+                                    self.vipImage = config.value;
+                                }else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_VIP_URL]){
+                                    self.ktVipImage = config.value;
                                 }
                             }];
                             

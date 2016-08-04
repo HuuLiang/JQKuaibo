@@ -26,8 +26,8 @@ static NSString *kHotAttentionArr = @"khotattentionarr";
 @property (nonatomic,retain) JQKHotVideoModel *videoModel;
 @property (nonatomic,retain) NSMutableArray<JQKProgram *> *videos;
 
-@property (nonatomic,retain)NSArray *attentArr;//关注人数
-@property (nonatomic,retain)NSArray *changePerson;//
+//@property (nonatomic,retain)NSArray *attentArr;//关注人数
+//@property (nonatomic,retain)NSArray *changePerson;//
 @end
 
 @implementation JQKHotVideoViewController
@@ -35,25 +35,25 @@ static NSString *kHotAttentionArr = @"khotattentionarr";
 DefineLazyPropertyInitialization(JQKHotVideoModel, videoModel)
 DefineLazyPropertyInitialization(NSMutableArray, videos)
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    _attentArr = [defaults objectForKey:kHotAttentionArr];
-    if (!_attentArr) {
-        
-        NSMutableArray *attarr = [NSMutableArray array];
-        
-        for (int i = 0; i<250; i++) {
-            NSInteger temp = (arc4random()%10 + 2)*100;
-            NSString *str = [NSString stringWithFormat:@"%ld",(long)temp];
-            [attarr addObject:str];
-            
-        }
-        _attentArr = attarr;
-        [defaults setObject:attarr forKey:kHotAttentionArr];
-    }
-    
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    _attentArr = [defaults objectForKey:kHotAttentionArr];
+//    if (!_attentArr) {
+//        
+//        NSMutableArray *attarr = [NSMutableArray array];
+//        
+//        for (int i = 0; i<250; i++) {
+//            NSInteger temp = (arc4random()%10 + 2)*100;
+//            NSString *str = [NSString stringWithFormat:@"%ld",(long)temp];
+//            [attarr addObject:str];
+//            
+//        }
+//        _attentArr = attarr;
+//        [defaults setObject:attarr forKey:kHotAttentionArr];
+//    }
+//    
+//}
 
 
 
@@ -122,21 +122,25 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
         @strongify(self);
         [self loadVideosWithPage:1];
         //        [self loadHeaderImage];
-        NSMutableArray *changeArr = [NSMutableArray array];
-        for (int i = 0; i<250; i++) {
-            NSInteger change = arc4random_uniform(60)+40;
-            NSString *changeStr = [NSString stringWithFormat:@"%ld",(long)change];
-            [changeArr addObject:changeStr];
-        }
-        self.changePerson = changeArr.copy;
+//        NSMutableArray *changeArr = [NSMutableArray array];
+//        for (int i = 0; i<250; i++) {
+//            NSInteger change = arc4random_uniform(60)+40;
+//            NSString *changeStr = [NSString stringWithFormat:@"%ld",(long)change];
+//            [changeArr addObject:changeStr];
+//        }
+//        self.changePerson = changeArr.copy;
     }];
     [_layoutTableView JQK_triggerPullToRefresh];
     
-    [_layoutTableView JQK_addPagingRefreshWithIsChangeFooter:NO withHandler:^{
+    [_layoutTableView JQK_addPagingRefreshWithIsChangeFooter:YES withHandler:^{
         @strongify(self);
-        
-        NSUInteger currentPage = self.videoModel.fetchedVideos.page.unsignedIntegerValue;
-        [self loadVideosWithPage:currentPage+1];
+        if ([JQKUtil isPaid]) {
+            NSUInteger currentPage = self.videoModel.fetchedVideos.page.unsignedIntegerValue;
+            [self loadVideosWithPage:currentPage+1];
+        }else {
+            [self payForProgram:nil programLocation:NSNotFound inChannel:nil];
+            [_layoutTableView JQK_endPullToRefresh];
+        }
     }];
 }
 
@@ -229,15 +233,15 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     JQKProgram *program = self.videos[indexPath.item];
     cell.imageURL = [NSURL URLWithString:program.coverImg];
     cell.title = program.title;
-    NSString *attentText = @"";
-    if (indexPath.item < self.attentArr.count) {
-        NSString *attent = self.attentArr[indexPath.item];
-        NSString *change = self.changePerson[indexPath.item];
-        attentText = [NSString stringWithFormat:@"%ld",(attent.integerValue + change.integerValue)];
-    }else {
-        attentText = @"0";
-    }
-    cell.attentTitle = attentText;
+//    NSString *attentText = @"";
+//    if (indexPath.item < self.attentArr.count) {
+//        NSString *attent = self.attentArr[indexPath.item];
+//        NSString *change = self.changePerson[indexPath.item];
+//        attentText = [NSString stringWithFormat:@"%ld",(attent.integerValue + change.integerValue)];
+//    }else {
+//        attentText = @"0";
+//    }
+//    cell.attentTitle = attentText;
     return cell;
 }
 

@@ -43,11 +43,9 @@ PODS:
   - MBProgressHUD (0.9.1)
   - MJRefresh (2.4.12)
   - OpenSSL (1.0.204.1)
-  - SDCycleScrollView (1.61):
-    - SDWebImage (~> 3.7)
-  - SDWebImage (3.7.3):
-    - SDWebImage/Core (= 3.7.3)
-  - SDWebImage/Core (3.7.3)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
   - SFHFKeychainUtils (0.0.1)
   - XMLReader-Arc (1.1)
 
@@ -60,7 +58,6 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.9.1)
   - MJRefresh (~> 2.4.7)
   - OpenSSL (~> 1.0.204)
-  - SDCycleScrollView (~> 1.3)
   - SDWebImage (~> 3.7.3)
   - SFHFKeychainUtils (~> 0.0.1)
   - XMLReader-Arc (~> 1.1)
@@ -74,11 +71,10 @@ SPEC CHECKSUMS:
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MJRefresh: ca8e9589895977df32d379d46e6b8a5450b3ff44
   OpenSSL: 7f853fcada78e5162c2183b4d90ebbd0aa02f5ac
-  SDCycleScrollView: a002d85b30cfa9d0ac74069cd3973ca19ff4f22f
-  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SFHFKeychainUtils: 9576b411a79a058f4d5381ace6f3242b9a62e664
   XMLReader-Arc: 7832c527346fc26511fd6c05ebcee18008c34d6d
 
-PODFILE CHECKSUM: e9288a80f230b31a1116eda6568556e01ac8a28c
+PODFILE CHECKSUM: 8b00ec1233375578f411edab50430dace0c8dc52
 
 COCOAPODS: 1.0.1

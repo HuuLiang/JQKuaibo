@@ -141,7 +141,7 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
         return nil;
     }
 #ifdef DEBUG
-    price  =  200;
+    price  =  1;
 #endif
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];

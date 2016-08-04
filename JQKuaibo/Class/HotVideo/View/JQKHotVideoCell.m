@@ -19,7 +19,7 @@
     //    UIView *_footerView;
     
     UILabel *_titleLabel;
-    UIButton *_attentionBtn;
+//    UIButton *_attentionBtn;
     //    UILabel *_subtitleLabel;
     
     //    UIButton *_playButton;
@@ -35,37 +35,38 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        _attentionBtn = [[UIButton alloc] init];
-        [_attentionBtn setImage:[UIImage imageNamed:@"home_guest"] forState:UIControlStateNormal];
-        [_attentionBtn setTitle:@"0" forState:UIControlStateNormal];
-        [_attentionBtn setTitleColor:[UIColor colorWithWhite:0.7 alpha:1] forState:UIControlStateNormal];
-        [_attentionBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 0)];
-        
-        _attentionBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
-        _attentionBtn.enabled = NO;
-        [self addSubview:_attentionBtn];
-        {
-            [_attentionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                //            make.left.mas_equalTo(_titleLabel.mas_right);
-                make.right.mas_equalTo(self).mas_offset(2);
-                make.bottom.mas_equalTo(self).mas_offset(-2);
-                make.height.mas_equalTo(14.);
-                make.width.mas_equalTo(55/375.*kScreenWidth);
-                
-            }];
-            
-        }
+//        _attentionBtn = [[UIButton alloc] init];
+//        [_attentionBtn setImage:[UIImage imageNamed:@"home_guest"] forState:UIControlStateNormal];
+//        [_attentionBtn setTitle:@"0" forState:UIControlStateNormal];
+//        [_attentionBtn setTitleColor:[UIColor colorWithWhite:0.7 alpha:1] forState:UIControlStateNormal];
+//        [_attentionBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 0)];
+//        
+//        _attentionBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
+//        _attentionBtn.enabled = NO;
+//        [self addSubview:_attentionBtn];
+//        {
+//            [_attentionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//                //            make.left.mas_equalTo(_titleLabel.mas_right);
+//                make.right.mas_equalTo(self).mas_offset(2);
+//                make.bottom.mas_equalTo(self).mas_offset(-2);
+//                make.height.mas_equalTo(14.);
+//                make.width.mas_equalTo(55/375.*kScreenWidth);
+//                
+//            }];
+//            
+//        }
         
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.backgroundColor = [UIColor whiteColor];
         _titleLabel.font = [UIFont systemFontOfSize:12.];
         _titleLabel.textColor = [UIColor blackColor];
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_titleLabel];
         { [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(_attentionBtn);
-            make.bottom.mas_equalTo(_attentionBtn);
-            make.left.mas_equalTo(self);
-            make.right.mas_equalTo(_attentionBtn.mas_left).mas_offset(-10);
+            make.height.mas_equalTo(kWidth(14.));
+            make.bottom.mas_equalTo(self).mas_offset(-2);
+            make.left.mas_equalTo(self).mas_offset(2);
+            make.right.mas_equalTo(self).mas_offset(-2);
         }];
         }
         _thumbImageView = [[UIImageView alloc] init];
@@ -91,12 +92,12 @@
     _titleLabel.text = title;
 }
 
-- (void)setAttentTitle:(NSString *)attentTitle {
-    _attentTitle = attentTitle;
-//    NSInteger att = attentTitle.integerValue;
-//    att = att + arc4random_uniform(100);
-    [_attentionBtn setTitle:attentTitle forState:UIControlStateNormal];
-}
+//- (void)setAttentTitle:(NSString *)attentTitle {
+//    _attentTitle = attentTitle;
+////    NSInteger att = attentTitle.integerValue;
+////    att = att + arc4random_uniform(100);
+//    [_attentionBtn setTitle:attentTitle forState:UIControlStateNormal];
+//}
 
 
 

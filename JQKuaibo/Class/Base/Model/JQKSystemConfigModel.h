@@ -36,7 +36,8 @@ typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic) NSString *contact;
 @property (nonatomic) NSInteger notificationLaunchSeq;
 
-
+@property (nonatomic) NSString *ktVipImage;
+@property (nonatomic) NSString *vipImage;
 
 + (instancetype)sharedModel;
 
