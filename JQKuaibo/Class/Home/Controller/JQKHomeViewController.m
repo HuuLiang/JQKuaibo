@@ -24,10 +24,11 @@ static NSString *const kBannerCellReusableIdentifier = @"BannerCellReusableIdent
 static NSString *const kHomeHeaderCellIdentifier = @"homeheadercellidentifier";
 static NSString *const kHomeBigCellIdentifier = @"homebigcellidentifier";
 
-static const NSUInteger kFreeVideoItemOffset = 1;
+static const NSUInteger kHeaderFreeVideoItemOffset = 1;
+static const NSUInteger kHeaderHotVideoItemOffset = 6;
 static const NSUInteger kHeaderViewOffset = 2;
 
-static const NSUInteger kChannelItemOffset = 4;
+//static const NSUInteger kChannelItemOffset = 4;
 
 @interface JQKHomeViewController () <UICollectionViewDataSource,UICollectionViewDelegate,JQKHomeCollectionViewLayoutDelegate,SDCycleScrollViewDelegate>
 {
@@ -63,6 +64,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     _bannerView = [[SDCycleScrollView alloc] init];
     _bannerView.autoScrollTimeInterval = 3;
     _bannerView.titleLabelHeight = kWidth(30.);
+    _bannerView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
     _bannerView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
     _bannerView .titleLabelTextFont = [UIFont fontWithName:@"PingFangSC-Regular" size:kWidth(15.)];
     //    _bannerView.currentPageDotImage = [UIImage imageNamed:@"current"];
@@ -91,6 +93,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     _layoutCollectionView.backgroundColor = [UIColor whiteColor];
     _layoutCollectionView.delegate = self;
     _layoutCollectionView.dataSource = self;
+    _layoutCollectionView.showsVerticalScrollIndicator = NO;
     [_layoutCollectionView registerClass:[JQKHomeCell class] forCellWithReuseIdentifier:kHomeCellReusableIdentifier];
     [_layoutCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBannerCellReusableIdentifier];
     [_layoutCollectionView registerClass:[JQKHomeHeaderViewCell class] forCellWithReuseIdentifier:kHomeHeaderCellIdentifier];
@@ -249,7 +252,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
         if (!_bannerCell) {
             _bannerCell = [collectionView dequeueReusableCellWithReuseIdentifier:kBannerCellReusableIdentifier forIndexPath:indexPath];
             [_bannerCell.contentView addSubview:_bannerView];
-                        
+            
             {
                 [_bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.edges.equalTo(_bannerCell);
@@ -261,14 +264,27 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     
     JQKHomeHeaderViewCell *headerCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeHeaderCellIdentifier forIndexPath:indexPath];
     
-    if (indexPath.item < kHeaderViewOffset) {
+    if (indexPath.item == kHeaderFreeVideoItemOffset) {
+        headerCell.titleName = @"激情试播";
+        return headerCell;
+    } else if (indexPath.item == kHeaderHotVideoItemOffset){
+        
+        headerCell.titleName = @"热门频道";
         return headerCell;
     }
     
     JQKHomeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellReusableIdentifier forIndexPath:indexPath];
+    if (indexPath.item -(kHeaderFreeVideoItemOffset+1)<self.videoModel.fetchedVideoPrograms.count ) {
+        JQKProgram *freeVideo = self.videoModel.fetchedVideoPrograms[indexPath.item - (kHeaderFreeVideoItemOffset+1)];
+        cell.imageURL = [NSURL URLWithString:freeVideo.coverImg];
+        
+        cell.freeVideo = YES;
+        return cell;
+    }
     
-    if (indexPath.item >= kHeaderViewOffset && indexPath.item <=self.channelModel.fetchedChannels.count +kHeaderViewOffset) {
-        NSUInteger item = indexPath.item -kHeaderViewOffset;
+    
+    if (indexPath.item >= ( kHeaderHotVideoItemOffset+1) && indexPath.item <=self.channelModel.fetchedChannels.count +kHeaderHotVideoItemOffset) {
+        NSUInteger item = indexPath.item - ( kHeaderHotVideoItemOffset+1);
         //        if (item < self.videoModel.fetchedVideoPrograms.count) {
         //            JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item-1];
         //            cell.title = @""; 
@@ -276,45 +292,50 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
         //        }
         //    } else {
         //        NSUInteger item = indexPath.item - kChannelItemOffset;
-        if (item < self.channelModel.fetchedChannels.count +kHeaderViewOffset) {
-            JQKChannel *channel = self.channelModel.fetchedChannels[item];
-            if (item %5 == 0) {
-                JQKHomeBigCell *bigCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeBigCellIdentifier forIndexPath:indexPath];
-                bigCell.imageURL = [NSURL URLWithString:channel.columnImg];
-                bigCell.title = channel.name;
-                return bigCell;
-            }
-            cell.imageURL = [NSURL URLWithString:channel.columnImg];
-            cell.title = channel.name;
-            //    cell.subtitle = channel.columnDesc;
+        
+        //        
+        //        if ( item < self.channelModel.fetchedChannels.count +kHeaderViewOffset) {
+        JQKChannel *channel = self.channelModel.fetchedChannels[item];
+        if ( item %5 == 0 && item < ([collectionView numberOfItemsInSection:0]-2)/5*5) {
+            JQKHomeBigCell *bigCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeBigCellIdentifier forIndexPath:indexPath];
+            bigCell.imageURL = [NSURL URLWithString:channel.columnImg];
+            bigCell.title = channel.name;
+            return bigCell;
         }
+        
+        cell.imageURL = [NSURL URLWithString:channel.columnImg];
+        cell.title = channel.name;
+        //    cell.subtitle = channel.columnDesc;
     }
+    //}
     
+    cell.freeVideo = NO;
     return cell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.channelModel.fetchedChannels.count + kHeaderViewOffset;
+    return self.channelModel.fetchedChannels.count + kHeaderFreeVideoItemOffset+2+self.videoModel.fetchedVideoPrograms.count;//kHeaderHotVideoItemOffset
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.item < kFreeVideoItemOffset) {
+    if (indexPath.item < kHeaderFreeVideoItemOffset) {
         return ;
     }
     
-    //    if (indexPath.item >= kFreeVideoItemOffset && indexPath.item < kChannelItemOffset) {
-    //        if (indexPath.item - kFreeVideoItemOffset < self.videoModel.fetchedVideoPrograms.count) {
-    //            JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item - kFreeVideoItemOffset];
-    ////            [self playVideo:program withTimeControl:NO shouldPopPayment:YES];
-    //            JQKChannels *channel = self.videoModel.fetchedPrograms.lastObject;
-    //            
-    //            [self playVideo:program withTimeControl:NO shouldPopPayment:YES withProgramLocation:(indexPath.item -kFreeVideoItemOffset) inChannel:channel];
-    //            
-    //             [[JQKStatsManager sharedManager] statsCPCWithProgram:program programLocation:(indexPath.item - kFreeVideoItemOffset) inChannel:channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
-    //        }
-    //    } else
-    if (indexPath.item - kHeaderViewOffset < self.channelModel.fetchedChannels.count) {
-        JQKChannel *selectedChannel = self.channelModel.fetchedChannels[indexPath.item - kHeaderViewOffset];
+    if (indexPath.item > kHeaderFreeVideoItemOffset && indexPath.item < kHeaderHotVideoItemOffset) {
+        if (indexPath.item - (kHeaderFreeVideoItemOffset+1) < self.videoModel.fetchedVideoPrograms.count) {
+            JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item - kHeaderFreeVideoItemOffset-1];
+            //            [self playVideo:program withTimeControl:NO shouldPopPayment:YES];
+            JQKChannels *channel = self.videoModel.fetchedPrograms.lastObject;
+            if ([JQKUtil isPaid]) {
+                [self playVideo:program];
+            }{
+                [self playVideo:program withTimeControl:NO shouldPopPayment:YES withProgramLocation:(indexPath.item -kHeaderFreeVideoItemOffset) inChannel:channel];
+            }
+            [[JQKStatsManager sharedManager] statsCPCWithProgram:program programLocation:(indexPath.item - kHeaderFreeVideoItemOffset) inChannel:channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
+        }
+    } else if(indexPath.item -( kHeaderHotVideoItemOffset+1) < self.channelModel.fetchedChannels.count) {
+        JQKChannel *selectedChannel = self.channelModel.fetchedChannels[indexPath.item - ( kHeaderHotVideoItemOffset+1)];
         
         [[JQKStatsManager sharedManager] statsCPCWithChannel:selectedChannel inTabIndex:self.tabBarController.selectedIndex];
         
@@ -331,8 +352,8 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
 
 - (BOOL)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout hasAdBannerForItem:(NSUInteger)item {
     
-    if (item >= kChannelItemOffset && item-kChannelItemOffset < self.channelModel.fetchedChannels.count) {
-        JQKChannel *channel = self.channelModel.fetchedChannels[item-kChannelItemOffset];
+    if (item >= kHeaderViewOffset && item-kHeaderViewOffset < self.channelModel.fetchedChannels.count) {
+        JQKChannel *channel = self.channelModel.fetchedChannels[item-kHeaderViewOffset];
         return channel.type.unsignedIntegerValue == JQKChannelTypeSpread && channel.spreadUrl.length > 0;
     }
     return NO;
@@ -341,7 +362,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     JQKProgram *bannerProgram = self.videoModel.fetchedBannerPrograms[index];
     JQKChannels *banenrchannel = self.videoModel.bannerChannels[0];
-    if (bannerProgram.type.unsignedIntegerValue == 5) {
+    if ( bannerProgram.type.unsignedIntegerValue == 1) {
         [self switchToPlayProgram:bannerProgram programLocation:index inChannel:banenrchannel];
     } else if (bannerProgram.type.unsignedIntegerValue == JQKProgramTypeSpread) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:bannerProgram.videoUrl]];

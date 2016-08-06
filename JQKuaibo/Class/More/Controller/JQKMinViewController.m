@@ -79,6 +79,7 @@
     
     _bannerCell = [[JQKTableViewCell alloc] init];
     _bannerCell.accessoryType = UITableViewCellAccessoryNone;
+    _bannerCell.selectionStyle = [JQKUtil isPaid] ? UITableViewCellSelectionStyleNone :UITableViewCellSelectionStyleGray;
     _bannerCell.backgroundColor = [UIColor whiteColor];
 //    _bannerCell.backgroundImageView.image = [UIImage imageNamed:@"setting_banner.jpg"];
     NSString *imageUrl = [JQKUtil isPaid] ? [JQKSystemConfigModel sharedModel].vipImage : [JQKSystemConfigModel sharedModel].ktVipImage;

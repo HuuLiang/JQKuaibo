@@ -74,7 +74,7 @@
         [self addSubview:_thumbImageView];
         { [_thumbImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.mas_equalTo(self);
-            make.bottom.mas_equalTo(_titleLabel.mas_top).mas_offset(-3);
+            make.bottom.mas_equalTo(_titleLabel.mas_top).mas_offset(-kWidth(3.));
         }];
         }
     }

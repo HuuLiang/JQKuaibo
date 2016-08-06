@@ -43,7 +43,7 @@
                                                                  selectedImage:[[UIImage imageNamed:@"home_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     JQKHotVideoViewController *videoVC   = [[JQKHotVideoViewController alloc] init];
-    videoVC.title                        = @"热门";
+    videoVC.title                        = @"精选";
     
     UINavigationController *videoNav     = [[UINavigationController alloc] initWithRootViewController:videoVC];
     videoNav.tabBarItem                = [[UITabBarItem alloc] initWithTitle:videoVC.title
@@ -59,7 +59,7 @@
                                                                    selectedImage:[[UIImage imageNamed:@"hot_video_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     JQKSpreadController *spreadVC = [[JQKSpreadController alloc] init];
-    spreadVC.title = @"精品";
+    spreadVC.title = @"更多";
     UINavigationController *spreadNav = [[UINavigationController alloc] initWithRootViewController:spreadVC];
     spreadNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:spreadVC.title image:[UIImage imageNamed:@"tabbar_spread_normal"] selectedImage:[UIImage imageNamed:@"tabbar_spread_normal"]];
     

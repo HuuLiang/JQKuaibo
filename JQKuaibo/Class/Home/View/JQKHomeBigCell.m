@@ -49,7 +49,7 @@
         [coverView addSubview:rightArrow];
         
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:kWidth(18.)];
+        _titleLabel.font = [UIFont systemFontOfSize:kWidth(17.)];//[UIFont fontWithName:@"PingFangSC-Regular" size:kWidth(18.)];
         _titleLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         [coverView addSubview:_titleLabel];
@@ -72,6 +72,7 @@
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.bottom.mas_equalTo(enterChannel.mas_top);
                 make.centerX.mas_equalTo(coverView);
+                make.size.mas_equalTo(CGSizeMake(kWidth(70.), kWidth(24.)));
             }];
             
             [leftArrow mas_makeConstraints:^(MASConstraintMaker *make) {

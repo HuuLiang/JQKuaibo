@@ -72,6 +72,8 @@
 - (void)setupImageView
 {
     UIImageView *imageView = [[UIImageView alloc] init];
+//    imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    imageView.clipsToBounds = YES;
     _imageView = imageView;
     [self.contentView addSubview:imageView];
 }
@@ -89,9 +91,9 @@
     
     _coverView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.45];
     [self.contentView addSubview:_coverView];
-    UIImageView *freeVideoImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"freevideo"]];
-    freeVideoImage.frame = CGRectMake(self.bounds.size.width - kWidth(76.4), 0, kWidth(76.4), kWidth(76.4));
-    [_coverView addSubview:freeVideoImage];
+//    UIImageView *freeVideoImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"freevideo"]];
+//    freeVideoImage.frame = CGRectMake(self.bounds.size.width - kWidth(76.4), 0, kWidth(76.4), kWidth(76.4));
+//    [_coverView addSubview:freeVideoImage];
 }
 
 - (void)setTitle:(NSString *)title

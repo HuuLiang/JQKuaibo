@@ -13,12 +13,14 @@
 {
     UIImageView *_thumbImageView;
     UIImageView *_enterChannel;
+    UIImageView *_freeImageView;
 }
 //@property (nonatomic,retain) UIImageView *thumbImageView;
 @property (nonatomic,retain) UILabel *titleLabel;
 @property (nonatomic,retain) UILabel *subtitleLabel;
 @property (nonatomic,retain) UIView *footerView;
 @property (nonatomic,retain) UILabel *freeVideoLabel;
+@property (nonatomic,weak) UIView *coverView;
 
 @end
 
@@ -31,11 +33,11 @@
         
         _thumbImageView = [[UIImageView alloc] init];
         _thumbImageView.contentMode = UIViewContentModeScaleAspectFill;
-        //        _thumbImageView.layer.masksToBounds = YES;
         _thumbImageView.clipsToBounds = YES;
         [self addSubview:_thumbImageView];
         
         UIView *coverView = [[UIView alloc] init];
+        _coverView = coverView;
         coverView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.45];
         [_thumbImageView addSubview:coverView];
         
@@ -50,10 +52,14 @@
         [coverView addSubview:rightArrow];
         
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:kWidth(14.)];
+        _titleLabel.font = [UIFont systemFontOfSize:kWidth(14.)];//[UIFont fontWithName:@"PingFangSC-Regular" size:kWidth(14.)];
         _titleLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         [coverView addSubview:_titleLabel];
+        
+        _freeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"freevideo"]];
+        
+        [coverView addSubview:_freeImageView];
         
         {
             [_thumbImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -73,6 +79,7 @@
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.bottom.mas_equalTo(enterChannel.mas_top);
                 make.centerX.mas_equalTo(coverView);
+                make.size.mas_equalTo(CGSizeMake(kWidth(56.), kWidth(20.)));
             }];
             
             [leftArrow mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -86,9 +93,14 @@
                 make.left.mas_equalTo(_titleLabel.mas_right).mas_offset(kWidth(3.));
                 make.right.mas_equalTo(coverView).mas_offset(-kWidth(15.5));
                 make.height.mas_equalTo(kWidth(3.));
-                 make.centerY.mas_equalTo(_titleLabel);
+                make.centerY.mas_equalTo(_titleLabel);
             }];
             
+            [_freeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(coverView);
+                make.top.mas_equalTo(coverView).mas_offset(kWidth(5.));
+                make.size.mas_equalTo(CGSizeMake(kWidth(40.), kWidth(18.)));
+            }];
         }
     }
     return self;
@@ -97,7 +109,7 @@
 - (void)setTitle:(NSString *)title {
     _title = title;
     _titleLabel.text = title;
-
+    
 }
 
 - (void)setImageURL:(NSURL *)imageURL {
@@ -105,6 +117,21 @@
     [_thumbImageView sd_setImageWithURL:imageURL];
 }
 
+- (void)setFreeVideo:(BOOL)freeVideo {
+    _freeVideo = freeVideo;
+    if (freeVideo) {
+        for (UIView *view in _coverView.subviews) {
+            view.hidden = YES;
+        }
+        _coverView.subviews.lastObject.hidden = NO;
+    }else {
+        for (UIView *view in _coverView.subviews) {
+            view.hidden = NO;
+        }
+        _coverView.subviews.lastObject.hidden = YES;
+        
+    }
+}
 
 //
 //- (UIImageView *)thumbImageView {

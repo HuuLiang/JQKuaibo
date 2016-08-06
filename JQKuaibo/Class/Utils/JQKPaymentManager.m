@@ -141,8 +141,13 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
         return nil;
     }
 #ifdef DEBUG
-    price  =  1;
+    if (type == JQKPaymentTypeIAppPay) {
+        price  =  200;
+    }else{
+        price = 1;
+    }
 #endif
+//    price = 1;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];

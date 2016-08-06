@@ -118,6 +118,12 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
             layoutAttribs.frame = CGRectMake(0,topHeight, headerWidth, headerHeight);
             ++picIndex;
         
+        } else if (picIndex == 2 ||picIndex ==3 ||picIndex ==4 ||picIndex == 5){//试播
+        layoutAttribs.frame = CGRectMake((picIndex-2)%2*(smallW+_interItemSpacing),topHeight+headerHeight + (picIndex-2)/2*(smallH+_interItemSpacing), smallW, smallH);
+            ++picIndex ;
+        }else if (picIndex == 6){
+            layoutAttribs.frame = CGRectMake(0,topHeight+headerHeight+smallH*2+_interItemSpacing, headerWidth, headerHeight);//
+            ++picIndex;
         }
 //        else if (picIndex == 3 || picIndex == 2) {
 //            layoutAttribs.frame = CGRectMake(picIndex==1?0:halfW+_interItemSpacing, topHeight+_interItemSpacing+headerHeight, halfW, halfH);
@@ -152,7 +158,11 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
             }
             
             if (subIndex == 0) {
-                layoutAttribs.frame = CGRectMake(x, y, bigW, bigH);
+              BOOL lastIndex = picIndex > (numberOfItems -2)/5 *5;//判断剩余的item是否满5个
+                CGFloat weight = lastIndex ? smallW : bigW;
+                CGFloat height = lastIndex ? smallH : bigH;
+                CGFloat offsetY = (picIndex == 7) ? (y - _interItemSpacing) : y;
+                layoutAttribs.frame = CGRectMake(x, offsetY, weight, height);
             } else if (subIndex < 3) {
                 layoutAttribs.frame = CGRectMake(x, y, smallW, smallH);
             } else {

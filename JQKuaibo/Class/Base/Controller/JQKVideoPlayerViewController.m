@@ -35,6 +35,11 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     _videoPlayer = [[JQKVideoPlayer alloc] initWithVideoURL:[NSURL URLWithString:self.video.videoUrl]];
+    @weakify(self);
+    _videoPlayer.endPlayAction = ^(id sender) {
+        @strongify(self);
+        [self dismissAndPopPayment];
+    };
     [self.view addSubview:_videoPlayer];
     {
         [_videoPlayer mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -52,22 +57,26 @@
         }];
     }
     
-    @weakify(self);
     [_closeButton bk_addEventHandler:^(id sender) {
         @strongify(self);
         [self->_videoPlayer pause];
-        
-        if (_shouldPopupPaymentIfNotPaid && ![JQKUtil isPaid]) {
-            [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view forProgram:(JQKProgram *)self.video
-                                                           programLocation:_programLocation
-                                                                 inChannel:_channel withCompletionHandler:^{
-                                                                     @strongify(self);
-                                                                     [self dismissViewControllerAnimated:YES completion:nil];
-                                                                 }];
-        } else {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
+        [self dismissAndPopPayment];
+//        if (_shouldPopupPaymentIfNotPaid && ![JQKUtil isPaid]) {
+//            [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view forProgram:(JQKProgram *)self.video
+//                                                           programLocation:_programLocation
+//                                                                 inChannel:_channel withCompletionHandler:^{
+//                                                                     @strongify(self);
+//                                                                     [self dismissViewControllerAnimated:YES completion:nil];
+//                                                                 }];
+//        } else {
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//        }
     } forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)dismissAndPopPayment {
+    [self payForProgram:(JQKProgram *)_video programLocation:_programLocation inChannel:_channel];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

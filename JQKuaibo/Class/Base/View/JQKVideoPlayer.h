@@ -15,5 +15,6 @@
 - (instancetype)initWithVideoURL:(NSURL *)videoURL;
 - (void)startToPlay;
 - (void)pause;
+@property (nonatomic,copy) JQKAction endPlayAction;
 
 @end

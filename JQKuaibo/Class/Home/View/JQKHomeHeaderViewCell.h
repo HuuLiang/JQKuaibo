@@ -10,4 +10,6 @@
 
 @interface JQKHomeHeaderViewCell : UICollectionViewCell
 
+@property (nonatomic) NSString *titleName;
+
 @end

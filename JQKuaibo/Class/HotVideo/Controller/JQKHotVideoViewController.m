@@ -247,7 +247,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat wiedth = (kScreenWidth - kHotVideoSpace*3)/2;
-    CGFloat height = wiedth *4/5;
+    CGFloat height = wiedth *3/5 + kWidth(17.);
     return CGSizeMake(wiedth, height);
 }
 
