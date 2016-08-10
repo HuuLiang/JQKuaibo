@@ -70,7 +70,7 @@
     
     
     
-    JQKPaymentType cardType = [[JQKPaymentManager sharedManager] cardPayPaymentType];
+//    JQKPaymentType cardType = [[JQKPaymentManager sharedManager] cardPayPaymentType];
     
     
     JQKPaymentType wechatPaymentType = [[JQKPaymentManager sharedManager] wechatPaymentType];
@@ -95,13 +95,13 @@
         }];
     }
     
-    if (cardType != JQKPaymentTypeNone) {
-        
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon"] title:@"购卡支付" subtitle:@"支持微信和支付宝" backgroundColor:[UIColor darkPink] action:^(id obj) {
-            Pay(cardType,JQKSubPayTypeUnknown);
-        }];
-        
-    }
+//    if (cardType != JQKPaymentTypeNone) {
+//        
+//        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon"] title:@"购卡支付" subtitle:@"支持微信和支付宝" backgroundColor:[UIColor darkPink] action:^(id obj) {
+//            Pay(cardType,JQKSubPayTypeUnknown);
+//        }];
+//        
+//    }
     
     
     //    if (([JQKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & JQKIAppPayTypeWeChat)

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8575D848DA658933FA08A635 /* libPods-JQKuaibo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C00B2137A7D7B22C563C826 /* libPods-JQKuaibo.a */; };
+		B32BB7241D5AFE5300E76494 /* IapppayAlphaResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B32BB7231D5AFE5300E76494 /* IapppayAlphaResource.bundle */; };
+		B32BB7261D5AFE9B00E76494 /* IapppayAlphaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32BB7251D5AFE9B00E76494 /* IapppayAlphaKit.framework */; };
 		B331B14B1D30CE9D00865369 /* IappPayMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = B331B14A1D30CE9D00865369 /* IappPayMananger.m */; };
 		B33BCC9D1D052E9800D8E62F /* UITableView+Separator.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCC9C1D052E9800D8E62F /* UITableView+Separator.m */; };
 		B34B95491D5357B700292EEC /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = B34B953C1D5357B700292EEC /* TAAbstractDotView.m */; };
@@ -63,8 +65,6 @@
 		B374B9D21CFD86690063C1C6 /* JQKApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9D11CFD86690063C1C6 /* JQKApplicationManager.m */; };
 		B374B9D51CFD867D0063C1C6 /* JQKApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9D41CFD867D0063C1C6 /* JQKApplication.m */; };
 		B374B9D81CFD86B20063C1C6 /* NSObject+PropertyAccessInspecting.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9D71CFD86B20063C1C6 /* NSObject+PropertyAccessInspecting.m */; };
-		B38BD9281D4352FA00AA34EA /* IapppayResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B38BD9271D4352FA00AA34EA /* IapppayResource.bundle */; };
-		B38BD92A1D43533200AA34EA /* IapppayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38BD9291D43533200AA34EA /* IapppayKit.framework */; };
 		B38BD92C1D43545B00AA34EA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B38BD92B1D43545B00AA34EA /* libc++.tbd */; };
 		B3EC58A61CF59AE900AC74F4 /* JQKLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */; };
 		B3EC58A81CF59B3600AC74F4 /* launch_image2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B3EC58A71CF59B3600AC74F4 /* launch_image2.jpg */; };
@@ -174,6 +174,8 @@
 
 /* Begin PBXFileReference section */
 		7C00B2137A7D7B22C563C826 /* libPods-JQKuaibo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JQKuaibo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B32BB7231D5AFE5300E76494 /* IapppayAlphaResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayAlphaResource.bundle; sourceTree = "<group>"; };
+		B32BB7251D5AFE9B00E76494 /* IapppayAlphaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayAlphaKit.framework; sourceTree = "<group>"; };
 		B331B1491D30CE9D00865369 /* IappPayMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IappPayMananger.h; sourceTree = "<group>"; };
 		B331B14A1D30CE9D00865369 /* IappPayMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IappPayMananger.m; sourceTree = "<group>"; };
 		B33BCC9B1D052E9800D8E62F /* UITableView+Separator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Separator.h"; sourceTree = "<group>"; };
@@ -270,8 +272,6 @@
 		B374B9D41CFD867D0063C1C6 /* JQKApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKApplication.m; sourceTree = "<group>"; };
 		B374B9D61CFD86B20063C1C6 /* NSObject+PropertyAccessInspecting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PropertyAccessInspecting.h"; sourceTree = "<group>"; };
 		B374B9D71CFD86B20063C1C6 /* NSObject+PropertyAccessInspecting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PropertyAccessInspecting.m"; sourceTree = "<group>"; };
-		B38BD9271D4352FA00AA34EA /* IapppayResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayResource.bundle; sourceTree = "<group>"; };
-		B38BD9291D43533200AA34EA /* IapppayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayKit.framework; sourceTree = "<group>"; };
 		B38BD92B1D43545B00AA34EA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B3EC58A41CF59AE900AC74F4 /* JQKLaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKLaunchView.h; sourceTree = "<group>"; };
 		B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKLaunchView.m; sourceTree = "<group>"; };
@@ -458,13 +458,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B38BD92C1D43545B00AA34EA /* libc++.tbd in Frameworks */,
-				B38BD92A1D43533200AA34EA /* IapppayKit.framework in Frameworks */,
 				B35F625F1D4706F900E03202 /* PayUtil.framework in Frameworks */,
 				EC87542F1D2B8B4300EC6DB5 /* SystemConfiguration.framework in Frameworks */,
 				EC87542D1D2B8B3900EC6DB5 /* CoreMotion.framework in Frameworks */,
 				EC87541E1D2B894100EC6DB5 /* AlipaySDK.framework in Frameworks */,
 				BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */,
 				BC38730E1C2D3B7100CBE88A /* libz.tbd in Frameworks */,
+				B32BB7261D5AFE9B00E76494 /* IapppayAlphaKit.framework in Frameworks */,
 				BC38730C1C2D3B4F00CBE88A /* libsqlite3.tbd in Frameworks */,
 				BC3872F71C2D33B200CBE88A /* libMobClickLibrary.a in Frameworks */,
 				BC4C09CB1C328B4F002C4709 /* libWeChatSDK.a in Frameworks */,
@@ -525,8 +525,8 @@
 		B331B14C1D30CEC000865369 /* iAppPay */ = {
 			isa = PBXGroup;
 			children = (
-				B38BD9291D43533200AA34EA /* IapppayKit.framework */,
-				B38BD9271D4352FA00AA34EA /* IapppayResource.bundle */,
+				B32BB7251D5AFE9B00E76494 /* IapppayAlphaKit.framework */,
+				B32BB7231D5AFE5300E76494 /* IapppayAlphaResource.bundle */,
 			);
 			path = iAppPay;
 			sourceTree = "<group>";
@@ -1292,12 +1292,12 @@
 				B35F62611D4706F900E03202 /* public_key.der in Resources */,
 				EC87541D1D2B894100EC6DB5 /* AlipaySDK.bundle in Resources */,
 				B35F62581D4706F900E03202 /* btn6.png in Resources */,
+				B32BB7241D5AFE5300E76494 /* IapppayAlphaResource.bundle in Resources */,
 				B35F625D1D4706F900E03202 /* unicom_back.png in Resources */,
 				B35F62561D4706F900E03202 /* btn3.png in Resources */,
 				B35F626A1D4706F900E03202 /* VIASDKVERSION.txt in Resources */,
 				B35F62531D4706F900E03202 /* btn1.png in Resources */,
 				BC8A2ABB1C8FF85900DF2AE2 /* Launch Screen.storyboard in Resources */,
-				B38BD9281D4352FA00AA34EA /* IapppayResource.bundle in Resources */,
 				B35F625A1D4706F900E03202 /* btn8.png in Resources */,
 				BC8A2AC01C900D9100DF2AE2 /* payment_background.jpg in Resources */,
 				BC5BCE961C51EE460034F532 /* config.plist in Resources */,

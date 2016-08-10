@@ -84,6 +84,8 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
 - (JQKPaymentType)wechatPaymentType {
     if ([JQKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JQKSubPayTypeWeChat) {
         return JQKPaymentTypeVIAPay;
+    } else if ([JQKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & JQKSubPayTypeWeChat){
+        return JQKPaymentTypeIAppPay;
     }
     //    else if ([JQKPaymentConfig sharedConfig].wftPayInfo) {
     //        return JQKPaymentTypeSPay;
@@ -98,6 +100,8 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
 - (JQKPaymentType)alipayPaymentType {
     if ([JQKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JQKSubPayTypeAlipay) {
         return JQKPaymentTypeVIAPay;
+    }else if ([JQKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue &JQKSubPayTypeAlipay){
+        return JQKPaymentTypeIAppPay;
     }
     return JQKPaymentTypeNone;
 }
@@ -122,8 +126,8 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
     } else if ([url.absoluteString rangeOfString:kAlipaySchemeUrl].location == 0) {
         [[PayUitls getIntents] paytoAli:url];
     }
-//    [[PayUitls getIntents] paytoAli:url];
-//    [[IappPayMananger sharedMananger] handleOpenURL:url];
+    //    [[PayUitls getIntents] paytoAli:url];
+    //    [[IappPayMananger sharedMananger] handleOpenURL:url];
 }
 
 - (JQKPaymentInfo *)startPaymentWithType:(JQKPaymentType)type
@@ -142,12 +146,12 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
     }
 #ifdef DEBUG
     if (type == JQKPaymentTypeIAppPay) {
-        price  =  200;
+        price  =  500;
     }else{
         price = 1;
     }
 #endif
-//    price = 1;
+    //    price = 1;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
@@ -191,17 +195,17 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
                           andchannelOrderId:[orderNo stringByAppendingFormat:@"$%@", JQK_REST_APP_ID] andType:[viaPayTypeMapping[@(subType)] stringValue]
                            andViewControler:[JQKUtil currentVisibleViewController]];
         
-    } else if (type == JQKPaymentTypeIAppPay){
+    } else if (type == JQKPaymentTypeIAppPay &&(subType == JQKSubPayTypeWeChat || subType == JQKSubPayTypeAlipay)){
         IappPayMananger *iAppMgr = [IappPayMananger sharedMananger];
         iAppMgr.appId = [JQKPaymentConfig sharedConfig].iappPayInfo.appid;
         iAppMgr.privateKey = [JQKPaymentConfig sharedConfig].iappPayInfo.privateKey;
         iAppMgr.waresid = [JQKPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
-        iAppMgr.appUserId = [JQKUtil userId].md5 ?: @"UnregisterUser";
+        iAppMgr.appUserId = [JQKUtil userId] ?: @"UnregisterUser";
         iAppMgr.privateInfo = JQK_PAYMENT_RESERVE_DATA;
         iAppMgr.notifyUrl = [JQKPaymentConfig sharedConfig].iappPayInfo.notifyUrl;
         iAppMgr.publicKey = [JQKPaymentConfig sharedConfig].iappPayInfo.publicKey;
         @weakify(self);
-        [iAppMgr payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
+        [iAppMgr payWithPaymentInfo:paymentInfo payType:subType completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
             @strongify(self);
             if (self.completionHandler) {
                 self.completionHandler(payResult, self.paymentInfo);

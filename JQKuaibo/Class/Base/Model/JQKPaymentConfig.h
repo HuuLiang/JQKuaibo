@@ -55,7 +55,6 @@
 @property (nonatomic) NSString *notifyUrl;
 @end
 
-
 @interface JQKPaymentConfig : JQKURLResponse
 
 @property (nonatomic,retain) JQKWeChatPaymentConfig *weixinInfo;
@@ -64,7 +63,6 @@
 @property (nonatomic,retain) JQKVIAPayConfig *syskPayInfo;
 @property (nonatomic,retain) JQKSPayConfig *wftPayInfo;
 @property (nonatomic,retain) JQKHTPayConfig *haitunPayInfo;
-
 
 + (instancetype)sharedConfig;
 - (void)setAsCurrentConfig;

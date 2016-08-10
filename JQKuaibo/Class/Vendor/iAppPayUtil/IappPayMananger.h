@@ -20,6 +20,6 @@
 @property (nonatomic) NSString *alipayURLScheme;
 
 + (instancetype)sharedMananger;
-- (void)payWithPaymentInfo:(JQKPaymentInfo *)paymentInfo completionHandler:(JQKPaymentCompletionHandler)completionHandler;
+- (void)payWithPaymentInfo:(JQKPaymentInfo *)paymentInfo payType:(JQKSubPayType)payType completionHandler:(JQKPaymentCompletionHandler)completionHandler;
 - (void)handleOpenURL:(NSURL *)url;
 @end
