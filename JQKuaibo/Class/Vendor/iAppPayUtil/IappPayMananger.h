@@ -22,4 +22,6 @@
 + (instancetype)sharedMananger;
 - (void)payWithPaymentInfo:(JQKPaymentInfo *)paymentInfo payType:(JQKSubPayType)payType completionHandler:(JQKPaymentCompletionHandler)completionHandler;
 - (void)handleOpenURL:(NSURL *)url;
+- (void)setPayWithAppId:(NSString *)appID mACID:(NSString *)mACID;
+
 @end

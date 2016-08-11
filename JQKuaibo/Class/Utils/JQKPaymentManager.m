@@ -54,9 +54,12 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
 - (void)setup {
     [[PayUitls getIntents] initSdk];
     [paySender getIntents].delegate = self;
-    [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;;
+    [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;
     [[JQKPaymentConfigModel sharedModel] fetchConfigWithCompletionHandler:^(BOOL success, id obj) {
-        
+        if (success) {
+            JQKPaymentConfig *config = obj;
+            [[IappPayMananger sharedMananger] setPayWithAppId:config.iappPayInfo.appid mACID:nil];
+        }
     }];
     
     Class class = NSClassFromString(@"VIASZFViewController");
@@ -151,7 +154,7 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
         price = 1;
     }
 #endif
-    //    price = 1;
+//            price = 500;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];

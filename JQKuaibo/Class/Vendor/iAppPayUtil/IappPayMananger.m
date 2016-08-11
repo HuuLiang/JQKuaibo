@@ -27,6 +27,11 @@
     return _sharedManager;
 }
 
+- (void)setPayWithAppId:(NSString *)appID mACID:(NSString *)mACID {
+    [[IapppayAlphaKit sharedInstance] setAppId:appID mACID:mACID];
+    
+}
+
 - (void)setAlipayURLScheme:(NSString *)alipayURLScheme {
     _alipayURLScheme = alipayURLScheme;
     [IapppayAlphaKit sharedInstance].appAlipayScheme = alipayURLScheme;
