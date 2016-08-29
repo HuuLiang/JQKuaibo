@@ -41,23 +41,24 @@
         if (cell == self->_vipCell || cell == self->_bannerCell) {
             if (![JQKUtil isPaid]) {
                 
-                [self payForProgram:nil programLocation:NSNotFound inChannel:nil];
+                [self payForProgram:nil programLocation:indexPath.section inChannel:nil];
             }
         } else if (cell == self->_protocolCell) {
-             NSString *urlString = [JQK_BASE_URL stringByAppendingString:[JQKUtil isPaid]?JQK_AGREEMENT_PAID_URL:JQK_AGREEMENT_NOTPAID_URL];
+            NSString *urlString = [JQK_BASE_URL stringByAppendingString:[JQKUtil isPaid]?JQK_AGREEMENT_PAID_URL:JQK_AGREEMENT_NOTPAID_URL];
             JQKWebViewController *webVC = [[JQKWebViewController alloc] initWithURL:[NSURL URLWithString:urlString]];
             webVC.title = @"用户协议";
             webVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:webVC animated:YES];
         } else if (cell == self->_telCell) {
-            [UIAlertView bk_showAlertViewWithTitle:nil message:@"4006296682" cancelButtonTitle:@"取消" otherButtonTitles:@[@"呼叫"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                if (buttonIndex == 1) {
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:4006296682"]];
-                }
-            }];
+            //            [UIAlertView bk_showAlertViewWithTitle:nil message:@"4006296682" cancelButtonTitle:@"取消" otherButtonTitles:@[@"呼叫"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            //                if (buttonIndex == 1) {
+            //                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:4006296682"]];
+            //                }
+            //            }];
+            [self contactCustomerService];
         }
     };
-
+    
     [self initCells];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPaidNotification:) name:kPaidNotificationName object:nil];
     
@@ -65,6 +66,26 @@
         NSString *baseURLString = [JQK_BASE_URL stringByReplacingCharactersInRange:NSMakeRange(0, JQK_BASE_URL.length-6) withString:@"******"];
         [[JQKHudManager manager] showHudWithText:[NSString stringWithFormat:@"Server:%@\nChannelNo:%@\nPackageCertificate:%@\npV:%@", baseURLString, JQK_CHANNEL_NO, JQK_PACKAGE_CERTIFICATE, JQK_REST_PV]];
     }];
+}
+
+- (void)contactCustomerService {
+    NSString *contactScheme = [JQKSystemConfigModel sharedModel].contactScheme;
+    NSString *contactName = [JQKSystemConfigModel sharedModel].contactName;
+    
+    if (contactScheme.length == 0) {
+        return ;
+    }
+    
+    [UIAlertView bk_showAlertViewWithTitle:nil
+                                   message:[NSString stringWithFormat:@"是否联系客服%@？", contactName ?: @""]
+                         cancelButtonTitle:@"取消"
+                         otherButtonTitles:@[@"确认"]
+                                   handler:^(UIAlertView *alertView, NSInteger buttonIndex)
+     {
+         if (buttonIndex == 1) {
+             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:contactScheme]];
+         }
+     }];
 }
 
 - (void)onPaidNotification:(NSNotification *)notification {
@@ -81,7 +102,7 @@
     _bannerCell.accessoryType = UITableViewCellAccessoryNone;
     _bannerCell.selectionStyle = [JQKUtil isPaid] ? UITableViewCellSelectionStyleNone :UITableViewCellSelectionStyleGray;
     _bannerCell.backgroundColor = [UIColor whiteColor];
-//    _bannerCell.backgroundImageView.image = [UIImage imageNamed:@"setting_banner.jpg"];
+    //    _bannerCell.backgroundImageView.image = [UIImage imageNamed:@"setting_banner.jpg"];
     NSString *imageUrl = [JQKUtil isPaid] ? [JQKSystemConfigModel sharedModel].vipImage : [JQKSystemConfigModel sharedModel].ktVipImage;
     _bannerCell.imageUrl = [NSURL URLWithString:imageUrl];
     [self setLayoutCell:_bannerCell cellHeight:kScreenWidth*0.55 inRow:0 andSection:section++];
@@ -101,9 +122,9 @@
     _protocolCell.backgroundColor = [UIColor colorWithWhite:0.85 alpha:1];
     [self setLayoutCell:_protocolCell cellHeight:44 inRow:0 andSection:section++];
     
-//    UITableViewCell *lineCell = [[UITableViewCell alloc] init];
-//    lineCell.backgroundColor = [UIColor colorWithHexString:@"#575757"];
-//    [self setLayoutCell:lineCell cellHeight:0.5 inRow:0 andSection:section++];
+    //    UITableViewCell *lineCell = [[UITableViewCell alloc] init];
+    //    lineCell.backgroundColor = [UIColor colorWithHexString:@"#575757"];
+    //    [self setLayoutCell:lineCell cellHeight:0.5 inRow:0 andSection:section++];
     
     if ([JQKUtil isPaid]) {
         [self setHeaderHeight:10 inSection:section];

@@ -87,6 +87,10 @@
                                     self.vipImage = config.value;
                                 }else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_VIP_URL]){
                                     self.ktVipImage = config.value;
+                                }else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_CONTACT_SCHEME]){
+                                    self.contactScheme = config.value;
+                                }else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_CONTACT_NAME]){
+                                    self.contactName = config.value;
                                 }
                             }];
                             

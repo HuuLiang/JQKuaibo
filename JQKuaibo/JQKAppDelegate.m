@@ -173,8 +173,8 @@
     
     [self.window makeKeyWindow];
     self.window.hidden = NO;
-    JQKLaunchView *launchView = [[JQKLaunchView alloc] init];
-    [launchView show];
+//    JQKLaunchView *launchView = [[JQKLaunchView alloc] init];
+//    [launchView show];
     
     if (![JQKUtil isRegistered]) {
         [[JQKActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
@@ -193,7 +193,7 @@
         if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
             statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;
         }
-        statsTimeInterval = 20;
+//        statsTimeInterval = 20;
         [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
         //        if ([JQKSystemConfigModel sharedModel].notificationLaunchSeq >0) {
         //            [self registerUserNotification];

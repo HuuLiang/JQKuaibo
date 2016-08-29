@@ -39,6 +39,9 @@ typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic) NSString *ktVipImage;
 @property (nonatomic) NSString *vipImage;
 
+@property (nonatomic) NSString  *contactScheme;
+@property (nonatomic) NSString  *contactName;
+
 + (instancetype)sharedModel;
 
 - (BOOL)fetchSystemConfigWithCompletionHandler:(JQKFetchSystemConfigCompletionHandler)handler;

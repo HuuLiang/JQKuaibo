@@ -67,7 +67,6 @@
 		B38151C31D5C6C4B00E6B7EE /* IapppayAlphaResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B38151C21D5C6C4B00E6B7EE /* IapppayAlphaResource.bundle */; };
 		B38BD92C1D43545B00AA34EA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B38BD92B1D43545B00AA34EA /* libc++.tbd */; };
 		B3EC58A61CF59AE900AC74F4 /* JQKLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */; };
-		B3EC58A81CF59B3600AC74F4 /* launch_image2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B3EC58A71CF59B3600AC74F4 /* launch_image2.jpg */; };
 		B3FEDAD61D53293B007CBB55 /* JQKHomeBigCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEDAD51D53293B007CBB55 /* JQKHomeBigCell.m */; };
 		B3FEDADA1D5330B8007CBB55 /* JQKLayoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEDAD91D5330B8007CBB55 /* JQKLayoutViewController.m */; };
 		B3FEDADD1D533262007CBB55 /* JQKMinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEDADC1D533262007CBB55 /* JQKMinViewController.m */; };
@@ -275,7 +274,6 @@
 		B38BD92B1D43545B00AA34EA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B3EC58A41CF59AE900AC74F4 /* JQKLaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKLaunchView.h; sourceTree = "<group>"; };
 		B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKLaunchView.m; sourceTree = "<group>"; };
-		B3EC58A71CF59B3600AC74F4 /* launch_image2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch_image2.jpg; sourceTree = "<group>"; };
 		B3FEDAD41D53293B007CBB55 /* JQKHomeBigCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKHomeBigCell.h; sourceTree = "<group>"; };
 		B3FEDAD51D53293B007CBB55 /* JQKHomeBigCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKHomeBigCell.m; sourceTree = "<group>"; };
 		B3FEDAD81D5330B8007CBB55 /* JQKLayoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKLayoutViewController.h; sourceTree = "<group>"; };
@@ -1168,7 +1166,6 @@
 			isa = PBXGroup;
 			children = (
 				BC8A2ABF1C900D9100DF2AE2 /* payment_background.jpg */,
-				B3EC58A71CF59B3600AC74F4 /* launch_image2.jpg */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1303,7 +1300,6 @@
 				BC5BCE961C51EE460034F532 /* config.plist in Resources */,
 				B35F62601D4706F900E03202 /* private_key.p12 in Resources */,
 				B35F62541D4706F900E03202 /* btn10.png in Resources */,
-				B3EC58A81CF59B3600AC74F4 /* launch_image2.jpg in Resources */,
 				B35F62591D4706F900E03202 /* btn7.png in Resources */,
 				B35F625C1D4706F900E03202 /* seperator.png in Resources */,
 				B35F62571D4706F900E03202 /* btn5.png in Resources */,
@@ -1644,7 +1640,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ccbec350-6535-4b4f-a5e2-6bfe8395053f";
+				PROVISIONING_PROFILE = "4b0ab9ef-6709-4b29-acfb-e8a89c6075c5";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1676,7 +1672,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ccbec350-6535-4b4f-a5e2-6bfe8395053f";
+				PROVISIONING_PROFILE = "4b0ab9ef-6709-4b29-acfb-e8a89c6075c5";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
