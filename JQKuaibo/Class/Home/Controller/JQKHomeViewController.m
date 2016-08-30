@@ -296,7 +296,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
         //        
         //        if ( item < self.channelModel.fetchedChannels.count +kHeaderViewOffset) {
         JQKChannel *channel = self.channelModel.fetchedChannels[item];
-        if ( item %5 == 0 && item < ([collectionView numberOfItemsInSection:0]-2)/5*5) {
+        if ( item %5 == 0 && item < ([collectionView numberOfItemsInSection:0]-( kHeaderHotVideoItemOffset+1))/5*5) {
             JQKHomeBigCell *bigCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeBigCellIdentifier forIndexPath:indexPath];
             bigCell.imageURL = [NSURL URLWithString:channel.columnImg];
             bigCell.title = channel.name;
