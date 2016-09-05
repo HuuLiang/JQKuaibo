@@ -19,5 +19,6 @@
 #import "UIView+Loading.h"
 #import "UIColor+FeaturedColor.h"
 #import "UITableView+Separator.h"
+#import "NSObject+DictionaryRepresentation.h"
 
 #endif /* JQKExtensions_h */
