@@ -41,6 +41,8 @@ NSString *const kJQKHTPayConfigName = @"HAITUN";
         return NSStringFromSelector(@selector(mingPayConfig));
     } else if ([parsingName hasSuffix:[@"-" stringByAppendingString:kJQKSPayConfigName]]) {
         return NSStringFromSelector(@selector(spayConfig));
+    } else if ([parsingName hasSuffix:[@"-" stringByAppendingString:kJQKHTPayConfigName]]) {
+        return NSStringFromSelector(@selector(haitunConfig));
     }
     return nil;
 }

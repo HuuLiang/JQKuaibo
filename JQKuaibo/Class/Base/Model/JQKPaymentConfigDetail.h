@@ -20,7 +20,7 @@ extern NSString *const kJQKMingPayConfigName;
 extern NSString *const kJQKSPayConfigName;
 extern NSString *const kJQKHTPayConfigName;
 
-@interface JQKPaymentConfigDetail : NSObject
+@interface JQKPaymentConfigDetail : NSObject <JQKResponseParsable>
 
 @property (nonatomic,retain) JQKIAppPayConfig *iAppPayConfig; //爱贝支付
 @property (nonatomic,retain) JQKVIAPayConfig *viaPayConfig; //首游时空

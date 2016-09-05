@@ -13,7 +13,7 @@ extern NSString *const kJQKAlipayPayConfigName;
 extern NSString *const kJQKUnionPayConfigName;
 extern NSString *const kJQKQQPayConfigName;
 
-@interface JQKPaymentConfigSummary : NSObject
+@interface JQKPaymentConfigSummary : NSObject <JQKResponseParsable>
 
 @property (nonatomic) NSString *wechat;
 @property (nonatomic) NSString *alipay;

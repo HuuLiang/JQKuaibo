@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol LTResponseParsable <NSObject>
+@protocol JQKResponseParsable <NSObject>
 
 @optional
-- (Class)LT_classOfProperty:(NSString *)propName;
-- (NSString *)LT_propertyOfParsing:(NSString *)parsingName;
+- (Class)JQK_classOfProperty:(NSString *)propName;
+- (NSString *)JQK_propertyOfParsing:(NSString *)parsingName;
 
 @end
 

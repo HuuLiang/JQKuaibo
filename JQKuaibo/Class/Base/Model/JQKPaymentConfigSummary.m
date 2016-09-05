@@ -15,7 +15,7 @@ NSString *const kJQKQQPayConfigName = @"QQPAY";
 
 @implementation JQKPaymentConfigSummary
 
-- (NSString *)LT_propertyOfParsing:(NSString *)parsingName {
+- (NSString *)JQK_propertyOfParsing:(NSString *)parsingName {
     NSDictionary *mapping = @{kJQKWeChatPayConfigName:NSStringFromSelector(@selector(wechat)),
                               kJQKAlipayPayConfigName:NSStringFromSelector(@selector(alipay)),
                               kJQKUnionPayConfigName:NSStringFromSelector(@selector(unionpay)),

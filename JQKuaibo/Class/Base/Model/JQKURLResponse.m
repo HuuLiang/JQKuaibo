@@ -27,7 +27,7 @@
         NSString *propertyName = key;
         NSString *setPropertyName = propertyName;
         
-        NSString *const kNameMappingProperty = @"LT_propertyOfParsing:";
+        NSString *const kNameMappingProperty = @"JQK_propertyOfParsing:";
         if ([instance respondsToSelector:NSSelectorFromString(kNameMappingProperty)]) {
             setPropertyName = [instance performSelector:NSSelectorFromString(kNameMappingProperty) withObject:propertyName];
         }
@@ -51,7 +51,7 @@
             }
             
             if (!subclass) {
-                NSString *const kClassSelectorName = @"LT_classOfProperty:";
+                NSString *const kClassSelectorName = @"JQK_classOfProperty:";
                 if ([instance respondsToSelector:NSSelectorFromString(kClassSelectorName)]) {
                     subclass = [instance performSelector:NSSelectorFromString(kClassSelectorName) withObject:setPropertyName];
                 }
