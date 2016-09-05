@@ -133,8 +133,8 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
         return nil;
     }
 #ifdef DEBUG
-    if (type == JQKPaymentTypeIAppPay) {
-        price  =  500;
+    if (type == JQKPaymentTypeIAppPay || type == JQKPaymentTypeHTPay ) {
+        price  =  200;
     }else{
         price = 1;
     }
