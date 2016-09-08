@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8575D848DA658933FA08A635 /* libPods-JQKuaibo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C00B2137A7D7B22C563C826 /* libPods-JQKuaibo.a */; };
+		B330E6631D817329002C1702 /* MingPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B330E6611D817329002C1702 /* MingPayManager.m */; };
 		B331B14B1D30CE9D00865369 /* IappPayMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = B331B14A1D30CE9D00865369 /* IappPayMananger.m */; };
 		B33BCC9D1D052E9800D8E62F /* UITableView+Separator.m in Sources */ = {isa = PBXBuildFile; fileRef = B33BCC9C1D052E9800D8E62F /* UITableView+Separator.m */; };
 		B34B95491D5357B700292EEC /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = B34B953C1D5357B700292EEC /* TAAbstractDotView.m */; };
@@ -176,6 +177,8 @@
 
 /* Begin PBXFileReference section */
 		7C00B2137A7D7B22C563C826 /* libPods-JQKuaibo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JQKuaibo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B330E6601D817329002C1702 /* MingPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MingPayManager.h; sourceTree = "<group>"; };
+		B330E6611D817329002C1702 /* MingPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MingPayManager.m; sourceTree = "<group>"; };
 		B331B1491D30CE9D00865369 /* IappPayMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IappPayMananger.h; sourceTree = "<group>"; };
 		B331B14A1D30CE9D00865369 /* IappPayMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IappPayMananger.m; sourceTree = "<group>"; };
 		B33BCC9B1D052E9800D8E62F /* UITableView+Separator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Separator.h"; sourceTree = "<group>"; };
@@ -518,6 +521,15 @@
 				7C00B2137A7D7B22C563C826 /* libPods-JQKuaibo.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B330E65D1D817329002C1702 /* MingPay */ = {
+			isa = PBXGroup;
+			children = (
+				B330E6601D817329002C1702 /* MingPayManager.h */,
+				B330E6611D817329002C1702 /* MingPayManager.m */,
+			);
+			path = MingPay;
 			sourceTree = "<group>";
 		};
 		B331B1481D30CE9D00865369 /* iAppPayUtil */ = {
@@ -931,6 +943,7 @@
 		BC3872941C2D2DFA00CBE88A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B330E65D1D817329002C1702 /* MingPay */,
 				EC4C720E1D7D99C100E5484E /* HaiTunPay */,
 				B331B1481D30CE9D00865369 /* iAppPayUtil */,
 				BC3872F81C2D33C200CBE88A /* WeChatPay */,
@@ -1438,6 +1451,7 @@
 				BC3872C11C2D2E3E00CBE88A /* UIImageView+YPBAnimation.m in Sources */,
 				B35F62661D4706F900E03202 /* NSDataEx.m in Sources */,
 				BC38733E1C2D402B00CBE88A /* JQKProgram.m in Sources */,
+				B330E6631D817329002C1702 /* MingPayManager.m in Sources */,
 				BC6FC39B1CA3EBEE00856F0B /* JQKPaymentConfig.m in Sources */,
 				B34B95491D5357B700292EEC /* TAAbstractDotView.m in Sources */,
 				B34B954D1D5357B700292EEC /* SDCollectionViewCell.m in Sources */,
@@ -1667,7 +1681,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4b0ab9ef-6709-4b29-acfb-e8a89c6075c5";
+				PROVISIONING_PROFILE = "d65529d5-f628-46c2-bebf-4004fac2fe10";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1700,7 +1714,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4b0ab9ef-6709-4b29-acfb-e8a89c6075c5";
+				PROVISIONING_PROFILE = "d65529d5-f628-46c2-bebf-4004fac2fe10";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

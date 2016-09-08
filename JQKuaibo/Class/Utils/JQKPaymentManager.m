@@ -7,7 +7,6 @@
 //
 
 #import "JQKPaymentManager.h"
-#import "JQKPaymentInfo.h"
 #import "JQKPaymentViewController.h"
 #import "JQKProgram.h"
 #import "JQKPaymentConfigModel.h"
@@ -15,7 +14,7 @@
 #import "WXApi.h"
 #import "WeChatPayQueryOrderRequest.h"
 #import "WeChatPayManager.h"
-
+#import "MingPayManager.h"
 #import "JQKSystemConfigModel.h"
 #import "IappPayMananger.h"
 #import <PayUtil/PayUtil.h>
@@ -199,7 +198,7 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
         }];
         
     } else if (type == JQKPaymentTypeHTPay) {
-        JQKPaymentConfig *config = [JQKPaymentConfig sharedConfig];
+//        JQKPaymentConfig *config = [JQKPaymentConfig sharedConfig];
         [HTPayManager sharedManager].mchId = [JQKPaymentConfig sharedConfig].configDetails.haitunConfig.mchId;
         [HTPayManager sharedManager].key = [JQKPaymentConfig sharedConfig].configDetails.haitunConfig.key;
         [HTPayManager sharedManager].notifyUrl = [JQKPaymentConfig sharedConfig].configDetails.haitunConfig.notifyUrl;
@@ -216,6 +215,20 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
              }
          }];
         
+    } else if (type == JQKPaymentTypeMingPay) {
+        @weakify(self);
+        [MingPayManager sharedManager].mch = [JQKPaymentConfig sharedConfig].configDetails.mingPayConfig.mch;
+        [MingPayManager sharedManager].payUrl = [JQKPaymentConfig sharedConfig].configDetails.mingPayConfig.payUrl;
+        [MingPayManager sharedManager].queryOrderUrl = [JQKPaymentConfig sharedConfig].configDetails.mingPayConfig.queryOrderUrl;
+        paymentInfo.orderId = [[MingPayManager sharedManager] processOrderNo:orderNo];
+        [paymentInfo save];
+        
+        [[MingPayManager sharedManager] payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
+            @strongify(self);
+            if (self.completionHandler) {
+                self.completionHandler(payResult, self.paymentInfo);
+            }
+        }];
     }
     
     else {

@@ -32,6 +32,8 @@ typedef NS_ENUM(NSUInteger, JQKPaymentStatus) {
 @property (nonatomic) NSNumber *paymentResult;
 @property (nonatomic) NSNumber *paymentStatus;
 @property (nonatomic) NSString *reservedData;
+@property (nonatomic) NSString *orderDescription;
+
 // 商户信息
 @property (nonatomic) NSString *appId;
 @property (nonatomic) NSString *mchId;
