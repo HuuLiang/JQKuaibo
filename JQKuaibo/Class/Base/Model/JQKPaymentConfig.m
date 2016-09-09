@@ -54,8 +54,9 @@ static NSString *const kPaymentConfigKeyName = @"JQKkuaibo_payment_config_key_na
                             kJQKIAppPayConfigName:@(JQKPaymentTypeIAppPay),
                             kJQKSPayConfigName:@(JQKPaymentTypeSPay),
                             kJQKMingPayConfigName:@(JQKPaymentTypeMingPay),
-                            kJQKHTPayConfigName:@(JQKPaymentTypeHTPay)};
-    return _paymentTypeMapping;
+                            kJQKHTPayConfigName:@(JQKPaymentTypeHTPay),
+                            kJQKDXTXPayConfigName:@(JQKPaymentTypeDXTXPay)};
+        return _paymentTypeMapping;
 }
 
 - (JQKPaymentType)wechatPaymentType {

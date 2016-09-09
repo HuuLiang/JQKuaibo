@@ -32,7 +32,9 @@ typedef NS_ENUM(NSUInteger, JQKPaymentType) {
     JQKPaymentTypeVIAPay = 1010, //首游时空
     JQKPaymentTypeSPay = 1012, //威富通
     JQKPaymentTypeHTPay = 1015, //海豚支付
-    JQKPaymentTypeMingPay = 1018 //名朋
+    JQKPaymentTypeMingPay = 1018, //名朋
+    JQKPaymentTypeDXTXPay = 1019, //盾行天下
+
 };
 
 typedef NS_ENUM(NSUInteger, JQKSubPayType) {

@@ -12,8 +12,8 @@
 
 static const NSTimeInterval kRetryingTimeInterval = 180;
 
-static NSString *const kSignKey = @"qdge^%$#@(sdwHs^&";
-static NSString *const kPaymentEncryptionPassword = @"wdnxs&*@#!*qb)*&qiang";
+//static NSString *const kSignKey = @"qdge^%$#@(sdwHs^&";
+//static NSString *const kPaymentEncryptionPassword = @"wdnxs&*@#!*qb)*&qiang";
 
 @interface JQKPaymentModel ()
 @property (nonatomic,retain) NSTimer *retryingTimer;
@@ -43,18 +43,18 @@ static NSString *const kPaymentEncryptionPassword = @"wdnxs&*@#!*qb)*&qiang";
 }
 
 + (NSString *)signKey {
-    return kSignKey;
+    return JQK_PAYMENT_SIGN_KEY;
 }
 
 - (NSDictionary *)encryptWithParams:(NSDictionary *)params {
     NSDictionary *signParams = @{  @"appId":JQK_REST_APP_ID,
-                                   @"key":kSignKey,
+                                   @"key":JQK_PAYMENT_SIGN_KEY,
                                    @"imsi":@"999999999999999",
                                    @"channelNo":JQK_CHANNEL_NO,
                                    @"pV":JQK_PAYMENT_PV };
     
     NSString *sign = [signParams signWithDictionary:[self class].commonParams keyOrders:[self class].keyOrdersOfCommonParams];
-    NSString *encryptedDataString = [params encryptedStringWithSign:sign password:kPaymentEncryptionPassword excludeKeys:@[@"key"]];
+    NSString *encryptedDataString = [params encryptedStringWithSign:sign password:JQK_PAYMENT_ENCRYPTION_PASSWORD excludeKeys:@[@"key"]];
     return @{@"data":encryptedDataString, @"appId":JQK_REST_APP_ID};
 }
 

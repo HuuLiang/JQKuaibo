@@ -20,5 +20,6 @@
 #import "UIColor+FeaturedColor.h"
 #import "UITableView+Separator.h"
 #import "NSObject+DictionaryRepresentation.h"
+#import "NSString+crypt.h"
 
 #endif /* JQKExtensions_h */

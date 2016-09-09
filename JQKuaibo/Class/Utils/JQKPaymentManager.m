@@ -10,7 +10,6 @@
 #import "JQKPaymentViewController.h"
 #import "JQKProgram.h"
 #import "JQKPaymentConfigModel.h"
-
 #import "WXApi.h"
 #import "WeChatPayQueryOrderRequest.h"
 #import "WeChatPayManager.h"
@@ -18,7 +17,7 @@
 #import "JQKSystemConfigModel.h"
 #import "IappPayMananger.h"
 #import <PayUtil/PayUtil.h>
-
+#import "DXTXPayManager.h"
 #import "HTPayManager.h"
 
 static NSString *const kAlipaySchemeUrl = @"comjqkuaibo2016appalipayurlscheme";
@@ -158,6 +157,8 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
     paymentInfo.paymentResult = @(PAYRESULT_UNKNOWN);
     paymentInfo.paymentStatus = @(JQKPaymentStatusPaying);
     paymentInfo.reservedData = JQK_PAYMENT_RESERVE_DATA;
+    paymentInfo.orderDescription = @"VIP";
+    paymentInfo.paymentSubtype = @(subType);
     if (type == JQKPaymentTypeWeChatPay) {
 
     }
@@ -229,6 +230,17 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
                 self.completionHandler(payResult, self.paymentInfo);
             }
         }];
+    }else if (type == JQKPaymentTypeDXTXPay && (subType == JQKSubPayTypeWeChat || subType == JQKSubPayTypeAlipay)) {
+        @weakify(self);
+        [DXTXPayManager sharedManager].appKey = [JQKPaymentConfig sharedConfig].configDetails.dxtxPayConfig.appKey;
+        [DXTXPayManager sharedManager].notifyUrl = [JQKPaymentConfig sharedConfig].configDetails.dxtxPayConfig.notifyUrl;
+        [DXTXPayManager sharedManager].waresid = [JQKPaymentConfig sharedConfig].configDetails.dxtxPayConfig.waresid;
+        [[DXTXPayManager sharedManager] payWithPaymentInfo:paymentInfo
+                                         completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo)
+         {
+             @strongify(self);
+             SafelyCallBlock(self.completionHandler, payResult, paymentInfo);
+         }];
     }
     
     else {

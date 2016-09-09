@@ -14,7 +14,7 @@
 #define JQK_CHANNEL_NO           [JQKConfiguration sharedConfig].channelNo
 #define JQK_REST_APP_ID          @"QUBA_2004"
 #define JQK_REST_PV              @113
-#define JQK_PAYMENT_PV           @105
+#define JQK_PAYMENT_PV           @106//106
 #define JQK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd."
 #define JQK_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JQK_REST_APP_ID, JQK_CHANNEL_NO]
 
@@ -64,7 +64,9 @@
 #define JQK_SYSTEM_CONFIG_CONTACT_NAME          @"CONTACT_NAME"
 
 
-
+#define JQK_PAYMENT_ENCRYPTION_PASSWORD @"wdnxs&*@#!*qb)*&qiang"
+#define JQK_PAYMENT_SIGN_KEY            @"qdge^%$#@(sdwHs^&"
+#define JQK_ORDER_QUERY_URL             @"http://phas.ihuiyx.com/pd-has/successOrderIds.json"
 
 #define JQK_UMENG_APP_ID         @"567d010667e58e2c8200223a"
 

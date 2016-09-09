@@ -26,6 +26,7 @@ static NSString *const kPaymentInfoPaymentMchId = @"kuaibov_paymentinfo_paymentm
 static NSString *const kPaymentInfoPaymentSignKey = @"kuaibov_paymentinfo_paymentsignkey_keyname";
 static NSString *const kPaymentInfoPaymentNotifyUrl = @"kuaibov_paymentinfo_paymentnotifyurl_keyname";
 static NSString *const kPaymentInfoOrderDescriptionKeyName = @"kuaibov_paymentinfo_orderdescription_keyname";
+static NSString *const kPaymentInfoPaymentSubtypeTypeKeyName = @"kuaibov_paymentinfo_paymentsubtype_keyname";
 
 @implementation JQKPaymentInfo
 
@@ -56,6 +57,7 @@ static NSString *const kPaymentInfoOrderDescriptionKeyName = @"kuaibov_paymentin
     paymentInfo.notifyUrl = payment[kPaymentInfoPaymentNotifyUrl];
     paymentInfo.signKey = payment[kPaymentInfoPaymentSignKey];
     paymentInfo.orderDescription = payment[kPaymentInfoOrderDescriptionKeyName];
+    paymentInfo.paymentSubtype = payment[kPaymentInfoPaymentSubtypeTypeKeyName];
     return paymentInfo;
 }
 
@@ -77,6 +79,7 @@ static NSString *const kPaymentInfoOrderDescriptionKeyName = @"kuaibov_paymentin
     [payment safelySetObject:self.notifyUrl forKey:kPaymentInfoPaymentNotifyUrl];
     [payment safelySetObject:self.signKey forKey:kPaymentInfoPaymentSignKey];
     [payment safelySetObject:self.orderDescription forKey:kPaymentInfoOrderDescriptionKeyName];
+    [payment safelySetObject:self.paymentSubtype forKey:kPaymentInfoPaymentSubtypeTypeKeyName];
     return payment;
 }
 
