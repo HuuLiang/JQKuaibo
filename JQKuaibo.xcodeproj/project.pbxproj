@@ -66,8 +66,10 @@
 		B38151C11D5C6C3E00E6B7EE /* IapppayAlphaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38151C01D5C6C3D00E6B7EE /* IapppayAlphaKit.framework */; };
 		B38151C31D5C6C4B00E6B7EE /* IapppayAlphaResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B38151C21D5C6C4B00E6B7EE /* IapppayAlphaResource.bundle */; };
 		B38BD92C1D43545B00AA34EA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B38BD92B1D43545B00AA34EA /* libc++.tbd */; };
+		B3CA7A371D8649270068E869 /* DXTXPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3CA7A321D8649270068E869 /* DXTXPayManager.m */; };
+		B3CA7A381D8649270068E869 /* libDXTXPaySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3CA7A351D8649270068E869 /* libDXTXPaySDK.a */; };
+		B3CA7A391D8649270068E869 /* SPaySDKResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3CA7A361D8649270068E869 /* SPaySDKResource.bundle */; };
 		B3EC58A61CF59AE900AC74F4 /* JQKLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */; };
-		B3FEBD381D82BA5600E11407 /* DXTXPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEBD371D82BA5600E11407 /* DXTXPayManager.m */; };
 		B3FEBD3B1D82BB7900E11407 /* JQKOrderWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEBD3A1D82BB7900E11407 /* JQKOrderWebViewController.m */; };
 		B3FEBD3E1D82BBC900E11407 /* JQKOrderQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEBD3D1D82BBC900E11407 /* JQKOrderQueryModel.m */; };
 		B3FEDAD61D53293B007CBB55 /* JQKHomeBigCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEDAD51D53293B007CBB55 /* JQKHomeBigCell.m */; };
@@ -279,10 +281,13 @@
 		B38151C01D5C6C3D00E6B7EE /* IapppayAlphaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayAlphaKit.framework; sourceTree = "<group>"; };
 		B38151C21D5C6C4B00E6B7EE /* IapppayAlphaResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayAlphaResource.bundle; sourceTree = "<group>"; };
 		B38BD92B1D43545B00AA34EA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		B3CA7A311D8649270068E869 /* DXTXPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTXPayManager.h; sourceTree = "<group>"; };
+		B3CA7A321D8649270068E869 /* DXTXPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTXPayManager.m; sourceTree = "<group>"; };
+		B3CA7A341D8649270068E869 /* PayuPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayuPlugin.h; sourceTree = "<group>"; };
+		B3CA7A351D8649270068E869 /* libDXTXPaySDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDXTXPaySDK.a; sourceTree = "<group>"; };
+		B3CA7A361D8649270068E869 /* SPaySDKResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SPaySDKResource.bundle; sourceTree = "<group>"; };
 		B3EC58A41CF59AE900AC74F4 /* JQKLaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKLaunchView.h; sourceTree = "<group>"; };
 		B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKLaunchView.m; sourceTree = "<group>"; };
-		B3FEBD361D82BA5600E11407 /* DXTXPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTXPayManager.h; sourceTree = "<group>"; };
-		B3FEBD371D82BA5600E11407 /* DXTXPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTXPayManager.m; sourceTree = "<group>"; };
 		B3FEBD391D82BB7900E11407 /* JQKOrderWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKOrderWebViewController.h; sourceTree = "<group>"; };
 		B3FEBD3A1D82BB7900E11407 /* JQKOrderWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKOrderWebViewController.m; sourceTree = "<group>"; };
 		B3FEBD3C1D82BBC900E11407 /* JQKOrderQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKOrderQueryModel.h; sourceTree = "<group>"; };
@@ -481,6 +486,7 @@
 				EC4C720D1D7D99AA00E5484E /* libHaiTunPay.a in Frameworks */,
 				EC87542F1D2B8B4300EC6DB5 /* SystemConfiguration.framework in Frameworks */,
 				EC87542D1D2B8B3900EC6DB5 /* CoreMotion.framework in Frameworks */,
+				B3CA7A381D8649270068E869 /* libDXTXPaySDK.a in Frameworks */,
 				EC87541E1D2B894100EC6DB5 /* AlipaySDK.framework in Frameworks */,
 				BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */,
 				BC38730E1C2D3B7100CBE88A /* libz.tbd in Frameworks */,
@@ -712,13 +718,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		B3FEBD351D82BA5600E11407 /* DunXingTianXia */ = {
+		B3CA7A301D8649270068E869 /* DunXingTianXia */ = {
 			isa = PBXGroup;
 			children = (
-				B3FEBD361D82BA5600E11407 /* DXTXPayManager.h */,
-				B3FEBD371D82BA5600E11407 /* DXTXPayManager.m */,
+				B3CA7A311D8649270068E869 /* DXTXPayManager.h */,
+				B3CA7A321D8649270068E869 /* DXTXPayManager.m */,
+				B3CA7A331D8649270068E869 /* include */,
+				B3CA7A351D8649270068E869 /* libDXTXPaySDK.a */,
+				B3CA7A361D8649270068E869 /* SPaySDKResource.bundle */,
 			);
 			path = DunXingTianXia;
+			sourceTree = "<group>";
+		};
+		B3CA7A331D8649270068E869 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				B3CA7A341D8649270068E869 /* PayuPlugin.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		B3FEDAD71D532FD6007CBB55 /* View */ = {
@@ -965,7 +982,7 @@
 		BC3872941C2D2DFA00CBE88A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				B3FEBD351D82BA5600E11407 /* DunXingTianXia */,
+				B3CA7A301D8649270068E869 /* DunXingTianXia */,
 				B330E65D1D817329002C1702 /* MingPay */,
 				EC4C720E1D7D99C100E5484E /* HaiTunPay */,
 				B331B1481D30CE9D00865369 /* iAppPayUtil */,
@@ -1363,6 +1380,7 @@
 				B35F62591D4706F900E03202 /* btn7.png in Resources */,
 				B35F625C1D4706F900E03202 /* seperator.png in Resources */,
 				B35F62571D4706F900E03202 /* btn5.png in Resources */,
+				B3CA7A391D8649270068E869 /* SPaySDKResource.bundle in Resources */,
 				B35F625B1D4706F900E03202 /* btn9.png in Resources */,
 				B35F62551D4706F900E03202 /* btn2.png in Resources */,
 				B35F625E1D4706F900E03202 /* Config.txt in Resources */,
@@ -1461,7 +1479,6 @@
 				BC38727E1C2D299D00CBE88A /* JQKBaseViewController.m in Sources */,
 				BC6116D71C8ED17700A66155 /* JQKMovieCell.m in Sources */,
 				B35BB6431D1A9F9E003CF5B6 /* DBTableVersion.m in Sources */,
-				B3FEBD381D82BA5600E11407 /* DXTXPayManager.m in Sources */,
 				BC2C027B1C2E5F5A00D10677 /* JQKHotVideoCell.m in Sources */,
 				B35F62651D4706F900E03202 /* MD5DataSigner.m in Sources */,
 				B35BB6351D1A9E2D003CF5B6 /* NSObject+DictionaryRepresentation.m in Sources */,
@@ -1520,6 +1537,7 @@
 				BC3873041C2D33C200CBE88A /* WXUtil.mm in Sources */,
 				BC3873441C2D402B00CBE88A /* JQKVideo.m in Sources */,
 				BC3872B81C2D2E3E00CBE88A /* NSMutableDictionary+SafeCoding.m in Sources */,
+				B3CA7A371D8649270068E869 /* DXTXPayManager.m in Sources */,
 				BC3872C21C2D2E3E00CBE88A /* UIScrollView+Refresh.m in Sources */,
 				BC3873091C2D38D000CBE88A /* JQKErrorHandler.m in Sources */,
 				B35BB6501D1A9FCA003CF5B6 /* JQKTabStatsModel.m in Sources */,
@@ -1704,10 +1722,11 @@
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/SPaySDK",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/iAppPay",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/HTPay",
+					"$(PROJECT_DIR)/JQKuaibo/Class/Utils/DunXingTianXia",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4b0ab9ef-6709-4b29-acfb-e8a89c6075c5";
+				PROVISIONING_PROFILE = "d65529d5-f628-46c2-bebf-4004fac2fe10";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1737,6 +1756,7 @@
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/SPaySDK",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/iAppPay",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/HTPay",
+					"$(PROJECT_DIR)/JQKuaibo/Class/Utils/DunXingTianXia",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";

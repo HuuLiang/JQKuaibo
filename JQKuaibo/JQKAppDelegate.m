@@ -19,6 +19,7 @@
 #import "JQKMovieViewController.h"
 #import "JQKLaunchView.h"
 #import "JQKMinViewController.h"
+#import "PayuPlugin.h"
 
 @interface JQKAppDelegate ()<UITabBarControllerDelegate>
 
@@ -223,12 +224,7 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
- 
-    [[JQKPaymentManager sharedManager] applicationWillEnterForeground];
-    //    if (![JQKUtil isPaid]) {
-    //        [[JQKPaymentManager sharedManager] checkPayment];
-    //    }
+    [[PayuPlugin defaultPlugin] applicationWillEnterForeground:application];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

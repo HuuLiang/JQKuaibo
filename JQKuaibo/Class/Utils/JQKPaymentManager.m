@@ -21,8 +21,8 @@
 #import "HTPayManager.h"
 
 static NSString *const kAlipaySchemeUrl = @"comjqkuaibo2016appalipayurlscheme";
-
 static NSString *const kIappPaySchemeUrl =@"comjqkuaibo2016appiaapayurlscheme";
+static NSString *const kDxtxSchemeUrl = @"comjqkuaibo2016dxtxpayurlscheme";
 
 @interface JQKPaymentManager () <WXApiDelegate,stringDelegate>//
 @property (nonatomic,retain) JQKPaymentInfo *paymentInfo;
@@ -111,9 +111,9 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
         [[IappPayMananger sharedMananger] handleOpenURL:url];
     } else if ([url.absoluteString rangeOfString:kAlipaySchemeUrl].location == 0) {
         [[PayUitls getIntents] paytoAli:url];
+    } else if ([url.absoluteString rangeOfString:kDxtxSchemeUrl].location == 0){
+        [[DXTXPayManager sharedManager] handleOpenURL:url];
     }
-    //    [[PayUitls getIntents] paytoAli:url];
-    //    [[IappPayMananger sharedMananger] handleOpenURL:url];
 }
 
 - (JQKPaymentInfo *)startPaymentWithType:(JQKPaymentType)type
@@ -131,15 +131,15 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
         return nil;
     }
 #ifdef DEBUG
-    if (type == JQKPaymentTypeIAppPay || type == JQKPaymentTypeHTPay ) {
-        price  =  200;
+    if (type == JQKPaymentTypeVIAPay) {
+        price  =  1;
     }else{
-        price = 1;
+        price = 200;
     }
 #endif
-//    price = 200;
+//    price = 3000;
     NSString *channelNo = JQK_CHANNEL_NO;
-    channelNo = [channelNo substringFromIndex:channelNo.length-14];
+    channelNo = [channelNo substringFromIndex:channelNo.length-15];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
     NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
     
@@ -235,6 +235,7 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
         [DXTXPayManager sharedManager].appKey = [JQKPaymentConfig sharedConfig].configDetails.dxtxPayConfig.appKey;
         [DXTXPayManager sharedManager].notifyUrl = [JQKPaymentConfig sharedConfig].configDetails.dxtxPayConfig.notifyUrl;
         [DXTXPayManager sharedManager].waresid = [JQKPaymentConfig sharedConfig].configDetails.dxtxPayConfig.waresid;
+        [DXTXPayManager sharedManager].urlScheme = kDxtxSchemeUrl;
         [[DXTXPayManager sharedManager] payWithPaymentInfo:paymentInfo
                                          completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo)
          {
