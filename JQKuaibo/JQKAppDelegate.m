@@ -224,12 +224,12 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    [[PayuPlugin defaultPlugin] applicationWillEnterForeground:application];
+     [[PayuPlugin defaultPlugin] applicationWillEnterForeground:application];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

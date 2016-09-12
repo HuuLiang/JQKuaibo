@@ -53,19 +53,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>alipay</string>
-		<string>wechat</string>
-	</array>
-	<key>LSApplicationQueriesSchemes - 2</key>
-	<array>
-		<string>alipay</string>
-		<string>wechat</string>
-		<string>alipayqr</string>
-		<string>weixin</string>
-		<string>mqq</string>
-	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -86,6 +73,14 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>alipay</string>
+		<string>wechat</string>
+		<string>alipayqr</string>
+		<string>weixin</string>
+		<string>mqq</string>
 	</array>
 </dict>
 </plist>
