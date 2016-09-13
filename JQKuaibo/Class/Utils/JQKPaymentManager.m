@@ -137,7 +137,7 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
         price = 200;
     }
 #endif
-//    price = 3000;
+//    price = 1000;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-15];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
