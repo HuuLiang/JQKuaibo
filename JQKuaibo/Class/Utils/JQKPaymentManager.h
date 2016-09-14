@@ -16,7 +16,7 @@ typedef void (^JQKPaymentCompletionHandler)(PAYRESULT payResult, JQKPaymentInfo 
 
 + (instancetype)sharedManager;
 
-- (void)setup;
+- (void)setupWithCompletionHandler:(JQKCompletionHandler)handler;
 //- (BOOL)startPaymentWithType:(JQKPaymentType)type
 //                     subType:(JQKPaymentType)subType
 //                       price:(NSUInteger)price

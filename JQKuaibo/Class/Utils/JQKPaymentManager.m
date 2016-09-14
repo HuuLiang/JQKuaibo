@@ -13,11 +13,11 @@
 #import "WXApi.h"
 #import "WeChatPayQueryOrderRequest.h"
 #import "WeChatPayManager.h"
-#import "MingPayManager.h"
+//#import "MingPayManager.h"
 #import "JQKSystemConfigModel.h"
 #import "IappPayMananger.h"
 #import <PayUtil/PayUtil.h>
-#import "DXTXPayManager.h"
+//#import "DXTXPayManager.h"
 #import "HTPayManager.h"
 
 static NSString *const kAlipaySchemeUrl = @"comjqkuaibo2016appalipayurlscheme";
@@ -51,16 +51,15 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
     return _sharedManager;
 }
 
-- (void)setup {
-    
+- (void)setupWithCompletionHandler:(JQKCompletionHandler)handler {
     [[PayUitls getIntents] initSdk];
     [paySender getIntents].delegate = self;
+    
     [[JQKPaymentConfigModel sharedModel] fetchConfigWithCompletionHandler:^(BOOL success, id obj) {
-        
         if (success) {
-            JQKPaymentConfig *config = obj;
-            [[IappPayMananger sharedMananger] setPayWithAppId:config.configDetails.iAppPayConfig.appid mACID:nil];
+            handler(success,obj);
         }
+        
     }];
     [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;
     
@@ -84,8 +83,8 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
              }
          } error:nil];
     }
-    
 }
+
 
 - (JQKPaymentType)wechatPaymentType {
     return [JQKPaymentConfig sharedConfig].wechatPaymentType;
@@ -112,7 +111,7 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
     } else if ([url.absoluteString rangeOfString:kAlipaySchemeUrl].location == 0) {
         [[PayUitls getIntents] paytoAli:url];
     } else if ([url.absoluteString rangeOfString:kDxtxSchemeUrl].location == 0){
-        [[DXTXPayManager sharedManager] handleOpenURL:url];
+//        [[DXTXPayManager sharedManager] handleOpenURL:url];
     }
 }
 
@@ -137,7 +136,7 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
         price = 200;
     }
 #endif
-//    price = 1000;
+//    price = 200;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-15];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
@@ -199,50 +198,41 @@ typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
         }];
         
     } else if (type == JQKPaymentTypeHTPay) {
-//        JQKPaymentConfig *config = [JQKPaymentConfig sharedConfig];
-        [HTPayManager sharedManager].mchId = [JQKPaymentConfig sharedConfig].configDetails.haitunConfig.mchId;
-        [HTPayManager sharedManager].key = [JQKPaymentConfig sharedConfig].configDetails.haitunConfig.key;
-        [HTPayManager sharedManager].notifyUrl = [JQKPaymentConfig sharedConfig].configDetails.haitunConfig.notifyUrl;
-        
         @weakify(self);
-        [[HTPayManager sharedManager] payWithPaymentInfo:paymentInfo
-                                       completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo)
-         {
-             @strongify(self);
-             //             [self onPaymentResult:payResult withPaymentInfo:paymentInfo];
-             
-             if (self.completionHandler) {
-                 self.completionHandler(payResult, self.paymentInfo);
-             }
-         }];
-        
-    } else if (type == JQKPaymentTypeMingPay) {
-        @weakify(self);
-        [MingPayManager sharedManager].mch = [JQKPaymentConfig sharedConfig].configDetails.mingPayConfig.mch;
-        [MingPayManager sharedManager].payUrl = [JQKPaymentConfig sharedConfig].configDetails.mingPayConfig.payUrl;
-        [MingPayManager sharedManager].queryOrderUrl = [JQKPaymentConfig sharedConfig].configDetails.mingPayConfig.queryOrderUrl;
-        paymentInfo.orderId = [[MingPayManager sharedManager] processOrderNo:orderNo];
-        [paymentInfo save];
-        
-        [[MingPayManager sharedManager] payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
+        [[HTPayManager sharedManager] payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
             @strongify(self);
             if (self.completionHandler) {
-                self.completionHandler(payResult, self.paymentInfo);
+                SafelyCallBlock(self.completionHandler,payResult,paymentInfo);
             }
         }];
-    }else if (type == JQKPaymentTypeDXTXPay && (subType == JQKSubPayTypeWeChat || subType == JQKSubPayTypeAlipay)) {
-        @weakify(self);
-        [DXTXPayManager sharedManager].appKey = [JQKPaymentConfig sharedConfig].configDetails.dxtxPayConfig.appKey;
-        [DXTXPayManager sharedManager].notifyUrl = [JQKPaymentConfig sharedConfig].configDetails.dxtxPayConfig.notifyUrl;
-        [DXTXPayManager sharedManager].waresid = [JQKPaymentConfig sharedConfig].configDetails.dxtxPayConfig.waresid;
-        [DXTXPayManager sharedManager].urlScheme = kDxtxSchemeUrl;
-        [[DXTXPayManager sharedManager] payWithPaymentInfo:paymentInfo
-                                         completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo)
-         {
-             @strongify(self);
-             SafelyCallBlock(self.completionHandler, payResult, paymentInfo);
-         }];
     }
+//    else if (type == JQKPaymentTypeMingPay) {
+//        @weakify(self);
+//        [MingPayManager sharedManager].mch = [JQKPaymentConfig sharedConfig].configDetails.mingPayConfig.mch;
+//        [MingPayManager sharedManager].payUrl = [JQKPaymentConfig sharedConfig].configDetails.mingPayConfig.payUrl;
+//        [MingPayManager sharedManager].queryOrderUrl = [JQKPaymentConfig sharedConfig].configDetails.mingPayConfig.queryOrderUrl;
+//        paymentInfo.orderId = [[MingPayManager sharedManager] processOrderNo:orderNo];
+//        [paymentInfo save];
+//        
+//        [[MingPayManager sharedManager] payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
+//            @strongify(self);
+//            if (self.completionHandler) {
+//                self.completionHandler(payResult, self.paymentInfo);
+//            }
+//        }];
+//    }else if (type == JQKPaymentTypeDXTXPay && (subType == JQKSubPayTypeWeChat || subType == JQKSubPayTypeAlipay)) {
+//        @weakify(self);
+//        [DXTXPayManager sharedManager].appKey = [JQKPaymentConfig sharedConfig].configDetails.dxtxPayConfig.appKey;
+//        [DXTXPayManager sharedManager].notifyUrl = [JQKPaymentConfig sharedConfig].configDetails.dxtxPayConfig.notifyUrl;
+//        [DXTXPayManager sharedManager].waresid = [JQKPaymentConfig sharedConfig].configDetails.dxtxPayConfig.waresid;
+//        [DXTXPayManager sharedManager].urlScheme = kDxtxSchemeUrl;
+//        [[DXTXPayManager sharedManager] payWithPaymentInfo:paymentInfo
+//                                         completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo)
+//         {
+//             @strongify(self);
+//             SafelyCallBlock(self.completionHandler, payResult, paymentInfo);
+//         }];
+//    }
     
     else {
         success = NO;

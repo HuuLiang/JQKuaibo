@@ -47,7 +47,8 @@ static NSString *const kSuccessResponse = @"SUCCESS";
                              @"appV":[JQKUtil appVersion],
                              @"appVN":@"",
                              @"ccn":JQK_PACKAGE_CERTIFICATE,
-                             @"operator":[JQKNetworkInfo sharedInfo].carriarName ?: @""
+                             @"operator":[JQKNetworkInfo sharedInfo].carriarName ?: @"",
+                             @"systemVersion":[UIDevice currentDevice].systemVersion
                              };
     
     BOOL success = [self requestURLPath:JQK_ACTIVATE_URL withParams:params responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage) {
