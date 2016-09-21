@@ -242,6 +242,7 @@
     }
     
 #endif
+//    price = 200;
     
     QBPaymentInfo *paymentInfo = [[QBPaymentInfo alloc] init];
     
@@ -251,7 +252,7 @@
     NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
     
     paymentInfo.orderId = orderNo;
-    paymentInfo.orderPrice = price;
+    paymentInfo.orderPrice = price*100;
     paymentInfo.paymentType = paymentType;
     paymentInfo.paymentSubType = paymentSubType;
     paymentInfo.payPointType = payPointType;
