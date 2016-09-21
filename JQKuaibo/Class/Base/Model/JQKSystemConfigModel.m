@@ -50,18 +50,18 @@
     @weakify(self);
     BOOL success = [self requestURLPath:JQK_SYSTEM_CONFIG_URL
                              withParams:@{@"type" : @([JQKUtil deviceType])}
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         
-                        if (respStatus == JQKURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             JQKSystemConfigResponse *resp = self.response;
                             
                             [resp.confis enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                 JQKSystemConfig *config = obj;
                                 
                                 if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_PAY_AMOUNT]) {
-                                    self.payAmount = config.value.doubleValue / 100.;
+                                    self.payAmount = config.value.integerValue / 100.;
                                 } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_PAYMENT_TOP_IMAGE]) {
                                     self.channelTopImage = config.value;
                                 } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_STARTUP_INSTALL]) {
@@ -98,7 +98,7 @@
                         }
                         
                         if (handler) {
-                            handler(respStatus==JQKURLResponseSuccess);
+                            handler(respStatus==QBURLResponseSuccess);
                         }
                     }];
     return success;

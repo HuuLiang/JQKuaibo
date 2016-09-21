@@ -29,30 +29,20 @@
 			<string>alipayscheme</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>comjqkuaibo2016appalipayurlscheme</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>comjqkuaibo2016appiaapayurlscheme</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>dxtx</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>comjqkuaibo2016dxtxpayurlscheme</string>
+				<string>comjqkuaibov22016appalipayurlscheme</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>alipay</string>
+		<string>wechat</string>
+		<string>alipayqr</string>
+		<string>weixin</string>
+		<string>mqq</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -73,14 +63,6 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>alipay</string>
-		<string>wechat</string>
-		<string>alipayqr</string>
-		<string>weixin</string>
-		<string>mqq</string>
 	</array>
 </dict>
 </plist>

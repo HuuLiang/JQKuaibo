@@ -15,7 +15,7 @@
 #import "UIScrollView+Refresh.h"
 #import "UIColor+hexColor.h"
 #import "NSMutableDictionary+SafeCoding.h"
-#import "NSDictionary+JQKSign.h"
+//#import "NSDictionary+JQKSign.h"
 #import "UIView+Loading.h"
 #import "UIColor+FeaturedColor.h"
 #import "UITableView+Separator.h"

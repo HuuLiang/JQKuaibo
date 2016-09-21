@@ -6,17 +6,17 @@
 //  Copyright (c) 2015年 kuaibov. All rights reserved.
 //
 
-#import "JQKEncryptedURLRequest.h"
+#import "QBEncryptedURLRequest.h"
 #import "JQKChannel.h"
 
-@interface JQKChannelResponse : JQKURLResponse
+@interface JQKChannelResponse : QBURLResponse
 @property (nonatomic,retain) NSMutableArray<JQKChannel> *columnList;
 
 @end
 
 typedef void (^JQKFetchChannelsCompletionHandler)(BOOL success, NSArray<JQKChannel *> *channels);
 
-@interface JQKChannelModel : JQKEncryptedURLRequest
+@interface JQKChannelModel : QBEncryptedURLRequest
 
 @property (nonatomic,retain,readonly) NSArray <JQKChannel*>*fetchedChannels;
 

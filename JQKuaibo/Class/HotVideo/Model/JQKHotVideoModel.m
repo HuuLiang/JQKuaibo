@@ -20,18 +20,18 @@
     @weakify(self);
     BOOL ret = [self requestURLPath:JQK_HOT_VIDEO_URL
                          withParams:@{@"page":@(pageNo)}
-                    responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                    responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
     {
         @strongify(self);
         
         JQKVideos *videos;
-        if (respStatus == JQKURLResponseSuccess) {
+        if (respStatus == QBURLResponseSuccess) {
             videos = self.response;
             self.fetchedVideos = videos;
         }
         
         if (handler) {
-            handler(respStatus == JQKURLResponseSuccess, videos);
+            handler(respStatus == QBURLResponseSuccess, videos);
         }
     }];
     return ret;

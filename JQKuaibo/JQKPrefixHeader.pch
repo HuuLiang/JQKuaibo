@@ -20,6 +20,7 @@
 #import <BlocksKit+UIKit.h>
 #import <Masonry.h>
 #import <UIImageView+WebCache.h>
+#import <QBPaymentInfo.h>
 #import "JQKCommonDef.h"
 #import "JQKConfig.h"
 #import "RACEXTScope.h"
@@ -29,10 +30,10 @@
 #import "JQKChannels.h"
 #import "JQKErrorHandler.h"
 #import "JQKHudManager.h"
-#import "JQKPaymentInfo.h"
+
 
 #import "DBHandler.h"
-#import "JQKPaymentManager.h"
+#import <QBPaymentManager.h>
 #import "JQKNetworkInfo.h"
 #import "JQKStatsManager.h"
 //#import "PayUtils.h"

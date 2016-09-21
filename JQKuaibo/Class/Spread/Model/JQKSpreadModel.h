@@ -6,7 +6,7 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKEncryptedURLRequest.h"
+#import "QBEncryptedURLRequest.h"
 //#import "JQKProgram.h"
 
 @interface JQKAppProgram : NSObject
@@ -22,7 +22,7 @@
 @end
 
 
-@interface JQKAppSpreadResponse : JQKURLResponse
+@interface JQKAppSpreadResponse : QBURLResponse
 @property (nonatomic) NSString *columnDesc;
 @property (nonatomic) NSNumber *columnId;
 @property (nonatomic) NSString *columnImg;
@@ -33,7 +33,7 @@
 @property (nonatomic,retain)NSArray <JQKAppProgram*>*programList;
 @end
 
-@interface JQKSpreadModel : JQKEncryptedURLRequest
+@interface JQKSpreadModel : QBEncryptedURLRequest
 
 @property (nonatomic,retain) JQKAppSpreadResponse *appSpreadResponse;
 - (BOOL)fetchAppSpreadWithCompletionHandler:(JQKCompletionHandler)handler;

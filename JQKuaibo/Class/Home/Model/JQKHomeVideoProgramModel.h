@@ -6,14 +6,14 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKEncryptedURLRequest.h"
+#import "QBEncryptedURLRequest.h"
 #import "JQKProgram.h"
 
-@interface JQKHomeProgramResponse : JQKURLResponse
+@interface JQKHomeProgramResponse : QBURLResponse
 @property (nonatomic,retain) NSArray<JQKChannels*> *columnList;
 @end
 
-@interface JQKHomeVideoProgramModel : JQKEncryptedURLRequest
+@interface JQKHomeVideoProgramModel : QBEncryptedURLRequest
 
 @property (nonatomic,retain,readonly) NSArray<JQKChannels *> *fetchedPrograms;
 @property (nonatomic,retain,readonly) NSArray<JQKProgram *> *fetchedBannerPrograms;

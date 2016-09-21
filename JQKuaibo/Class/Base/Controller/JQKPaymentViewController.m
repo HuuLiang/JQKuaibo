@@ -9,12 +9,11 @@
 #import "JQKPaymentViewController.h"
 #import "JQKPaymentPopView.h"
 #import "JQKSystemConfigModel.h"
-#import "JQKPaymentModel.h"
 #import <objc/runtime.h>
 #import "JQKProgram.h"
-#import "WeChatPayManager.h"
-#import "JQKPaymentInfo.h"
-#import "JQKPaymentConfig.h"
+//#import "WeChatPayManager.h"
+//#import "JQKPaymentInfo.h"
+//#import "JQKPaymentConfig.h"
 
 @interface JQKPaymentViewController ()
 @property (nonatomic,retain) JQKPaymentPopView *popView;
@@ -48,7 +47,7 @@
     }
     
     @weakify(self);
-    void (^Pay)(JQKPaymentType type, JQKSubPayType subType) = ^(JQKPaymentType type, JQKSubPayType subType)
+    void (^Pay)(QBPayType type, QBPaySubType subType) = ^(QBPayType type, QBPaySubType subType)
     {
         @strongify(self);
         if (!self.payAmount) {
@@ -70,38 +69,38 @@
     
     
     
-//    JQKPaymentType cardType = [[JQKPaymentManager sharedManager] cardPayPaymentType];
+    //    JQKPaymentType cardType = [[JQKPaymentManager sharedManager] cardPayPaymentType];
     
     
-    JQKPaymentType wechatPaymentType = [[JQKPaymentManager sharedManager] wechatPaymentType];
+    QBPayType wechatPaymentType = [[QBPaymentManager sharedManager] wechatPaymentType];
     if (wechatPaymentType != JQKPaymentTypeNone) {
         //微信支付
         [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon-1"] title:@"微信支付" subtitle:nil backgroundColor:[UIColor colorWithHexString:@"#05c30b"] action:^(id sender) {
-            Pay(wechatPaymentType, JQKSubPayTypeWeChat);
+            Pay(wechatPaymentType, QBPaySubTypeWeChat);
         }];
     }
-    JQKPaymentType aliPaymentType = [[JQKPaymentManager sharedManager] alipayPaymentType];
+    QBPayType aliPaymentType = [[QBPaymentManager sharedManager] alipayPaymentType];
     if (aliPaymentType != JQKPaymentTypeNone) {
         //支付宝支付
         [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon-1"] title:@"支付宝" subtitle:nil backgroundColor:[UIColor colorWithHexString:@"#02a0e9"] action:^(id sender) {
-            Pay(aliPaymentType, JQKSubPayTypeAlipay);
+            Pay(aliPaymentType, QBPaySubTypeAlipay);
         }];
         
     }
-    JQKPaymentType qqPaymentType = [[JQKPaymentManager sharedManager] qqPaymentType];
+    QBPayType qqPaymentType = [[QBPaymentManager sharedManager] qqPaymentType];
     if (qqPaymentType != JQKPaymentTypeNone) {
         [_popView addPaymentWithImage:[UIImage imageNamed:@"qq_icon"] title:@"QQ钱包" subtitle:nil backgroundColor:[UIColor redColor] action:^(id sender) {
-            Pay(qqPaymentType, JQKSubPayTypeQQ);
+            Pay(qqPaymentType, QBPaySubTypeQQ);
         }];
     }
     
-//    if (cardType != JQKPaymentTypeNone) {
-//        
-//        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon"] title:@"购卡支付" subtitle:@"支持微信和支付宝" backgroundColor:[UIColor darkPink] action:^(id obj) {
-//            Pay(cardType,JQKSubPayTypeUnknown);
-//        }];
-//        
-//    }
+    //    if (cardType != JQKPaymentTypeNone) {
+    //        
+    //        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon"] title:@"购卡支付" subtitle:@"支持微信和支付宝" backgroundColor:[UIColor darkPink] action:^(id obj) {
+    //            Pay(cardType,JQKSubPayTypeUnknown);
+    //        }];
+    //        
+    //    }
     
     
     //    if (([JQKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & JQKIAppPayTypeWeChat)
@@ -197,9 +196,9 @@
 }
 
 - (void)setPayAmount:(NSNumber *)payAmount {
-//#ifdef DEBUG
-//    payAmount = @(0.01);
-//#endif
+    //#ifdef DEBUG
+    //    payAmount = @(0.01);
+    //#endif
     _payAmount = payAmount;
     self.popView.showPrice = payAmount;
 }
@@ -221,22 +220,70 @@
 
 - (void)payForProgram:(JQKProgram *)program
                 price:(double)price
-          paymentType:(JQKPaymentType)paymentType
-       paymentSubType:(JQKSubPayType)paymentSubType
+          paymentType:(QBPayType)paymentType
+       paymentSubType:(QBPaySubType)paymentSubType
 {
     @weakify(self);
-    JQKPaymentInfo *paymentInfo = [[JQKPaymentManager sharedManager] startPaymentWithType:paymentType
-                                                                                  subType:paymentSubType
-                                                                                    price:price*100
-                                                                               forProgram:program
-                                                                          programLocation:_programLocationToPayFor
-                                                                                inChannel:_channelToPayFor
-                                   
-                                                                        completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
-                                                                            @strongify(self);
-                                                                            [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
-                                                                        }];
-    if (paymentInfo) {
+    QBPayPointType payPointType = JQKPayPointTypeVIP;
+    if (price == 0) {
+        [[JQKHudManager manager] showHudWithText:@"无法获取价格信息,请检查网络配置！"];
+        return ;
+    }
+    
+#ifdef DEBUG
+    if (paymentType == QBPayTypeIAppPay || paymentType == QBPayTypeHTPay || paymentType == QBPayTypeWeiYingPay) {
+        price = 200;
+    } else if (paymentType == QBPayTypeMingPay || paymentType == QBPayTypeDXTXPay) {
+        price = 100;
+    } else if (paymentType == QBPayTypeVIAPay) {
+        price = 1000;
+    } else {
+        price = payPointType ==  1;
+    }
+    
+#endif
+    
+    QBPaymentInfo *paymentInfo = [[QBPaymentInfo alloc] init];
+    
+    NSString *channelNo = JQK_CHANNEL_NO;
+    channelNo = [channelNo substringFromIndex:channelNo.length-14];
+    NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
+    NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
+    
+    paymentInfo.orderId = orderNo;
+    paymentInfo.orderPrice = price;
+    paymentInfo.paymentType = paymentType;
+    paymentInfo.paymentSubType = paymentSubType;
+    paymentInfo.payPointType = payPointType;
+    paymentInfo.paymentTime = [JQKUtil currentTimeString];
+    paymentInfo.paymentResult = QBPayResultUnknown;
+    paymentInfo.paymentStatus = QBPayStatusPaying;
+    paymentInfo.reservedData = JQK_PAYMENT_RESERVE_DATA;
+    
+    NSString *tradeName = @"VIP会员";
+    NSString *contactName = [JQKSystemConfigModel sharedModel].contactName;
+    if (paymentType == QBPayTypeMingPay) {
+        paymentInfo.orderDescription = contactName ?: @"VIP";
+    } else {
+        paymentInfo.orderDescription = contactName.length > 0 ? [tradeName stringByAppendingFormat:@"(%@)", contactName] : tradeName;
+    }
+    
+    paymentInfo.contentId = self.programToPayFor.programId;
+    paymentInfo.contentType = self.programToPayFor.type;
+    paymentInfo.contentLocation = @(self.programLocationToPayFor+1);
+    paymentInfo.columnId = self.channelToPayFor.realColumnId;
+    paymentInfo.columnType = self.channelToPayFor.type;
+    paymentInfo.userId = [JQKUtil userId];
+    
+    BOOL success = [[QBPaymentManager sharedManager] startPaymentWithPaymentInfo:paymentInfo
+                                                               completionHandler:^(QBPayResult payResult, QBPaymentInfo *paymentInfo)
+                    {
+                        @strongify(self);
+                        [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
+                    }];
+    
+    
+    if (success) {
         [[JQKStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo forPayAction:JQKStatsPayActionGoToPay andTabIndex:[JQKUtil currentTabPageIndex] subTabIndex:[JQKUtil currentSubTabPageIndex]];
     }
     
@@ -248,30 +295,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)notifyPaymentResult:(PAYRESULT)result withPaymentInfo:(JQKPaymentInfo *)paymentInfo {
-    if (result == PAYRESULT_SUCCESS && [JQKUtil successfulPaymentInfo]) {
-        return ;
-    }
+- (void)notifyPaymentResult:(QBPayResult)result withPaymentInfo:(QBPaymentInfo *)paymentInfo {
     
-    NSDateFormatter *dateFormmater = [[NSDateFormatter alloc] init];
-    [dateFormmater setDateFormat:kDefaultDateFormat];
-    
-    paymentInfo.paymentResult = @(result);
-    paymentInfo.paymentStatus = @(JQKPaymentStatusNotProcessed);
-    paymentInfo.paymentTime = [dateFormmater stringFromDate:[NSDate date]];
-    [paymentInfo save];
-    
-    if (result == PAYRESULT_SUCCESS) {
+    if (result == QBPayResultSuccess) {
         [self hidePayment];
         [[JQKHudManager manager] showHudWithText:@"支付成功"];
         [[NSNotificationCenter defaultCenter] postNotificationName:kPaidNotificationName object:nil];
-    } else if (result == PAYRESULT_ABANDON) {
+    } else if (result == QBPayResultCancelled) {
         [[JQKHudManager manager] showHudWithText:@"支付取消"];
     } else {
         [[JQKHudManager manager] showHudWithText:@"支付失败"];
     }
-    
-    [[JQKPaymentModel sharedModel] commitPaymentInfo:paymentInfo];
     
     [[JQKStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo
                                                 forPayAction:JQKStatsPayActionPayBack

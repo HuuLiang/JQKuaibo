@@ -39,10 +39,10 @@
     @weakify(self);
     BOOL success = [self requestURLPath:JQK_HOME_CHANNEL_URL
                              withParams:nil
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
     {
         @strongify(self);
-        if (respStatus == JQKURLResponseSuccess) {
+        if (respStatus == QBURLResponseSuccess) {
             JQKChannelResponse *channelResp = (JQKChannelResponse *)self.response;
             self->_fetchedChannels = channelResp.columnList;
             

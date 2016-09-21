@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 kuaibov. All rights reserved.
 //
 
-#import "JQKEncryptedURLRequest.h"
+#import "QBEncryptedURLRequest.h"
 //#import "JQKChannelProgram.h"
 
 @interface JQKChannelProgramResponse : JQKChannels
@@ -15,7 +15,7 @@
 
 typedef void (^JQKFetchChannelProgramCompletionHandler)(BOOL success, JQKChannels *programs);
 
-@interface JQKChannelProgramModel : JQKEncryptedURLRequest
+@interface JQKChannelProgramModel : QBEncryptedURLRequest
 
 @property (nonatomic,retain) JQKChannels *fetchedPrograms;
 

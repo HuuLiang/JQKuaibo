@@ -10,7 +10,6 @@
 #import "JQKCPCStatsModel.h"
 #import "JQKTabStatsModel.h"
 #import "JQKPayStatsModel.h"
-#import "JQKPaymentInfo.h"
 #import "MobClick.h"
 
 static NSString *const kUmengCPCChannelEvent = @"CPC_CHANNEL";
@@ -308,7 +307,7 @@ DefineLazyPropertyInitialization(JQKPayStatsModel, payStats)
     });
 }
 
-- (void)statsPayWithPaymentInfo:(JQKPaymentInfo *)paymentInfo
+- (void)statsPayWithPaymentInfo:(QBPaymentInfo *)paymentInfo
                    forPayAction:(JQKStatsPayAction)payAction
                     andTabIndex:(NSUInteger)tabIndex
                     subTabIndex:(NSUInteger)subTabIndex
@@ -332,7 +331,7 @@ DefineLazyPropertyInitialization(JQKPayStatsModel, payStats)
             statsInfo.isPayConfirm = @(1);
         } else if (payAction == JQKStatsPayActionPayBack) {
             NSDictionary *payStautsMapping = @{@(PAYRESULT_SUCCESS):@(1), @(PAYRESULT_FAIL):@(2), @(PAYRESULT_ABANDON):@(3)};
-            NSNumber *payStatus = payStautsMapping[paymentInfo.paymentResult];
+            NSNumber *payStatus = payStautsMapping[@(paymentInfo.paymentResult)];
             statsInfo.payStatus = payStatus;
         } else {
             return ;

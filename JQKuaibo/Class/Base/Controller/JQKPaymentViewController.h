@@ -9,7 +9,6 @@
 #import "JQKBaseViewController.h"
 
 @class JQKProgram;
-@class JQKPaymentInfo;
 
 @interface JQKPaymentViewController : JQKBaseViewController
 
@@ -23,6 +22,5 @@
      withCompletionHandler:(void (^)(void))completionHandler;
 - (void)hidePayment;
 
-- (void)notifyPaymentResult:(PAYRESULT)result withPaymentInfo:(JQKPaymentInfo *)paymentInfo;
-
+- (void)notifyPaymentResult:(QBPayResult)result withPaymentInfo:(QBPaymentInfo *)paymentInfo;
 @end

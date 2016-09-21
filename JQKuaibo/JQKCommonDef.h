@@ -94,4 +94,6 @@ static NSString *const kPersistenceCryptPassword = @"#%Q%$#afaf3134134";
 
 typedef void (^JQKAction)(id obj);
 typedef void (^JQKCompletionHandler)(BOOL success, id obj);
+typedef QBPaymentInfo JQKPaymentInfo;
+
 #endif /* JQKCommonDef_h */

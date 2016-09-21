@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JQKURLResponse.h"
+#import "QBURLResponse.h"
 #import "JQKVideo.h"
 
 typedef NS_ENUM(NSUInteger, JQKProgramType) {

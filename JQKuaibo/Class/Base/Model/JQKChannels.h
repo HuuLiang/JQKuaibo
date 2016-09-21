@@ -6,9 +6,9 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKURLResponse.h"
+#import "QBURLResponse.h"
 
-@interface JQKChannels : JQKURLResponse
+@interface JQKChannels : QBURLResponse
 
 //@property (nonatomic) NSNumber *columnId;
 //@property (nonatomic) NSString *name;

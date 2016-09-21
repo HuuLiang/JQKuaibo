@@ -10,7 +10,6 @@
 
 extern NSString *const kPaymentInfoKeyName;
 
-@class JQKPaymentInfo;
 @class JQKVideo;
 
 @interface JQKUtil : NSObject
@@ -42,5 +41,5 @@ extern NSString *const kPaymentInfoKeyName;
 + (UIViewController *)currentVisibleViewController;
 
 + (NSString *)getIPAddress;
-
++ (NSString *)currentTimeString;
 @end

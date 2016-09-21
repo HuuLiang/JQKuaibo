@@ -6,18 +6,18 @@
 //  Copyright (c) 2015年 kuaibov. All rights reserved.
 //
 
-#import "JQKEncryptedURLRequest.h"
+#import "QBEncryptedURLRequest.h"
 #import "JQKSystemConfig.h"
 
-@interface JQKSystemConfigResponse : JQKURLResponse
+@interface JQKSystemConfigResponse : QBURLResponse
 @property (nonatomic,retain) NSArray<JQKSystemConfig> *confis;
 @end
 
 typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 
-@interface JQKSystemConfigModel : JQKEncryptedURLRequest
+@interface JQKSystemConfigModel : QBEncryptedURLRequest
 
-@property (nonatomic) double payAmount;
+@property (nonatomic) NSInteger payAmount;
 @property (nonatomic) NSString *channelTopImage;
 @property (nonatomic) NSString *spreadTopImage;
 @property (nonatomic) NSString *spreadURL;

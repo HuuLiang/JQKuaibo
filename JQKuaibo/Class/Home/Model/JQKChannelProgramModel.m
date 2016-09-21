@@ -26,18 +26,18 @@
     NSDictionary *params = @{@"columnId":columnId, @"page":@(pageNo), @"pageSize":@(pageSize),@"scale":[JQKUtil isPaid]?@2:@2};
     BOOL success = [self requestURLPath:JQK_HOME_CHANNEL_PROGRAM_URL
                              withParams:params
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
     {
         @strongify(self);
         
         JQKChannels *programs;
-        if (respStatus == JQKURLResponseSuccess) {
+        if (respStatus == QBURLResponseSuccess) {
             programs = (JQKChannelProgramResponse *)self.response;
             self.fetchedPrograms = programs;
         }
         
         if (handler) {
-            handler(respStatus==JQKURLResponseSuccess, programs);
+            handler(respStatus==QBURLResponseSuccess, programs);
         }
     }];
     return success;

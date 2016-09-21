@@ -70,7 +70,7 @@
     @weakify(self);
     BOOL success = [self requestURLPath:JQK_HOME_VIDEO_URL
                              withParams:nil
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         
@@ -79,7 +79,7 @@
                         }
                         
                         NSArray *programs;
-                        if (respStatus == JQKURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             JQKHomeProgramResponse *resp = (JQKHomeProgramResponse *)self.response;
                             programs = resp.columnList;
                             self->_fetchedPrograms = programs;
@@ -88,7 +88,7 @@
                         }
                         
                         if (handler) {
-                            handler(respStatus==JQKURLResponseSuccess, programs);
+                            handler(respStatus==QBURLResponseSuccess, programs);
                         }
                     }];
     return success;

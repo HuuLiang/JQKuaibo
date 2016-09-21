@@ -13,17 +13,14 @@
 #import "MobClick.h"
 #import "JQKActivateModel.h"
 #import "JQKUserAccessModel.h"
-#import "JQKPaymentModel.h"
 #import "JQKSystemConfigModel.h"
 #import "JQKPaymentViewController.h"
 #import "JQKMovieViewController.h"
 #import "JQKLaunchView.h"
 #import "JQKMinViewController.h"
-//#import "PayuPlugin.h"
-#import "HTPayManager.h"
-#import "HaiTunPay.h"
-#import "SPayClient.h"
-#import "JQKPaymentConfig.h"
+#import <QBNetworkingConfiguration.h>
+#import <QBNetworkInfo.h>
+
 
 static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
 
@@ -171,18 +168,22 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [JQKUtil accumateLaunchSeq];
-    
-    [[JQKPaymentManager sharedManager] setupWithCompletionHandler:^(BOOL success, id obj) {
-        if (success) {
-            if ([JQKPaymentConfig sharedConfig].configDetails.haitunConfig) {
-                [[HTPayManager sharedManager] registerHaitunSDKWithApplication:application Options:launchOptions];
-            }
-        }
-    }];
+    [QBNetworkingConfiguration defaultConfiguration].baseURL = JQK_BASE_URL;
+    [QBNetworkingConfiguration defaultConfiguration].channelNo = JQK_CHANNEL_NO;
+    [QBNetworkingConfiguration defaultConfiguration].RESTpV = JQK_REST_PV;
+    [QBNetworkingConfiguration defaultConfiguration].RESTAppId = JQK_REST_APP_ID;
+#ifdef DEBUG
+    [QBNetworkingConfiguration defaultConfiguration].logEnabled = YES;
+#endif
+    [[QBPaymentManager sharedManager] registerPaymentWithAppId:JQK_REST_APP_ID
+                                                     paymentPv:JQK_PAYMENT_PV
+                                                     channelNo:JQK_CHANNEL_NO
+                                                     urlScheme:@"comjqkuaibov22016appalipayurlscheme"];
     [[JQKErrorHandler sharedHandler] initialize];
     [self setupMobStatistics];
     [self setupCommonStyles];
-    [[JQKNetworkInfo sharedInfo] startMonitoring];
+//    [[JQKNetworkInfo sharedInfo] startMonitoring];
+     [[QBNetworkInfo sharedInfo] startMonitoring];
     
     [self.window makeKeyWindow];
     self.window.hidden = NO;
@@ -200,7 +201,6 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
         [[JQKUserAccessModel sharedModel] requestUserAccess];
     }
     
-    [[JQKPaymentModel sharedModel] startRetryingToCommitUnprocessedOrders];
     [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
         NSUInteger statsTimeInterval = 180;
         if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
@@ -225,46 +225,43 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application
-      handleOpenURL:(NSURL *)url {
-    if ([url.absoluteString rangeOfString:kHTPaySchemeUrl].location == 0) {
-        [HTPayManager sharedManager].isAutoForeground = YES;
-        return [[SPayClient sharedInstance] application:application handleOpenURL:url];
-    } else {
-        [[JQKPaymentManager sharedManager] handleOpenURL:url];
-        return YES;
-    }
-}
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
-    if ([url.absoluteString rangeOfString:kHTPaySchemeUrl].location == 0) {
-        [HTPayManager sharedManager].isAutoForeground = YES;
-        [[SPayClient sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
-    } else {
-        [[JQKPaymentManager sharedManager] handleOpenURL:url];
-    }
-    return YES;
-}
-- (BOOL)application:(UIApplication *)app
-            openURL:(NSURL *)url
-            options:(NSDictionary<NSString *,id> *)options {
-    if ([url.absoluteString rangeOfString:kHTPaySchemeUrl].location == 0) {
-        [HTPayManager sharedManager].isAutoForeground = YES;
-        [[SPayClient sharedInstance] application:app openURL:url options:options];
-    } else {
-        [[JQKPaymentManager sharedManager] handleOpenURL:url];
-    }
-    return YES;
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[QBPaymentManager sharedManager] applicationWillEnterForeground:application];
+    //    if (![YYKUtil isAllVIPs]) {
+    //        [[YYKPaymentManager sharedManager] checkPayment];
+    //    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    //这一步判断HTPayManager 如果没有直接就是触发自主查询
-    [[HTPayManager sharedManager] searchOrderState];
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
+- (void)applicationWillTerminate:(UIApplication *)application {
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    DLog(@"receive local notification");
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    [[QBPaymentManager sharedManager] handleOpenUrl:url];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    [[QBPaymentManager sharedManager] handleOpenUrl:url];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    [[QBPaymentManager sharedManager] handleOpenUrl:url];
+    return YES;
+}
 
 #pragma mark - UITabBarControllerDelegate
 
