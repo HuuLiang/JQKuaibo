@@ -56,7 +56,7 @@
         }
         
         [self payForProgram:self.programToPayFor
-                      price:self.payAmount.doubleValue
+                      price:self.payAmount.doubleValue*100
                 paymentType:type
              paymentSubType:subType];
         [self hidePayment];
@@ -252,7 +252,7 @@
     NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
     
     paymentInfo.orderId = orderNo;
-    paymentInfo.orderPrice = price*100;
+    paymentInfo.orderPrice = price;
     paymentInfo.paymentType = paymentType;
     paymentInfo.paymentSubType = paymentSubType;
     paymentInfo.payPointType = payPointType;

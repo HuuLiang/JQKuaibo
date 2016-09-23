@@ -175,6 +175,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
 #ifdef DEBUG
     [QBNetworkingConfiguration defaultConfiguration].logEnabled = YES;
 #endif
+//    [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];//测试支付
     [[QBPaymentManager sharedManager] registerPaymentWithAppId:JQK_REST_APP_ID
                                                      paymentPv:JQK_PAYMENT_PV
                                                      channelNo:JQK_CHANNEL_NO
@@ -182,13 +183,13 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     [[JQKErrorHandler sharedHandler] initialize];
     [self setupMobStatistics];
     [self setupCommonStyles];
-//    [[JQKNetworkInfo sharedInfo] startMonitoring];
-     [[QBNetworkInfo sharedInfo] startMonitoring];
+    //    [[JQKNetworkInfo sharedInfo] startMonitoring];
+    [[QBNetworkInfo sharedInfo] startMonitoring];
     
     [self.window makeKeyWindow];
     self.window.hidden = NO;
-//    JQKLaunchView *launchView = [[JQKLaunchView alloc] init];
-//    [launchView show];
+    //    JQKLaunchView *launchView = [[JQKLaunchView alloc] init];
+    //    [launchView show];
     
     if (![JQKUtil isRegistered]) {
         [[JQKActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
@@ -206,7 +207,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
         if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
             statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;
         }
-//        statsTimeInterval = 20;
+        //        statsTimeInterval = 20;
         [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
         //        if ([JQKSystemConfigModel sharedModel].notificationLaunchSeq >0) {
         //            [self registerUserNotification];
