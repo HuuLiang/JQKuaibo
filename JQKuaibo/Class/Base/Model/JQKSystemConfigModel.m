@@ -91,6 +91,8 @@
                                     self.contactScheme = config.value;
                                 }else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_CONTACT_NAME]){
                                     self.contactName = config.value;
+                                }else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_IMAGE_TOKEN]) {
+                                    self.imageToken = config.value;
                                 }
                             }];
                             

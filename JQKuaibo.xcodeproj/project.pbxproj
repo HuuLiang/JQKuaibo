@@ -37,6 +37,7 @@
 		B374B9D51CFD867D0063C1C6 /* JQKApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9D41CFD867D0063C1C6 /* JQKApplication.m */; };
 		B374B9D81CFD86B20063C1C6 /* NSObject+PropertyAccessInspecting.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9D71CFD86B20063C1C6 /* NSObject+PropertyAccessInspecting.m */; };
 		B38BD92C1D43545B00AA34EA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B38BD92B1D43545B00AA34EA /* libc++.tbd */; };
+		B393277F1D990D1C00E0EF89 /* JQKVideoTokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B393277E1D990D1C00E0EF89 /* JQKVideoTokenManager.m */; };
 		B3EC58A61CF59AE900AC74F4 /* JQKLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */; };
 		B3FEBD3B1D82BB7900E11407 /* JQKOrderWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEBD3A1D82BB7900E11407 /* JQKOrderWebViewController.m */; };
 		B3FEDAD61D53293B007CBB55 /* JQKHomeBigCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEDAD51D53293B007CBB55 /* JQKHomeBigCell.m */; };
@@ -186,6 +187,8 @@
 		B374B9D61CFD86B20063C1C6 /* NSObject+PropertyAccessInspecting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PropertyAccessInspecting.h"; sourceTree = "<group>"; };
 		B374B9D71CFD86B20063C1C6 /* NSObject+PropertyAccessInspecting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PropertyAccessInspecting.m"; sourceTree = "<group>"; };
 		B38BD92B1D43545B00AA34EA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		B393277D1D990D1C00E0EF89 /* JQKVideoTokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKVideoTokenManager.h; sourceTree = "<group>"; };
+		B393277E1D990D1C00E0EF89 /* JQKVideoTokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKVideoTokenManager.m; sourceTree = "<group>"; };
 		B3EC58A41CF59AE900AC74F4 /* JQKLaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKLaunchView.h; sourceTree = "<group>"; };
 		B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKLaunchView.m; sourceTree = "<group>"; };
 		B3FEBD391D82BB7900E11407 /* JQKOrderWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKOrderWebViewController.h; sourceTree = "<group>"; };
@@ -726,6 +729,8 @@
 				B35BB6521D1AA15F003CF5B6 /* JQKNetworkInfo.m */,
 				B35BB6531D1AA15F003CF5B6 /* JQKStatsManager.h */,
 				B35BB6541D1AA15F003CF5B6 /* JQKStatsManager.m */,
+				B393277D1D990D1C00E0EF89 /* JQKVideoTokenManager.h */,
+				B393277E1D990D1C00E0EF89 /* JQKVideoTokenManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1155,6 +1160,7 @@
 				BC3872B81C2D2E3E00CBE88A /* NSMutableDictionary+SafeCoding.m in Sources */,
 				BC3872C21C2D2E3E00CBE88A /* UIScrollView+Refresh.m in Sources */,
 				BC3873091C2D38D000CBE88A /* JQKErrorHandler.m in Sources */,
+				B393277F1D990D1C00E0EF89 /* JQKVideoTokenManager.m in Sources */,
 				B35BB6501D1A9FCA003CF5B6 /* JQKTabStatsModel.m in Sources */,
 				BC3873391C2D402B00CBE88A /* JQKActivateModel.m in Sources */,
 				BC64E2571C4E171200450C1B /* JQKAdView.m in Sources */,

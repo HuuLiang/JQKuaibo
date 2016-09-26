@@ -42,4 +42,6 @@ extern NSString *const kPaymentInfoKeyName;
 
 + (NSString *)getIPAddress;
 + (NSString *)currentTimeString;
++ (NSString *)imageToken;
++ (void)setImageToken:(NSString *)imageToken;
 @end

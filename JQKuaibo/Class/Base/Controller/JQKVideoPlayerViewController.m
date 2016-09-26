@@ -33,19 +33,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blackColor];
-    
-    _videoPlayer = [[JQKVideoPlayer alloc] initWithVideoURL:[NSURL URLWithString:self.video.videoUrl]];
+    [self.view beginProgressingWithTitle:@"加载中..." subtitle:nil];
     @weakify(self);
+    [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:^(BOOL success, NSString *token, NSString *userId) {
+        @strongify(self);
+        if (!self) {
+            return ;
+        }
+        [self.view endProgressing];
+        if (success) {
+            [self loadVideo:[NSURL URLWithString:self.video.videoUrl]];
+        }
+        
+    }];
+    
     _videoPlayer.endPlayAction = ^(id sender) {
         @strongify(self);
         [self dismissAndPopPayment];
     };
-    [self.view addSubview:_videoPlayer];
-    {
-        [_videoPlayer mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.view);
-        }];
-    }
     
     _closeButton = [[UIButton alloc] init];
     [_closeButton setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
@@ -61,18 +66,33 @@
         @strongify(self);
         [self->_videoPlayer pause];
         [self dismissAndPopPayment];
-//        if (_shouldPopupPaymentIfNotPaid && ![JQKUtil isPaid]) {
-//            [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view forProgram:(JQKProgram *)self.video
-//                                                           programLocation:_programLocation
-//                                                                 inChannel:_channel withCompletionHandler:^{
-//                                                                     @strongify(self);
-//                                                                     [self dismissViewControllerAnimated:YES completion:nil];
-//                                                                 }];
-//        } else {
-//            [self dismissViewControllerAnimated:YES completion:nil];
-//        }
+        //        if (_shouldPopupPaymentIfNotPaid && ![JQKUtil isPaid]) {
+        //            [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view forProgram:(JQKProgram *)self.video
+        //                                                           programLocation:_programLocation
+        //                                                                 inChannel:_channel withCompletionHandler:^{
+        //                                                                     @strongify(self);
+        //                                                                     [self dismissViewControllerAnimated:YES completion:nil];
+        //                                                                 }];
+        //        } else {
+        //            [self dismissViewControllerAnimated:YES completion:nil];
+        //        }
     } forControlEvents:UIControlEventTouchUpInside];
 }
+
+- (void)loadVideo:(NSURL *)videoUrl {
+    _videoPlayer = [[JQKVideoPlayer alloc] initWithVideoURL:videoUrl];
+    [self.view insertSubview:_videoPlayer atIndex:0];
+    {
+        [_videoPlayer mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+    }
+#ifdef JQK_DISPLAY_VIDEO_URL
+    NSString *url = videoUrl.absoluteString;
+    [UIAlertView bk_showAlertViewWithTitle:@"视频链接" message:url cancelButtonTitle:@"确定" otherButtonTitles:nil handler:nil];
+#endif
+}
+
 
 - (void)dismissAndPopPayment {
     [self payForProgram:(JQKProgram *)_video programLocation:_programLocation inChannel:_channel];

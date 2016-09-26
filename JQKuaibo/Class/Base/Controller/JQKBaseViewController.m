@@ -91,7 +91,24 @@
     UIViewController *retVC;
     if (NSClassFromString(@"AVPlayerViewController")) {
         AVPlayerViewController *playerVC = [[AVPlayerViewController alloc] init];
-        playerVC.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:video.videoUrl]];
+        [self.view beginProgressingWithTitle:@"加载中..." subtitle:nil];
+        @weakify(self);
+        [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:^(BOOL success, NSString *token, NSString *userId) {
+            @strongify(self);
+            if (!self) {
+                return ;
+            }
+            [self.view endProgressing];
+            if (success) {
+                playerVC.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:video.videoUrl]];
+#ifdef JQK_DISPLAY_VIDEO_URL
+                NSString *url = [NSURL URLWithString:video.videoUrl].absoluteString;
+                [UIAlertView bk_showAlertViewWithTitle:@"视频链接" message:url cancelButtonTitle:@"确定" otherButtonTitles:nil handler:nil];
+#endif
+            }
+            
+        }];
+        
         [playerVC aspect_hookSelector:@selector(viewDidAppear:)
                           withOptions:AspectPositionAfter
                            usingBlock:^(id<AspectInfo> aspectInfo){
@@ -101,7 +118,25 @@
         
         retVC = playerVC;
     } else {
-        retVC = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:video.videoUrl]];
+       MPMoviePlayerViewController *mpVideoVC = [[MPMoviePlayerViewController alloc] init];
+        @weakify(self);
+        [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:^(BOOL success, NSString *token, NSString *userId) {
+            @strongify(self);
+            if (!self) {
+                return ;
+            }
+            [self.view endProgressing];
+            if (success) {
+                mpVideoVC.moviePlayer.contentURL = [NSURL URLWithString:video.videoUrl];
+//
+#ifdef JQK_DISPLAY_VIDEO_URL
+                NSString *url = [NSURL URLWithString:video.videoUrl].absoluteString;
+                [UIAlertView bk_showAlertViewWithTitle:@"视频链接" message:url cancelButtonTitle:@"确定" otherButtonTitles:nil handler:nil];
+#endif
+            }
+            
+        }];
+        retVC = mpVideoVC;
     }
     
     [retVC aspect_hookSelector:@selector(supportedInterfaceOrientations) withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
@@ -114,6 +149,19 @@
         [[aspectInfo originalInvocation] setReturnValue:&rotate];
     } error:nil];
     return retVC;
+}
+- (void)player:(AVPlayer *)player loadVideo:(NSURL *)videoUrl {
+    //    player = [[AVPlayer alloc] initWithURL:videoUrl];
+    //    [self.view insertSubview:_videoPlayer atIndex:0];
+    //    {
+    //        [_videoPlayer mas_makeConstraints:^(MASConstraintMaker *make) {
+    //            make.edges.equalTo(self.view);
+    //        }];
+    //    }
+#ifdef JQK_DISPLAY_VIDEO_URL
+    NSString *url = videoUrl.absoluteString;
+    [UIAlertView bk_showAlertViewWithTitle:@"视频链接" message:url cancelButtonTitle:@"确定" otherButtonTitles:nil handler:nil];
+#endif
 }
 
 - (void)didReceiveMemoryWarning {

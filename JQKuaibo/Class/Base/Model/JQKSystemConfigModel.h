@@ -41,6 +41,7 @@ typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 
 @property (nonatomic) NSString  *contactScheme;
 @property (nonatomic) NSString  *contactName;
+@property (nonatomic) NSString *imageToken;
 
 + (instancetype)sharedModel;
 

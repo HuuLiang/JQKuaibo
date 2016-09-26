@@ -18,6 +18,9 @@
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 
+static NSString *const kImageTokenKeyName = @"safiajfoaiefr$^%^$E&&$*&$*";
+static NSString *const kImageTokenCryptPassword = @"wafei@#$%^%$^$wfsssfsf";
+
 NSString *const kPaymentInfoKeyName = @"jqkuaibov_paymentinfo_keyname";
 
 static NSString *const kRegisterKeyName = @"jqkuaibov_register_keyname";
@@ -224,6 +227,27 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
     NSDateFormatter *fomatter =[[NSDateFormatter alloc] init];
     [fomatter setDateFormat:kDefaultDateFormat];
     return [fomatter stringFromDate:[NSDate date]];
+}
+
+
++ (NSString *)imageToken {
+    NSString *imageToken = [[NSUserDefaults standardUserDefaults] objectForKey:kImageTokenKeyName];
+    if (!imageToken) {
+        return nil;
+    }
+    
+    return [imageToken decryptedStringWithPassword:kImageTokenCryptPassword];
+}
+
++ (void)setImageToken:(NSString *)imageToken {
+    if (imageToken) {
+        imageToken = [imageToken encryptedStringWithPassword:kImageTokenCryptPassword];
+        [[NSUserDefaults standardUserDefaults] setObject:imageToken forKey:kImageTokenKeyName];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kImageTokenKeyName];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

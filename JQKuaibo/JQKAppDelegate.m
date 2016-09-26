@@ -26,17 +26,15 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
 
 @interface JQKAppDelegate ()<UITabBarControllerDelegate>
 
+@property (nonatomic,retain) UIViewController *rootViewController;
 @end
 
 @implementation JQKAppDelegate
 
-- (UIWindow *)window {
-    if (_window) {
-        return _window;
+- (UIViewController *)rootViewController {
+    if (_rootViewController) {
+        return _rootViewController;
     }
-    
-    _window                              = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    _window.backgroundColor              = [UIColor whiteColor];
     
     JQKHomeViewController *homeVC        = [[JQKHomeViewController alloc] init];
     homeVC.title                         = [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"];
@@ -70,7 +68,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     
     //    JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
     //    mineVC.title                         = @"我的";
-    //    
+    //
     //    UINavigationController *mineNav      = [[UINavigationController alloc] initWithRootViewController:mineVC];
     //    mineNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:mineVC.title
     //                                                                          image:[[UIImage imageNamed:@"mine_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
@@ -89,9 +87,25 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     tabBarController.tabBar.translucent     = NO;
     tabBarController.tabBar.backgroundImage = [UIImage imageWithColor:[UIColor colorWithWhite:0.95 alpha:1]];
     tabBarController.delegate = self;
-    _window.rootViewController              = tabBarController;
+    _rootViewController = tabBarController;
+    return _rootViewController;
+}
+
+
+- (UIWindow *)window {
+    if (_window) {
+        return _window;
+    }
+    
+    _window                              = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    _window.backgroundColor              = [UIColor whiteColor];
+    
+    
     return _window;
 }
+
+
+
 
 - (void)setupCommonStyles {
     
@@ -175,7 +189,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
 #ifdef DEBUG
     [QBNetworkingConfiguration defaultConfiguration].logEnabled = YES;
 #endif
-//    [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];//测试支付
+    //    [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];//测试支付
     [[QBPaymentManager sharedManager] registerPaymentWithAppId:JQK_REST_APP_ID
                                                      paymentPv:JQK_PAYMENT_PV
                                                      channelNo:JQK_CHANNEL_NO
@@ -186,10 +200,50 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     //    [[JQKNetworkInfo sharedInfo] startMonitoring];
     [[QBNetworkInfo sharedInfo] startMonitoring];
     
-    [self.window makeKeyWindow];
-    self.window.hidden = NO;
-    //    JQKLaunchView *launchView = [[JQKLaunchView alloc] init];
-    //    [launchView show];
+    BOOL requestedSystemConfig = NO;
+    #ifdef JQK_IMAGE_TOKEN_ENABLED
+    NSString *imageToken = [JQKUtil imageToken];
+    if (imageToken) {
+        [[SDWebImageManager sharedManager].imageDownloader setValue:imageToken forHTTPHeaderField:@"Referer"];
+        self.window.rootViewController = self.rootViewController;
+        [self.window makeKeyAndVisible];
+    } else {
+        self.window.rootViewController = [[UIViewController alloc] init];
+        [self.window makeKeyAndVisible];
+        
+        [self.window beginProgressingWithTitle:@"更新系统配置..." subtitle:nil];
+        requestedSystemConfig = [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+            [self.window endProgressing];
+            
+            if (success) {
+                NSString *fetchedToken = [JQKSystemConfigModel sharedModel].imageToken;
+                [JQKUtil setImageToken:fetchedToken];
+                if (fetchedToken) {
+                    [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
+                }
+                
+            }
+            
+            self.window.rootViewController = self.rootViewController;
+            
+            NSUInteger statsTimeInterval = 180;
+            if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
+                statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;
+            }
+            [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+        }];
+    }
+    #else
+        self.window.rootViewController = self.rootViewController;
+        [self.window makeKeyAndVisible];
+    #endif
+    
+    
+    
+    //    [self.window makeKeyWindow];
+    //    self.window.hidden = NO;
+        JQKLaunchView *launchView = [[JQKLaunchView alloc] init];
+        [launchView show];
     
     if (![JQKUtil isRegistered]) {
         [[JQKActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
@@ -201,28 +255,36 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     } else {
         [[JQKUserAccessModel sharedModel] requestUserAccess];
     }
-    
-    [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
-        NSUInteger statsTimeInterval = 180;
-        if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
-            statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;
-        }
-        //        statsTimeInterval = 20;
-        [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
-        //        if ([JQKSystemConfigModel sharedModel].notificationLaunchSeq >0) {
-        //            [self registerUserNotification];
-        //        }
+    if (!requestedSystemConfig) {
         
-        if (!success) {
-            return ;
-        }
-        if ([JQKSystemConfigModel sharedModel].startupInstall.length == 0
-            || [JQKSystemConfigModel sharedModel].startupPrompt.length == 0) {
-            return ;
-        }
-        
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].startupInstall]];
-    }];
+        [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+#ifdef JQK_IMAGE_TOKEN_ENABLED
+            if (success) {
+                [JQKUtil setImageToken:[JQKSystemConfigModel sharedModel].imageToken];
+            }
+#endif
+            NSUInteger statsTimeInterval = 180;
+            if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
+                statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;
+            }
+            //        statsTimeInterval = 20;
+            [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+            //        if ([JQKSystemConfigModel sharedModel].notificationLaunchSeq >0) {
+            //            [self registerUserNotification];
+            //        }
+            
+            if (!success) {
+                return ;
+            }
+            if ([JQKSystemConfigModel sharedModel].startupInstall.length == 0
+                || [JQKSystemConfigModel sharedModel].startupPrompt.length == 0) {
+                return ;
+            }
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].startupInstall]];
+        }];
+    }
+    [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:nil];
     return YES;
 }
 
@@ -231,8 +293,8 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     [[QBPaymentManager sharedManager] applicationWillEnterForeground:application];
-    //    if (![YYKUtil isAllVIPs]) {
-    //        [[YYKPaymentManager sharedManager] checkPayment];
+    //    if (![JQKUtil isAllVIPs]) {
+    //        [[JQKPaymentManager sharedManager] checkPayment];
     //    }
 }
 

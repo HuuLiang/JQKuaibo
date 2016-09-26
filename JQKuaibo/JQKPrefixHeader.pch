@@ -31,11 +31,11 @@
 #import "JQKErrorHandler.h"
 #import "JQKHudManager.h"
 
-
 #import "DBHandler.h"
 #import <QBPaymentManager.h>
 #import "JQKNetworkInfo.h"
 #import "JQKStatsManager.h"
+#import "JQKVideoTokenManager.h"
 //#import "PayUtils.h"
 
 #endif /* JQKPrefixHeader_pch */
