@@ -11,7 +11,7 @@
 #import <NSDate+Utilities.h>
 #import "JQKActivateModel.h"
 
-static NSString *const kTokenURL = @"http://token.iqu8.cn/token";//@"http://bbs.qu8cc.com/token";
+static NSString *const kTokenURL = @"http://bbs.qu8cc.com/token";//@"http://token.iqu8.cn/token";//
 static NSString *const kTokenDataEncryptionPassword = @"fdl_2016$@Ask^we";
 
 @interface JQKVideoTokenManager ()

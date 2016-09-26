@@ -201,7 +201,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     [[QBNetworkInfo sharedInfo] startMonitoring];
     
     BOOL requestedSystemConfig = NO;
-    #ifdef JQK_IMAGE_TOKEN_ENABLED
+//    #ifdef JQK_IMAGE_TOKEN_ENABLED
     NSString *imageToken = [JQKUtil imageToken];
     if (imageToken) {
         [[SDWebImageManager sharedManager].imageDownloader setValue:imageToken forHTTPHeaderField:@"Referer"];
@@ -233,10 +233,10 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
             [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
         }];
     }
-    #else
-        self.window.rootViewController = self.rootViewController;
-        [self.window makeKeyAndVisible];
-    #endif
+//    #else
+//        self.window.rootViewController = self.rootViewController;
+//        [self.window makeKeyAndVisible];
+//    #endif
     
     
     
@@ -258,11 +258,11 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     if (!requestedSystemConfig) {
         
         [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
-#ifdef JQK_IMAGE_TOKEN_ENABLED
+//#ifdef JQK_IMAGE_TOKEN_ENABLED
             if (success) {
                 [JQKUtil setImageToken:[JQKSystemConfigModel sharedModel].imageToken];
             }
-#endif
+//#endif
             NSUInteger statsTimeInterval = 180;
             if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
                 statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;

@@ -41,6 +41,7 @@
 - (void)switchToPlayProgram:(JQKProgram *)program
             programLocation:(NSUInteger)programLocation
                   inChannel:(JQKChannels *)channel{
+    program.videoUrl = @"http://dnmb.clxbb.com/hv5io/91ss/20160824zsdy40.mp4";
     if (![JQKUtil isPaid]) {
         [self payForProgram:program programLocation:programLocation inChannel:channel];
     } else if (program.type.unsignedIntegerValue == JQKProgramTypeVideo) {
@@ -53,10 +54,38 @@
 }
 
 - (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment withProgramLocation:(NSInteger)programLocation inChannel:(JQKChannels *)channel{
+    video.videoUrl = @"http://dnmb.clxbb.com/hv5io/91ss/20160824zsdy40.mp4";
     if (hasTimeControl) {
-        UIViewController *videoPlayVC = [self playerVCWithVideo:video];
-        videoPlayVC.hidesBottomBarWhenPushed = YES;
-        [self presentViewController:videoPlayVC animated:YES completion:nil];
+        
+        @weakify(self);
+        [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:^(BOOL success, NSString *token, NSString *userId) {
+            @strongify(self);
+            if (!self) {
+                return ;
+            }
+            [self.view endProgressing];
+            
+            if (success) {
+//                #ifdef YYK_DISPLAY_VIDEO_URL
+                NSString *url = [[JQKVideoTokenManager sharedManager] videoLinkWithOriginalLink:video.videoUrl];
+                NSString *str = [NSURL URLWithString:url].absoluteString;
+                [UIAlertView bk_showAlertViewWithTitle:@"视频链接" message:str cancelButtonTitle:@"确定" otherButtonTitles:nil handler:nil];
+//                #endif
+                //            [self loadVideo:[NSURL URLWithString:[[JFVideoTokenManager sharedManager]videoLinkWithOriginalLink:_videoUrl]]];
+                NSString *videoUrl = [[JQKVideoTokenManager sharedManager] videoLinkWithOriginalLink:video.videoUrl];
+                UIViewController *videoPlayVC = [self playerVCWithVideoUrl:videoUrl];
+                videoPlayVC.hidesBottomBarWhenPushed = YES;
+                [self presentViewController:videoPlayVC animated:YES completion:nil];
+            } else {
+                [UIAlertView bk_showAlertViewWithTitle:@"无法获取视频信息" message:nil cancelButtonTitle:@"确定" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                    
+                }];
+            }
+        }];
+
+//        UIViewController *videoPlayVC = [self playerVCWithVideo:video];
+//        videoPlayVC.hidesBottomBarWhenPushed = YES;
+//        [self presentViewController:videoPlayVC animated:YES completion:nil];
     } else {
         JQKVideoPlayerViewController *playerVC = [[JQKVideoPlayerViewController alloc] initWithVideo:video];
         playerVC.hidesBottomBarWhenPushed = YES;
@@ -87,28 +116,11 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
-- (UIViewController *)playerVCWithVideo:(JQKVideo *)video {
+- (UIViewController *)playerVCWithVideoUrl:(NSString *)videoUrl {
     UIViewController *retVC;
     if (NSClassFromString(@"AVPlayerViewController")) {
         AVPlayerViewController *playerVC = [[AVPlayerViewController alloc] init];
-        [self.view beginProgressingWithTitle:@"加载中..." subtitle:nil];
-        @weakify(self);
-        [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:^(BOOL success, NSString *token, NSString *userId) {
-            @strongify(self);
-            if (!self) {
-                return ;
-            }
-            [self.view endProgressing];
-            if (success) {
-                playerVC.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:video.videoUrl]];
-#ifdef JQK_DISPLAY_VIDEO_URL
-                NSString *url = [NSURL URLWithString:video.videoUrl].absoluteString;
-                [UIAlertView bk_showAlertViewWithTitle:@"视频链接" message:url cancelButtonTitle:@"确定" otherButtonTitles:nil handler:nil];
-#endif
-            }
-            
-        }];
-        
+        playerVC.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:videoUrl]];
         [playerVC aspect_hookSelector:@selector(viewDidAppear:)
                           withOptions:AspectPositionAfter
                            usingBlock:^(id<AspectInfo> aspectInfo){
@@ -118,25 +130,7 @@
         
         retVC = playerVC;
     } else {
-       MPMoviePlayerViewController *mpVideoVC = [[MPMoviePlayerViewController alloc] init];
-        @weakify(self);
-        [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:^(BOOL success, NSString *token, NSString *userId) {
-            @strongify(self);
-            if (!self) {
-                return ;
-            }
-            [self.view endProgressing];
-            if (success) {
-                mpVideoVC.moviePlayer.contentURL = [NSURL URLWithString:video.videoUrl];
-//
-#ifdef JQK_DISPLAY_VIDEO_URL
-                NSString *url = [NSURL URLWithString:video.videoUrl].absoluteString;
-                [UIAlertView bk_showAlertViewWithTitle:@"视频链接" message:url cancelButtonTitle:@"确定" otherButtonTitles:nil handler:nil];
-#endif
-            }
-            
-        }];
-        retVC = mpVideoVC;
+        retVC = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:videoUrl]];
     }
     
     [retVC aspect_hookSelector:@selector(supportedInterfaceOrientations) withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
