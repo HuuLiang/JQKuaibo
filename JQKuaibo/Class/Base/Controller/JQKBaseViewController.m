@@ -41,7 +41,7 @@
 - (void)switchToPlayProgram:(JQKProgram *)program
             programLocation:(NSUInteger)programLocation
                   inChannel:(JQKChannels *)channel{
-    program.videoUrl = @"http://dnmb.clxbb.com/hv5io/91ss/20160824zsdy40.mp4";
+//    program.videoUrl = @"http://dnmb.clxbb.com/hv5io/91ss/20160824zsdy40.mp4";
     if (![JQKUtil isPaid]) {
         [self payForProgram:program programLocation:programLocation inChannel:channel];
     } else if (program.type.unsignedIntegerValue == JQKProgramTypeVideo) {
@@ -54,7 +54,7 @@
 }
 
 - (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment withProgramLocation:(NSInteger)programLocation inChannel:(JQKChannels *)channel{
-    video.videoUrl = @"http://dnmb.clxbb.com/hv5io/91ss/20160824zsdy40.mp4";
+//    video.videoUrl = @"http://dnmb.clxbb.com/hv5io/91ss/20160824zsdy40.mp4";
     if (hasTimeControl) {
         
         @weakify(self);
@@ -66,11 +66,11 @@
             [self.view endProgressing];
             
             if (success) {
-//                #ifdef YYK_DISPLAY_VIDEO_URL
+                #ifdef YYK_DISPLAY_VIDEO_URL
                 NSString *url = [[JQKVideoTokenManager sharedManager] videoLinkWithOriginalLink:video.videoUrl];
                 NSString *str = [NSURL URLWithString:url].absoluteString;
                 [UIAlertView bk_showAlertViewWithTitle:@"视频链接" message:str cancelButtonTitle:@"确定" otherButtonTitles:nil handler:nil];
-//                #endif
+                #endif
                 //            [self loadVideo:[NSURL URLWithString:[[JFVideoTokenManager sharedManager]videoLinkWithOriginalLink:_videoUrl]]];
                 NSString *videoUrl = [[JQKVideoTokenManager sharedManager] videoLinkWithOriginalLink:video.videoUrl];
                 UIViewController *videoPlayVC = [self playerVCWithVideoUrl:videoUrl];
