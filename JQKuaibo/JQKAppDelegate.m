@@ -193,7 +193,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     [[QBPaymentManager sharedManager] registerPaymentWithAppId:JQK_REST_APP_ID
                                                      paymentPv:JQK_PAYMENT_PV
                                                      channelNo:JQK_CHANNEL_NO
-                                                     urlScheme:@"comjqkuaibov22016appalipayurlscheme"];
+                                                     urlScheme:@"comsimiyingyuan2016appalipayurlscheme"];
     [[JQKErrorHandler sharedHandler] initialize];
     [self setupMobStatistics];
     [self setupCommonStyles];
