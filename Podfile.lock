@@ -37,8 +37,8 @@ PODS:
   - MBProgressHUD (0.9.2)
   - MJRefresh (2.4.12)
   - OpenSSL (1.0.208)
-  - QBExtensions (0.0.6)
-  - QBNetworking (0.0.5):
+  - QBExtensions (0.0.7)
+  - QBNetworking (0.0.7):
     - AFNetworking (~> 3.1.0)
     - QBExtensions (~> 0.0.3)
   - QBPayment/Core (0.0.22):
@@ -99,8 +99,8 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: ca8e9589895977df32d379d46e6b8a5450b3ff44
   OpenSSL: b187269d386b07452f56af273764ea0636dd5da8
-  QBExtensions: 9c4def5e3cd2eebabb3d9e9057f1fbbce5a04849
-  QBNetworking: b2e4fffb974f86563854488736452d0fcb530f4c
+  QBExtensions: a32e8ae6e371c208e2efe2b2eec7251c36187b90
+  QBNetworking: b428ef65416c672982454952323cdb86163b8c39
   QBPayment: d676fc6d0d2f8cd6c56c986f6320e2b535bdb184
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SFHFKeychainUtils: 9576b411a79a058f4d5381ace6f3242b9a62e664
