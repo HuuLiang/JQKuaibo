@@ -65,6 +65,7 @@ DefineLazyPropertyInitialization(NSArray, fetchedSpreads)
     }
     
     [self setUpCollectionView];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -96,7 +97,14 @@ DefineLazyPropertyInitialization(NSArray, fetchedSpreads)
     }];
     [_layoutCollectionView JQK_triggerPullToRefresh];
     
-    
+    [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+        @strongify(self);
+        [self->_layoutCollectionView JQK_endPullToRefresh];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self->_layoutCollectionView JQK_triggerPullToRefresh];
+        });
+    }];
 
 }
 
@@ -117,6 +125,7 @@ DefineLazyPropertyInitialization(NSArray, fetchedSpreads)
 //获取模型数据
 - (void)loadSpreadModel {
     @weakify(self);
+    [self removeCurrentRefreshBtn];
     [self.appSpreadModel fetchAppSpreadWithCompletionHandler:^(BOOL success, id obj) {
         @strongify(self);
         if (!self) {
@@ -128,6 +137,11 @@ DefineLazyPropertyInitialization(NSArray, fetchedSpreads)
         if (success) {
             _fetchedSpreads = _appSpreadModel.appSpreadResponse.programList;
             [self->_layoutCollectionView reloadData];
+        }else {
+            [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                @strongify(self);
+                [self->_layoutCollectionView JQK_triggerPullToRefresh];
+            }];
         }
     }];
 }

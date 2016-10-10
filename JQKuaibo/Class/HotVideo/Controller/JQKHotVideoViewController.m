@@ -122,13 +122,13 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
         @strongify(self);
         [self loadVideosWithPage:1];
         //        [self loadHeaderImage];
-//        NSMutableArray *changeArr = [NSMutableArray array];
-//        for (int i = 0; i<250; i++) {
-//            NSInteger change = arc4random_uniform(60)+40;
-//            NSString *changeStr = [NSString stringWithFormat:@"%ld",(long)change];
-//            [changeArr addObject:changeStr];
-//        }
-//        self.changePerson = changeArr.copy;
+        //        NSMutableArray *changeArr = [NSMutableArray array];
+        //        for (int i = 0; i<250; i++) {
+        //            NSInteger change = arc4random_uniform(60)+40;
+        //            NSString *changeStr = [NSString stringWithFormat:@"%ld",(long)change];
+        //            [changeArr addObject:changeStr];
+        //        }
+        //        self.changePerson = changeArr.copy;
     }];
     [_layoutTableView JQK_triggerPullToRefresh];
     
@@ -141,6 +141,14 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
             [self payForProgram:nil programLocation:NSNotFound inChannel:nil];
             [_layoutTableView JQK_endPullToRefresh];
         }
+    }];
+    [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+        @strongify(self);
+        [self->_layoutTableView JQK_endPullToRefresh];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self->_layoutTableView JQK_triggerPullToRefresh];
+        });
     }];
 }
 
@@ -193,6 +201,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     @weakify(self);
     [self.videoModel fetchVideosWithPageNo:page completionHandler:^(BOOL success, JQKVideos *videos) {
         @strongify(self);
+        [self removeCurrentRefreshBtn];
         if (!self) {
             return ;
         }
@@ -209,6 +218,12 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
             if (videos.items.unsignedIntegerValue == self.videos.count) {
                 [self->_layoutTableView JQK_pagingRefreshNoMoreData];
             }
+        }else {
+            [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                @strongify(self);
+                [self->_layoutTableView JQK_triggerPullToRefresh];
+            }];
+            
         }
     }];
 }
@@ -233,15 +248,15 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     JQKProgram *program = self.videos[indexPath.item];
     cell.imageURL = [NSURL URLWithString:program.coverImg];
     cell.title = program.title;
-//    NSString *attentText = @"";
-//    if (indexPath.item < self.attentArr.count) {
-//        NSString *attent = self.attentArr[indexPath.item];
-//        NSString *change = self.changePerson[indexPath.item];
-//        attentText = [NSString stringWithFormat:@"%ld",(attent.integerValue + change.integerValue)];
-//    }else {
-//        attentText = @"0";
-//    }
-//    cell.attentTitle = attentText;
+    //    NSString *attentText = @"";
+    //    if (indexPath.item < self.attentArr.count) {
+    //        NSString *attent = self.attentArr[indexPath.item];
+    //        NSString *change = self.changePerson[indexPath.item];
+    //        attentText = [NSString stringWithFormat:@"%ld",(attent.integerValue + change.integerValue)];
+    //    }else {
+    //        attentText = @"0";
+    //    }
+    //    cell.attentTitle = attentText;
     return cell;
 }
 

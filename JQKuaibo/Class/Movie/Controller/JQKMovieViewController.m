@@ -57,37 +57,52 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
         [self loadMoviesWithRefreshFlag:NO];
     }];
     [_layoutCollectionView JQK_triggerPullToRefresh];
+    [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+        @strongify(self);
+        [self->_layoutCollectionView JQK_endPullToRefresh];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self->_layoutCollectionView JQK_triggerPullToRefresh];
+        });
+    }];
 }
 
 - (void)loadMoviesWithRefreshFlag:(BOOL)isRefresh {
     @weakify(self);
     [self.movieModel fetchMoviesInPage:isRefresh?1:self.movieModel.fetchedVideos.page.unsignedIntegerValue+1
                  withCompletionHandler:^(BOOL success, id obj)
-    {
-        @strongify(self);
-        if (!self) {
-            return ;
-        }
-        
-        [self->_layoutCollectionView JQK_endPullToRefresh];
-        
-        if (success) {
-            if (isRefresh) {
-                [self.videos removeAllObjects];
-            }
-            
-            JQKVideos *videos = obj;
-            _fetchVideos = videos;
-            if (videos.programList) {
-                [self.videos addObjectsFromArray:videos.programList];
-                [self->_layoutCollectionView reloadData];
-            }
-            
-            if (videos.page.unsignedIntegerValue * videos.pageSize.unsignedIntegerValue >= videos.items.unsignedIntegerValue) {
-                [self->_layoutCollectionView JQK_pagingRefreshNoMoreData];
-            }
-        }
-    }];
+     {
+         @strongify(self);
+         [self removeCurrentRefreshBtn];
+         if (!self) {
+             return ;
+         }
+         
+         [self->_layoutCollectionView JQK_endPullToRefresh];
+         
+         if (success) {
+             if (isRefresh) {
+                 [self.videos removeAllObjects];
+             }
+             
+             JQKVideos *videos = obj;
+             _fetchVideos = videos;
+             if (videos.programList) {
+                 [self.videos addObjectsFromArray:videos.programList];
+                 [self->_layoutCollectionView reloadData];
+             }
+             
+             if (videos.page.unsignedIntegerValue * videos.pageSize.unsignedIntegerValue >= videos.items.unsignedIntegerValue) {
+                 [self->_layoutCollectionView JQK_pagingRefreshNoMoreData];
+             }
+         }else {
+             [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                 @strongify(self);
+                 [self->_layoutCollectionView JQK_triggerPullToRefresh];
+             }];
+             
+         }
+     }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -125,7 +140,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     JQKVideo *video = self.videos[indexPath.item];
-//    [self switchToPlayProgram:(JQKProgram *)video];
+    //    [self switchToPlayProgram:(JQKProgram *)video];
     [self switchToPlayProgram:(JQKProgram *)video programLocation:indexPath.item inChannel:_fetchVideos];
     
     [[JQKStatsManager sharedManager] statsCPCWithProgram:(JQKProgram *)video programLocation:indexPath.item inChannel:_fetchVideos andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];

@@ -30,5 +30,6 @@
 - (void)onPaidNotification:(NSNotification *)notification;
 
 - (NSUInteger)currentIndex;
-
+- (void)addRefreshBtnWithCurrentView:(UIView *)view withAction:(JQKAction) action;
+- (void)removeCurrentRefreshBtn;
 @end
