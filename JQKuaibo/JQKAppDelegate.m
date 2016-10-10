@@ -187,7 +187,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     [QBNetworkingConfiguration defaultConfiguration].RESTpV = JQK_REST_PV;
     [QBNetworkingConfiguration defaultConfiguration].RESTAppId = JQK_REST_APP_ID;
 #ifdef DEBUG
-    [QBNetworkingConfiguration defaultConfiguration].logEnabled = YES;
+    //    [QBNetworkingConfiguration defaultConfiguration].logEnabled = YES;
 #endif
     //    [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];//测试支付
     [[QBPaymentManager sharedManager] registerPaymentWithAppId:JQK_REST_APP_ID
@@ -198,10 +198,15 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     [self setupMobStatistics];
     [self setupCommonStyles];
     //    [[JQKNetworkInfo sharedInfo] startMonitoring];
+    [QBNetworkInfo sharedInfo].reachabilityChangedAction = ^(BOOL reachable) {
+        if (reachable && ![JQKSystemConfigModel sharedModel].loaded) {
+            [self fetchSystemConfigWithCompletionHandler:nil];
+        }
+    };
     [[QBNetworkInfo sharedInfo] startMonitoring];
     
     BOOL requestedSystemConfig = NO;
-//    #ifdef JQK_IMAGE_TOKEN_ENABLED
+    //    #ifdef JQK_IMAGE_TOKEN_ENABLED
     NSString *imageToken = [JQKUtil imageToken];
     if (imageToken) {
         [[SDWebImageManager sharedManager].imageDownloader setValue:imageToken forHTTPHeaderField:@"Referer"];
@@ -212,38 +217,42 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
         [self.window makeKeyAndVisible];
         
         [self.window beginProgressingWithTitle:@"更新系统配置..." subtitle:nil];
-        requestedSystemConfig = [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+        requestedSystemConfig = [self fetchSystemConfigWithCompletionHandler:^(BOOL success) {
             [self.window endProgressing];
-            
-            if (success) {
-                NSString *fetchedToken = [JQKSystemConfigModel sharedModel].imageToken;
-                [JQKUtil setImageToken:fetchedToken];
-                if (fetchedToken) {
-                    [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
-                }
-                
-            }
-            
             self.window.rootViewController = self.rootViewController;
-            
-            NSUInteger statsTimeInterval = 180;
-            if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
-                statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;
-            }
-            [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
         }];
+//        requestedSystemConfig = [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+//            [self.window endProgressing];
+//            
+//            if (success) {
+//                NSString *fetchedToken = [JQKSystemConfigModel sharedModel].imageToken;
+//                [JQKUtil setImageToken:fetchedToken];
+//                if (fetchedToken) {
+//                    [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
+//                }
+//                
+//            }
+//            
+//            self.window.rootViewController = self.rootViewController;
+//            
+//            NSUInteger statsTimeInterval = 180;
+//            if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
+//                statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;
+//            }
+//            [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+//        }];
     }
-//    #else
-//        self.window.rootViewController = self.rootViewController;
-//        [self.window makeKeyAndVisible];
-//    #endif
+    //    #else
+    //        self.window.rootViewController = self.rootViewController;
+    //        [self.window makeKeyAndVisible];
+    //    #endif
     
     
     
     //    [self.window makeKeyWindow];
     //    self.window.hidden = NO;
-        JQKLaunchView *launchView = [[JQKLaunchView alloc] init];
-        [launchView show];
+    JQKLaunchView *launchView = [[JQKLaunchView alloc] init];
+    [launchView show];
     
     if (![JQKUtil isRegistered]) {
         [[JQKActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
@@ -258,11 +267,11 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     if (!requestedSystemConfig) {
         
         [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
-//#ifdef JQK_IMAGE_TOKEN_ENABLED
+            //#ifdef JQK_IMAGE_TOKEN_ENABLED
             if (success) {
                 [JQKUtil setImageToken:[JQKSystemConfigModel sharedModel].imageToken];
             }
-//#endif
+            //#endif
             NSUInteger statsTimeInterval = 180;
             if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
                 statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;
@@ -288,7 +297,23 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     return YES;
 }
 
-
+- (BOOL)fetchSystemConfigWithCompletionHandler:(void (^)(BOOL success))completionHandler {
+    return [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+        if (success) {
+            NSString *fetchedToken = [JQKSystemConfigModel sharedModel].imageToken;
+            [JQKUtil setImageToken:fetchedToken];
+            if (fetchedToken) {
+                [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
+            }
+            
+        }
+        
+        NSUInteger statsTimeInterval = 180;
+        [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+        
+        SafelyCallBlock(completionHandler, success);
+    }];
+}
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
