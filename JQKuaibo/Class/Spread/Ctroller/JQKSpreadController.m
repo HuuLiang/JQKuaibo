@@ -138,10 +138,12 @@ DefineLazyPropertyInitialization(NSArray, fetchedSpreads)
             _fetchedSpreads = _appSpreadModel.appSpreadResponse.programList;
             [self->_layoutCollectionView reloadData];
         }else {
-            [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-                @strongify(self);
-                [self->_layoutCollectionView JQK_triggerPullToRefresh];
-            }];
+            if (_fetchedSpreads.count == 0) {
+                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                    @strongify(self);
+                    [self->_layoutCollectionView JQK_triggerPullToRefresh];
+                }];
+            }
         }
     }];
 }

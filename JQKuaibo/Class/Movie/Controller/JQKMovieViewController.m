@@ -96,10 +96,13 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
                  [self->_layoutCollectionView JQK_pagingRefreshNoMoreData];
              }
          }else {
-             [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-                 @strongify(self);
-                 [self->_layoutCollectionView JQK_triggerPullToRefresh];
-             }];
+             if (self.videos.count == 0) {
+                 
+                 [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                     @strongify(self);
+                     [self->_layoutCollectionView JQK_triggerPullToRefresh];
+                 }];
+             }
              
          }
      }];
