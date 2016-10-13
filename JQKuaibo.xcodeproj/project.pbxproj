@@ -100,6 +100,9 @@
 		EC87542D1D2B8B3900EC6DB5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC87542C1D2B8B3900EC6DB5 /* CoreMotion.framework */; };
 		EC87542F1D2B8B4300EC6DB5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC87542E1D2B8B4300EC6DB5 /* SystemConfiguration.framework */; };
 		EC8754321D2B8B9600EC6DB5 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = EC8754311D2B8B9600EC6DB5 /* UIView+Loading.m */; };
+		EC9DE28D1DAF8FE7007B0CEE /* JQKTorrentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9DE28C1DAF8FE7007B0CEE /* JQKTorrentViewController.m */; };
+		EC9DE2901DAF9005007B0CEE /* JQKTorrentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9DE28F1DAF9005007B0CEE /* JQKTorrentModel.m */; };
+		EC9DE2931DAF90E5007B0CEE /* JQKTorrentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9DE2921DAF90E5007B0CEE /* JQKTorrentCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -308,6 +311,12 @@
 		EC87542E1D2B8B4300EC6DB5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EC8754301D2B8B9600EC6DB5 /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Loading.h"; sourceTree = "<group>"; };
 		EC8754311D2B8B9600EC6DB5 /* UIView+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Loading.m"; sourceTree = "<group>"; };
+		EC9DE28B1DAF8FE7007B0CEE /* JQKTorrentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKTorrentViewController.h; sourceTree = "<group>"; };
+		EC9DE28C1DAF8FE7007B0CEE /* JQKTorrentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKTorrentViewController.m; sourceTree = "<group>"; };
+		EC9DE28E1DAF9005007B0CEE /* JQKTorrentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKTorrentModel.h; sourceTree = "<group>"; };
+		EC9DE28F1DAF9005007B0CEE /* JQKTorrentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKTorrentModel.m; sourceTree = "<group>"; };
+		EC9DE2911DAF90E5007B0CEE /* JQKTorrentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKTorrentCell.h; sourceTree = "<group>"; };
+		EC9DE2921DAF90E5007B0CEE /* JQKTorrentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKTorrentCell.m; sourceTree = "<group>"; };
 		F2837DDF85A418D0E9FEC248 /* Pods-JQKuaibo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JQKuaibo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JQKuaibo/Pods-JQKuaibo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -566,6 +575,7 @@
 				BC38727F1C2D29B400CBE88A /* Home */,
 				BC3872841C2D2B8B00CBE88A /* HotVideo */,
 				BC6116CB1C8EC8CF00A66155 /* Movie */,
+				EC9DE2871DAF8FAD007B0CEE /* Torrent */,
 				B374B9C01CFD6C7E0063C1C6 /* Spread */,
 				BC38728E1C2D2CA500CBE88A /* More */,
 			);
@@ -876,6 +886,43 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		EC9DE2871DAF8FAD007B0CEE /* Torrent */ = {
+			isa = PBXGroup;
+			children = (
+				EC9DE2881DAF8FAD007B0CEE /* Controller */,
+				EC9DE2891DAF8FAD007B0CEE /* Model */,
+				EC9DE28A1DAF8FAD007B0CEE /* View */,
+			);
+			path = Torrent;
+			sourceTree = "<group>";
+		};
+		EC9DE2881DAF8FAD007B0CEE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EC9DE28B1DAF8FE7007B0CEE /* JQKTorrentViewController.h */,
+				EC9DE28C1DAF8FE7007B0CEE /* JQKTorrentViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EC9DE2891DAF8FAD007B0CEE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EC9DE28E1DAF9005007B0CEE /* JQKTorrentModel.h */,
+				EC9DE28F1DAF9005007B0CEE /* JQKTorrentModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EC9DE28A1DAF8FAD007B0CEE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EC9DE2911DAF90E5007B0CEE /* JQKTorrentCell.h */,
+				EC9DE2921DAF90E5007B0CEE /* JQKTorrentCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1075,6 +1122,7 @@
 				B3FEDAE61D5334D1007CBB55 /* JQKWebViewController.m in Sources */,
 				BC5BCE991C51EF8C0034F532 /* JQKConfiguration.m in Sources */,
 				B34B954E1D5357B700292EEC /* SDCycleScrollView.m in Sources */,
+				EC9DE2901DAF9005007B0CEE /* JQKTorrentModel.m in Sources */,
 				B35F64681D475EF400E03202 /* UIColor+FeaturedColor.m in Sources */,
 				BC38727E1C2D299D00CBE88A /* JQKBaseViewController.m in Sources */,
 				BC6116D71C8ED17700A66155 /* JQKMovieCell.m in Sources */,
@@ -1100,6 +1148,7 @@
 				BC6116DD1C8EFCA800A66155 /* JQKVideos.m in Sources */,
 				BC3872BE1C2D2E3E00CBE88A /* NSString+meltutils.m in Sources */,
 				B374B9C61CFD6CBA0063C1C6 /* JQKSpreadController.m in Sources */,
+				EC9DE28D1DAF8FE7007B0CEE /* JQKTorrentViewController.m in Sources */,
 				BC2C027E1C2E744700D10677 /* JQKPaymentPopView.m in Sources */,
 				BC2C02771C2E5C1A00D10677 /* JQKHotVideoModel.m in Sources */,
 				B374B9D21CFD86690063C1C6 /* JQKApplicationManager.m in Sources */,
@@ -1109,6 +1158,7 @@
 				BC3873541C2D4CD500CBE88A /* JQKHomeCell.m in Sources */,
 				B35BB6421D1A9F9E003CF5B6 /* DBPersistence.m in Sources */,
 				BC3872081C2D273100CBE88A /* main.m in Sources */,
+				EC9DE2931DAF90E5007B0CEE /* JQKTorrentCell.m in Sources */,
 				B35BB6551D1AA15F003CF5B6 /* JQKNetworkInfo.m in Sources */,
 				B3FEBD3B1D82BB7900E11407 /* JQKOrderWebViewController.m in Sources */,
 				B35F64621D475B1600E03202 /* JQKPaymentTypeCell.m in Sources */,
@@ -1271,7 +1321,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "Developer ID Installer: Neijiang Fenghuang Enterprise (Group) Co., Ltd. (7VHT3KAS56)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "Developer ID Application: Neijiang Fenghuang Enterprise (Group) Co., Ltd. (7VHT3KAS56)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Developer ID Application: Neijiang Fenghuang Enterprise (Group) Co., Ltd. (7VHT3KAS56)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7VHT3KAS56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1294,7 +1344,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d65529d5-f628-46c2-bebf-4004fac2fe10";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1307,7 +1357,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "Developer ID Installer: Neijiang Fenghuang Enterprise (Group) Co., Ltd. (7VHT3KAS56)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Developer ID Application: Neijiang Fenghuang Enterprise (Group) Co., Ltd. (7VHT3KAS56)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7VHT3KAS56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1330,7 +1380,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4b0ab9ef-6709-4b29-acfb-e8a89c6075c5";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

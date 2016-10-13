@@ -16,6 +16,7 @@
 #import "JQKSystemConfigModel.h"
 #import "JQKPaymentViewController.h"
 #import "JQKMovieViewController.h"
+#import "JQKTorrentViewController.h"
 #import "JQKLaunchView.h"
 #import "JQKMinViewController.h"
 #import <QBNetworkingConfiguration.h>
@@ -60,10 +61,17 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
                                                                            image:[[UIImage imageNamed:@"hot_video_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                                                    selectedImage:[[UIImage imageNamed:@"hot_video_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    JQKSpreadController *spreadVC = [[JQKSpreadController alloc] init];
-    spreadVC.title = @"更多";
-    UINavigationController *spreadNav = [[UINavigationController alloc] initWithRootViewController:spreadVC];
-    spreadNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:spreadVC.title image:[UIImage imageNamed:@"tabbar_spread_normal"] selectedImage:[UIImage imageNamed:@"tabbar_spread_normal"]];
+    JQKTorrentViewController *torrentVC = [[JQKTorrentViewController alloc] init];
+    torrentVC.title                         = @"种子";
+    UINavigationController *torrentNav = [[UINavigationController alloc] initWithRootViewController:torrentVC];
+    torrentNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:torrentVC.title
+                                                                            image:[[UIImage imageNamed:@"hot_video_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                                    selectedImage:[[UIImage imageNamed:@"hot_video_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    
+//    JQKSpreadController *spreadVC = [[JQKSpreadController alloc] init];
+//    spreadVC.title = @"更多";
+//    UINavigationController *spreadNav = [[UINavigationController alloc] initWithRootViewController:spreadVC];
+//    spreadNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:spreadVC.title image:[UIImage imageNamed:@"tabbar_spread_normal"] selectedImage:[UIImage imageNamed:@"tabbar_spread_normal"]];
     
     
     //    JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
@@ -83,7 +91,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
                                                                  selectedImage:[[UIImage imageNamed:@"more_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     UITabBarController *tabBarController    = [[UITabBarController alloc] init];
-    tabBarController.viewControllers        = @[homeNav,videoNav,spreadNav,moreNav];
+    tabBarController.viewControllers        = @[homeNav,videoNav,torrentVC,moreNav];
     tabBarController.tabBar.translucent     = NO;
     tabBarController.tabBar.backgroundImage = [UIImage imageWithColor:[UIColor colorWithWhite:0.95 alpha:1]];
     tabBarController.delegate = self;
