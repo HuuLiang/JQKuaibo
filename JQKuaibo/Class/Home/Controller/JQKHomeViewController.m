@@ -329,7 +329,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
             JQKChannels *channel = self.videoModel.fetchedPrograms.lastObject;
             if ([JQKUtil isPaid]) {
                 [self playVideo:program];
-            }{
+            } else {
                 [self playVideo:program withTimeControl:NO shouldPopPayment:YES withProgramLocation:(indexPath.item -kHeaderFreeVideoItemOffset) inChannel:channel];
             }
             [[JQKStatsManager sharedManager] statsCPCWithProgram:program programLocation:(indexPath.item - kHeaderFreeVideoItemOffset) inChannel:channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];

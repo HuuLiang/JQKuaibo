@@ -150,6 +150,15 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
             [self->_layoutTableView JQK_triggerPullToRefresh];
         });
     }];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.videos.count == 0) {
+            [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                @strongify(self);
+                [self->_layoutTableView JQK_triggerPullToRefresh];
+            }];
+        }
+    });
 }
 
 //- (void)loadHeaderImage {

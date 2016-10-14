@@ -87,9 +87,6 @@
 		BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4C09CC1C328C1D002C4709 /* CoreTelephony.framework */; };
 		BC5BCE961C51EE460034F532 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC5BCE951C51EE460034F532 /* config.plist */; };
 		BC5BCE991C51EF8C0034F532 /* JQKConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BCE981C51EF8C0034F532 /* JQKConfiguration.m */; };
-		BC6116D41C8ECE9B00A66155 /* JQKMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6116D31C8ECE9B00A66155 /* JQKMovieViewController.m */; };
-		BC6116D71C8ED17700A66155 /* JQKMovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6116D61C8ED17700A66155 /* JQKMovieCell.m */; };
-		BC6116DA1C8EF3A800A66155 /* JQKMovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6116D91C8EF3A800A66155 /* JQKMovieModel.m */; };
 		BC6116DD1C8EFCA800A66155 /* JQKVideos.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6116DC1C8EFCA800A66155 /* JQKVideos.m */; };
 		BC64E2571C4E171200450C1B /* JQKAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC64E2561C4E171200450C1B /* JQKAdView.m */; };
 		BC8A2AB91C8FD06100DF2AE2 /* JQKHomeVideoProgramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8A2AB81C8FD06100DF2AE2 /* JQKHomeVideoProgramModel.m */; };
@@ -97,6 +94,12 @@
 		BC8A2AC01C900D9100DF2AE2 /* payment_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BC8A2ABF1C900D9100DF2AE2 /* payment_background.jpg */; };
 		BC8A2AC61C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8A2AC51C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m */; };
 		BC8A2AC91C902E6300DF2AE2 /* JQKVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8A2AC81C902E6300DF2AE2 /* JQKVideoPlayer.m */; };
+		EC4872A21DB0B01C00CCCC54 /* JQKAppCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC4872A11DB0B01C00CCCC54 /* JQKAppCell.m */; };
+		EC4872AC1DB0BD5100CCCC54 /* JQKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC4872AB1DB0BD5100CCCC54 /* JQKDetailViewController.m */; };
+		EC4872B71DB0C2FB00CCCC54 /* JQKDetailHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC4872B41DB0C2FB00CCCC54 /* JQKDetailHeaderCell.m */; };
+		EC4872B81DB0C2FB00CCCC54 /* JQKDetailVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC4872B61DB0C2FB00CCCC54 /* JQKDetailVideoCell.m */; };
+		EC4872BB1DB0CD2A00CCCC54 /* JQKDetailBDCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC4872BA1DB0CD2A00CCCC54 /* JQKDetailBDCell.m */; };
+		EC4872BE1DB0E3DF00CCCC54 /* JQKDetailPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC4872BD1DB0E3DF00CCCC54 /* JQKDetailPhotoCell.m */; };
 		EC87542D1D2B8B3900EC6DB5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC87542C1D2B8B3900EC6DB5 /* CoreMotion.framework */; };
 		EC87542F1D2B8B4300EC6DB5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC87542E1D2B8B4300EC6DB5 /* SystemConfiguration.framework */; };
 		EC8754321D2B8B9600EC6DB5 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = EC8754311D2B8B9600EC6DB5 /* UIView+Loading.m */; };
@@ -288,12 +291,6 @@
 		BC5BCE951C51EE460034F532 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		BC5BCE971C51EF8C0034F532 /* JQKConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKConfiguration.h; sourceTree = "<group>"; };
 		BC5BCE981C51EF8C0034F532 /* JQKConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKConfiguration.m; sourceTree = "<group>"; };
-		BC6116D21C8ECE9B00A66155 /* JQKMovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKMovieViewController.h; sourceTree = "<group>"; };
-		BC6116D31C8ECE9B00A66155 /* JQKMovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKMovieViewController.m; sourceTree = "<group>"; };
-		BC6116D51C8ED17700A66155 /* JQKMovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKMovieCell.h; sourceTree = "<group>"; };
-		BC6116D61C8ED17700A66155 /* JQKMovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKMovieCell.m; sourceTree = "<group>"; };
-		BC6116D81C8EF3A800A66155 /* JQKMovieModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKMovieModel.h; sourceTree = "<group>"; };
-		BC6116D91C8EF3A800A66155 /* JQKMovieModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKMovieModel.m; sourceTree = "<group>"; };
 		BC6116DB1C8EFCA800A66155 /* JQKVideos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKVideos.h; sourceTree = "<group>"; };
 		BC6116DC1C8EFCA800A66155 /* JQKVideos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKVideos.m; sourceTree = "<group>"; };
 		BC64E2551C4E171200450C1B /* JQKAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKAdView.h; sourceTree = "<group>"; };
@@ -307,6 +304,18 @@
 		BC8A2AC71C902E6300DF2AE2 /* JQKVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKVideoPlayer.h; sourceTree = "<group>"; };
 		BC8A2AC81C902E6300DF2AE2 /* JQKVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKVideoPlayer.m; sourceTree = "<group>"; };
 		E70C055F2C8A24576C1A945B /* Pods-JQKuaibo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JQKuaibo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JQKuaibo/Pods-JQKuaibo.release.xcconfig"; sourceTree = "<group>"; };
+		EC4872A01DB0B01C00CCCC54 /* JQKAppCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JQKAppCell.h; path = JQKuaibo/Class/Torrent/View/JQKAppCell.h; sourceTree = SOURCE_ROOT; };
+		EC4872A11DB0B01C00CCCC54 /* JQKAppCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JQKAppCell.m; path = JQKuaibo/Class/Torrent/View/JQKAppCell.m; sourceTree = SOURCE_ROOT; };
+		EC4872AA1DB0BD5100CCCC54 /* JQKDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JQKDetailViewController.h; path = JQKuaibo/Class/Detail/Controller/JQKDetailViewController.h; sourceTree = SOURCE_ROOT; };
+		EC4872AB1DB0BD5100CCCC54 /* JQKDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JQKDetailViewController.m; path = JQKuaibo/Class/Detail/Controller/JQKDetailViewController.m; sourceTree = SOURCE_ROOT; };
+		EC4872B31DB0C2FB00CCCC54 /* JQKDetailHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JQKDetailHeaderCell.h; path = JQKuaibo/Class/Detail/View/JQKDetailHeaderCell.h; sourceTree = SOURCE_ROOT; };
+		EC4872B41DB0C2FB00CCCC54 /* JQKDetailHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JQKDetailHeaderCell.m; path = JQKuaibo/Class/Detail/View/JQKDetailHeaderCell.m; sourceTree = SOURCE_ROOT; };
+		EC4872B51DB0C2FB00CCCC54 /* JQKDetailVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JQKDetailVideoCell.h; path = JQKuaibo/Class/Detail/View/JQKDetailVideoCell.h; sourceTree = SOURCE_ROOT; };
+		EC4872B61DB0C2FB00CCCC54 /* JQKDetailVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JQKDetailVideoCell.m; path = JQKuaibo/Class/Detail/View/JQKDetailVideoCell.m; sourceTree = SOURCE_ROOT; };
+		EC4872B91DB0CD2A00CCCC54 /* JQKDetailBDCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JQKDetailBDCell.h; path = JQKuaibo/Class/Detail/View/JQKDetailBDCell.h; sourceTree = SOURCE_ROOT; };
+		EC4872BA1DB0CD2A00CCCC54 /* JQKDetailBDCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JQKDetailBDCell.m; path = JQKuaibo/Class/Detail/View/JQKDetailBDCell.m; sourceTree = SOURCE_ROOT; };
+		EC4872BC1DB0E3DF00CCCC54 /* JQKDetailPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JQKDetailPhotoCell.h; path = JQKuaibo/Class/Detail/View/JQKDetailPhotoCell.h; sourceTree = SOURCE_ROOT; };
+		EC4872BD1DB0E3DF00CCCC54 /* JQKDetailPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JQKDetailPhotoCell.m; path = JQKuaibo/Class/Detail/View/JQKDetailPhotoCell.m; sourceTree = SOURCE_ROOT; };
 		EC87542C1D2B8B3900EC6DB5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		EC87542E1D2B8B4300EC6DB5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EC8754301D2B8B9600EC6DB5 /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Loading.h"; sourceTree = "<group>"; };
@@ -475,6 +484,8 @@
 		B3FEDAD71D532FD6007CBB55 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EC4872A01DB0B01C00CCCC54 /* JQKAppCell.h */,
+				EC4872A11DB0B01C00CCCC54 /* JQKAppCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -574,9 +585,9 @@
 				BC38723D1C2D28BF00CBE88A /* Base */,
 				BC38727F1C2D29B400CBE88A /* Home */,
 				BC3872841C2D2B8B00CBE88A /* HotVideo */,
-				BC6116CB1C8EC8CF00A66155 /* Movie */,
 				EC9DE2871DAF8FAD007B0CEE /* Torrent */,
 				B374B9C01CFD6C7E0063C1C6 /* Spread */,
+				EC4872A31DB0BD0F00CCCC54 /* Detail */,
 				BC38728E1C2D2CA500CBE88A /* More */,
 			);
 			path = Class;
@@ -841,49 +852,54 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		BC6116CB1C8EC8CF00A66155 /* Movie */ = {
-			isa = PBXGroup;
-			children = (
-				BC6116CD1C8EC9A700A66155 /* View */,
-				BC6116CC1C8EC99E00A66155 /* Controller */,
-				BC6116CE1C8EC9AF00A66155 /* Model */,
-			);
-			path = Movie;
-			sourceTree = "<group>";
-		};
-		BC6116CC1C8EC99E00A66155 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				BC6116D21C8ECE9B00A66155 /* JQKMovieViewController.h */,
-				BC6116D31C8ECE9B00A66155 /* JQKMovieViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		BC6116CD1C8EC9A700A66155 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				BC6116D51C8ED17700A66155 /* JQKMovieCell.h */,
-				BC6116D61C8ED17700A66155 /* JQKMovieCell.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		BC6116CE1C8EC9AF00A66155 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				BC6116D81C8EF3A800A66155 /* JQKMovieModel.h */,
-				BC6116D91C8EF3A800A66155 /* JQKMovieModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		BC8A2ABC1C8FF8F000DF2AE2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				BC8A2ABF1C900D9100DF2AE2 /* payment_background.jpg */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		EC4872A31DB0BD0F00CCCC54 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				EC4872A41DB0BD0F00CCCC54 /* Controller */,
+				EC4872A51DB0BD0F00CCCC54 /* Model */,
+				EC4872A61DB0BD0F00CCCC54 /* View */,
+			);
+			name = Detail;
+			path = Torrent/Detail;
+			sourceTree = "<group>";
+		};
+		EC4872A41DB0BD0F00CCCC54 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EC4872AA1DB0BD5100CCCC54 /* JQKDetailViewController.h */,
+				EC4872AB1DB0BD5100CCCC54 /* JQKDetailViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EC4872A51DB0BD0F00CCCC54 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EC4872A61DB0BD0F00CCCC54 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EC4872B31DB0C2FB00CCCC54 /* JQKDetailHeaderCell.h */,
+				EC4872B41DB0C2FB00CCCC54 /* JQKDetailHeaderCell.m */,
+				EC4872B51DB0C2FB00CCCC54 /* JQKDetailVideoCell.h */,
+				EC4872B61DB0C2FB00CCCC54 /* JQKDetailVideoCell.m */,
+				EC4872B91DB0CD2A00CCCC54 /* JQKDetailBDCell.h */,
+				EC4872BA1DB0CD2A00CCCC54 /* JQKDetailBDCell.m */,
+				EC4872BC1DB0E3DF00CCCC54 /* JQKDetailPhotoCell.h */,
+				EC4872BD1DB0E3DF00CCCC54 /* JQKDetailPhotoCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		EC9DE2871DAF8FAD007B0CEE /* Torrent */ = {
@@ -1112,8 +1128,8 @@
 				BC8A2AB91C8FD06100DF2AE2 /* JQKHomeVideoProgramModel.m in Sources */,
 				BC3872831C2D29F000CBE88A /* JQKHomeViewController.m in Sources */,
 				B374B9D51CFD867D0063C1C6 /* JQKApplication.m in Sources */,
-				BC6116DA1C8EF3A800A66155 /* JQKMovieModel.m in Sources */,
 				B374B9C91CFD70100063C1C6 /* JQKSpreadModel.m in Sources */,
+				EC4872BE1DB0E3DF00CCCC54 /* JQKDetailPhotoCell.m in Sources */,
 				BC8A2AC61C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m in Sources */,
 				B34B954A1D5357B700292EEC /* TAAnimatedDotView.m in Sources */,
 				BC38736B1C2D56A300CBE88A /* JQKChannelProgram.m in Sources */,
@@ -1125,7 +1141,6 @@
 				EC9DE2901DAF9005007B0CEE /* JQKTorrentModel.m in Sources */,
 				B35F64681D475EF400E03202 /* UIColor+FeaturedColor.m in Sources */,
 				BC38727E1C2D299D00CBE88A /* JQKBaseViewController.m in Sources */,
-				BC6116D71C8ED17700A66155 /* JQKMovieCell.m in Sources */,
 				B35BB6431D1A9F9E003CF5B6 /* DBTableVersion.m in Sources */,
 				BC2C027B1C2E5F5A00D10677 /* JQKHotVideoCell.m in Sources */,
 				B33BC8641DA8BFB20051A035 /* NSObject+PropertyAccessInspecting.m in Sources */,
@@ -1135,10 +1150,12 @@
 				BC3872C11C2D2E3E00CBE88A /* UIImageView+YPBAnimation.m in Sources */,
 				BC38733E1C2D402B00CBE88A /* JQKProgram.m in Sources */,
 				B34B95491D5357B700292EEC /* TAAbstractDotView.m in Sources */,
+				EC4872B81DB0C2FB00CCCC54 /* JQKDetailVideoCell.m in Sources */,
 				B34B954D1D5357B700292EEC /* SDCollectionViewCell.m in Sources */,
 				BC3873431C2D402B00CBE88A /* JQKUserAccessModel.m in Sources */,
 				BC38730A1C2D38D000CBE88A /* JQKHudManager.m in Sources */,
 				B33BCC9D1D052E9800D8E62F /* UITableView+Separator.m in Sources */,
+				EC4872A21DB0B01C00CCCC54 /* JQKAppCell.m in Sources */,
 				BC3873501C2D4BAD00CBE88A /* JQKHomeCollectionViewLayout.m in Sources */,
 				B3FEDADA1D5330B8007CBB55 /* JQKLayoutViewController.m in Sources */,
 				B35F64651D475B4F00E03202 /* JQKPaymentButton.m in Sources */,
@@ -1149,13 +1166,16 @@
 				BC3872BE1C2D2E3E00CBE88A /* NSString+meltutils.m in Sources */,
 				B374B9C61CFD6CBA0063C1C6 /* JQKSpreadController.m in Sources */,
 				EC9DE28D1DAF8FE7007B0CEE /* JQKTorrentViewController.m in Sources */,
+				EC4872AC1DB0BD5100CCCC54 /* JQKDetailViewController.m in Sources */,
 				BC2C027E1C2E744700D10677 /* JQKPaymentPopView.m in Sources */,
 				BC2C02771C2E5C1A00D10677 /* JQKHotVideoModel.m in Sources */,
+				EC4872B71DB0C2FB00CCCC54 /* JQKDetailHeaderCell.m in Sources */,
 				B374B9D21CFD86690063C1C6 /* JQKApplicationManager.m in Sources */,
 				B3FEDADD1D533262007CBB55 /* JQKMinViewController.m in Sources */,
 				B35BB6411D1A9F9E003CF5B6 /* DBHandler.m in Sources */,
 				BC3872BC1C2D2E3E00CBE88A /* NSString+length.m in Sources */,
 				BC3873541C2D4CD500CBE88A /* JQKHomeCell.m in Sources */,
+				EC4872BB1DB0CD2A00CCCC54 /* JQKDetailBDCell.m in Sources */,
 				B35BB6421D1A9F9E003CF5B6 /* DBPersistence.m in Sources */,
 				BC3872081C2D273100CBE88A /* main.m in Sources */,
 				EC9DE2931DAF90E5007B0CEE /* JQKTorrentCell.m in Sources */,
@@ -1176,7 +1196,6 @@
 				B3FEDAD61D53293B007CBB55 /* JQKHomeBigCell.m in Sources */,
 				B35BB64E1D1A9FCA003CF5B6 /* JQKPayStatsModel.m in Sources */,
 				B35BB6561D1AA15F003CF5B6 /* JQKStatsManager.m in Sources */,
-				BC6116D41C8ECE9B00A66155 /* JQKMovieViewController.m in Sources */,
 				BC3872D21C2D307400CBE88A /* JQKUtil.m in Sources */,
 				BC3873751C2D80D500CBE88A /* JQKProgramCell.m in Sources */,
 				B35BB64F1D1A9FCA003CF5B6 /* JQKStatsBaseModel.m in Sources */,

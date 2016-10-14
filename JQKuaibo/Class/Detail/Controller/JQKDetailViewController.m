@@ -1,0 +1,151 @@
+//
+//  JQKDetailViewController.m
+//  JQKuaibo
+//
+//  Created by Liang on 2016/10/14.
+//  Copyright © 2016年 iqu8. All rights reserved.
+//
+
+#import "JQKDetailViewController.h"
+#import "JQKDetailHeaderCell.h"
+#import "JQKDetailVideoCell.h"
+#import "JQKDetailBDCell.h"
+#import "JQKDetailPhotoCell.h"
+
+@interface JQKDetailViewController ()
+{
+    JQKTorrentProgram *_program;
+    JQKTorrentResponse *_response;
+    JQKDetailHeaderCell *_headerCell;
+    JQKDetailVideoCell *_videoCell;
+    JQKDetailBDCell *_bdCell;
+    JQKDetailPhotoCell *_photoCell;
+    NSUInteger _index;
+}
+
+@end
+
+@implementation JQKDetailViewController
+
+- (instancetype)initWithProgramInfo:(JQKTorrentResponse *)column index:(NSUInteger)index {
+    if (self = [super init]) {
+        _index = index;
+        _response = column;
+        _program = column.programList[index];
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor redColor];
+    self.layoutTableView.hasRowSeparator = NO;
+    self.layoutTableView.hasSectionBorder = NO;
+    
+    {
+        [self.layoutTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+    }
+    @weakify(self);
+    self.layoutTableViewAction = ^(NSIndexPath *indexPath, UITableViewCell *cell) {
+        @strongify(self);
+        if (cell == self->_videoCell) {
+            
+            JQKProgram *program = [[JQKProgram alloc] init];
+            program.type = @(self->_program.type);
+            program.programId = @(self->_program.programId);
+            program.videoUrl = self->_program.videoUrl;
+            
+            JQKChannels *channels = [[JQKChannels alloc] init];
+            channels.type = @(self->_response.type);
+            channels.realColumnId = @(self->_response.realColumnId);
+            
+            JQKVideo *video = [[JQKVideo alloc] init];
+            video.videoUrl = self->_program.videoUrl;
+            
+            [self playVideo:video withTimeControl:YES shouldPopPayment:YES withProgramLocation:self->_index inChannel:channels];
+            if ([JQKUtil isPaid]) {
+                [self playVideo:video];
+            } else {
+                [self playVideo:program withTimeControl:NO shouldPopPayment:YES withProgramLocation:self->_index inChannel:channels];
+            }
+        }
+    };
+    
+    [self initCells];
+}
+
+- (void)initCells {
+    [self removeAllLayoutCells];
+    
+    NSInteger section = 0;
+    
+    [self initHeaderCellInSection:section++];
+    [self initVideoCellInSection:section++];
+    [self initBDCellInSection:section++];
+}
+
+- (void)initHeaderCellInSection:(NSInteger)section {
+    _headerCell = [[JQKDetailHeaderCell alloc] init];
+    _headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    _headerCell.tagStr = [[_program.tag componentsSeparatedByString:@"|"] lastObject];
+    _headerCell.tagColor = [UIColor colorWithHexString:[[_program.tag componentsSeparatedByString:@"|"] firstObject]];
+    _headerCell.titleStr = _program.title;
+    [self setLayoutCell:_headerCell cellHeight:kWidth(47) inRow:0 andSection:section];
+}
+
+- (void)initVideoCellInSection:(NSInteger)section {
+    _videoCell = [[JQKDetailVideoCell alloc] init];
+    _videoCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    _videoCell.imgUrlStr = _program.detailsCoverImg;
+    [self setLayoutCell:_videoCell cellHeight:kWidth(206) inRow:0 andSection:section];
+}
+
+- (void)initBDCellInSection:(NSInteger)section {
+    _bdCell = [[JQKDetailBDCell alloc] init];
+    NSArray *array = [_program.spare componentsSeparatedByString:@"|"];
+    if (array[1]) {
+        _bdCell.bdUrlStr = array[1];
+    }
+    if (array[2] && [JQKUtil isPaid]) {
+        _bdCell.bdPasswordStr = array[2];
+    }
+    @weakify(self);
+    _bdCell.vipAction = ^ {
+        @strongify(self);
+        JQKProgram *program = [[JQKProgram alloc] init];
+        program.type = @(self->_program.type);
+        program.programId = @(self->_program.programId);
+        
+        JQKChannels *channels = [[JQKChannels alloc] init];
+        channels.type = @(self->_response.type);
+        channels.realColumnId = @(self->_response.realColumnId);
+        
+        [self payForProgram:program programLocation:self->_program.payPointType inChannel:channels];
+    };
+    
+    _bdCell.bdAction = ^ {
+        if (array[1]) {
+           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:array[1]]];
+        }
+    };
+    
+    _bdCell.copyAction = ^ {
+        UIPasteboard *pastboard = [UIPasteboard generalPasteboard];
+        pastboard.string = array[1] ? array[1] : @"";
+        if (array[1]) {
+            [[JQKHudManager manager] showHudWithText:@"复制成功"];
+        }
+    };
+    
+    [self setLayoutCell:_bdCell cellHeight:kWidth(173) inRow:0 andSection:section];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end

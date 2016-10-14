@@ -160,10 +160,13 @@
 #endif
 }
 
-- (void)addRefreshBtnWithCurrentView:(UIView *)view withAction:(JQKAction) action;{
+- (void)addRefreshBtnWithCurrentView:(UIView *)view withAction:(JQKAction) action {
+    if (self.refreshBtn) {
+        return;
+    }
+    
     UIButton *refreshBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.refreshBtn = refreshBtn;
-    //    [refreshBtn setImage:[UIImage imageNamed:@"refresh"] forState:UIControlStateNormal];
     refreshBtn.titleLabel.font = [UIFont systemFontOfSize:kWidth(9.)];
     [refreshBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [refreshBtn setTitle:@"点击刷新" forState:UIControlStateNormal];
@@ -171,22 +174,22 @@
     refreshBtn.backgroundColor = [UIColor clearColor];
     [view addSubview:refreshBtn];
     [UIView animateWithDuration:0.3 animations:^{
-        //       refreshBtn.frame = CGRectMake(kScreenWidth/2.-kWidth(40.), (kScreenHeight-108.)/2.-kWidth(40.), kWidth(80.), kWidth(80.));
         refreshBtn.transform = CGAffineTransformMakeScale(1.6, 1.6);
-        //        refreshBtn.frame
     }];
     [refreshBtn bk_addEventHandler:^(id sender) {
         if (action) {
             action(refreshBtn);
+            [refreshBtn removeFromSuperview];
+            [self removeCurrentRefreshBtn];
         }
-        //        [refreshBtn removeFromSuperview];
-        //        refreshBtn.enabled = NO;
+
         if (![JQKSystemConfigModel sharedModel].loaded) {
             [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:nil];
         }
         
     } forControlEvents:UIControlEventTouchUpInside];
 }
+
 - (void)removeCurrentRefreshBtn{
     if (self.refreshBtn) {
         [self.refreshBtn removeFromSuperview];
