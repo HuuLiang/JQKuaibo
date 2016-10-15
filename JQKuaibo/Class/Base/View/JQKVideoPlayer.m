@@ -15,6 +15,7 @@
     UILabel *_loadingLabel;
 }
 @property (nonatomic,retain) AVPlayer *player;
+@property (nonatomic,retain) NSTimer *avTimer;
 @end
 
 @implementation JQKVideoPlayer
@@ -50,6 +51,19 @@
         self.player = [AVPlayer playerWithURL:videoURL];
         [self.player addObserver:self forKeyPath:@"status" options:0 context:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEndPlay) name:AVPlayerItemDidPlayToEndTimeNotification  object:nil];
+
+         @weakify(self);
+        self.avTimer = [NSTimer bk_scheduledTimerWithTimeInterval:0.5 block:^(NSTimer *timer) {
+            float startSeconds = CMTimeGetSeconds(self.player.currentItem.currentTime);
+            if (startSeconds >= 20.) {
+                @strongify(self);
+                [self didEndPlay];
+                [self pause];
+                [timer invalidate];
+            }
+        } repeats:YES];
+         
+        
     }
     return self;
 }
@@ -65,11 +79,13 @@
 
 - (void)pause {
     [self.player pause];
+    
 }
 
 - (void)dealloc {
     [self.player removeObserver:self forKeyPath:@"status"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.avTimer invalidate];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
