@@ -65,7 +65,6 @@
             JQKVideo *video = [[JQKVideo alloc] init];
             video.videoUrl = self->_program.videoUrl;
             
-            [self playVideo:video withTimeControl:YES shouldPopPayment:YES withProgramLocation:self->_index inChannel:channels];
             if ([JQKUtil isPaid]) {
                 [self playVideo:video];
             } else {
@@ -74,6 +73,12 @@
         }
     };
     
+    [self initCells];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPaidNotification:) name:kPaidNotificationName object:nil];
+}
+
+- (void)onPaidNotification:(NSNotification *)notification {
     [self initCells];
 }
 
@@ -85,6 +90,7 @@
     [self initHeaderCellInSection:section++];
     [self initVideoCellInSection:section++];
     [self initBDCellInSection:section++];
+    [self initPhotoCellInSection:section++];
 }
 
 - (void)initHeaderCellInSection:(NSInteger)section {
@@ -141,6 +147,30 @@
     };
     
     [self setLayoutCell:_bdCell cellHeight:kWidth(173) inRow:0 andSection:section];
+}
+
+- (void)initPhotoCellInSection:(NSInteger)section {
+    _photoCell = [[JQKDetailPhotoCell alloc] init];
+    _photoCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [self setLayoutCell:_photoCell cellHeight:kWidth(40) inRow:0 andSection:section++];
+    
+    for (NSString *str in self->_program.imgurls) {
+        [self setHeaderHeight:kWidth(5) inSection:section];
+        UITableViewCell *cell = [[UITableViewCell alloc] init];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UIImageView * imgV = [[UIImageView alloc] init];
+        [imgV sd_setImageWithURL:[NSURL URLWithString:str]];
+        [imgV setContentMode:UIViewContentModeScaleAspectFill];
+        imgV.clipsToBounds = YES;
+        [cell addSubview:imgV];
+        {
+            [imgV mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(cell);
+            }];
+        }
+        
+        [self setLayoutCell:cell cellHeight:(kScreenWidth - kWidth(30))*1.25 inRow:0 andSection:section++];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

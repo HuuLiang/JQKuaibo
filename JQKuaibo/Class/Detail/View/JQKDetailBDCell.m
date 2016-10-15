@@ -53,6 +53,7 @@
         
         _textField = [[UITextField alloc] init];
         _textField.backgroundColor = [UIColor colorWithHexString:@"#ebebeb"];
+        _textField.textColor = [UIColor colorWithHexString:@"#9b9b9b"];
         _textField.layer.cornerRadius = kWidth(8);
         _textField.layer.masksToBounds = YES;
         _textField.enabled = NO;
