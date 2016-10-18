@@ -181,15 +181,36 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
                                                      channelNo:JQK_CHANNEL_NO
                                                      urlScheme:@"comsimiyingyuan2016appalipayurlscheme"];
     [[JQKErrorHandler sharedHandler] initialize];
-    [self setupMobStatistics];
-    [self setupCommonStyles];
-    //    [[JQKNetworkInfo sharedInfo] startMonitoring];
     [QBNetworkInfo sharedInfo].reachabilityChangedAction = ^(BOOL reachable) {
         if (reachable && ![JQKSystemConfigModel sharedModel].loaded) {
             [self fetchSystemConfigWithCompletionHandler:nil];
         }
+        if (reachable && ![JQKUtil isRegistered]) {
+            [[JQKActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
+                if (success) {
+                    [JQKUtil setRegisteredWithUserId:userId];
+                    [[JQKUserAccessModel sharedModel] requestUserAccess];
+                }
+            }];
+        } else {
+            [[JQKUserAccessModel sharedModel] requestUserAccess];
+        }
+        if ([QBNetworkInfo sharedInfo].networkStatus <= QBNetworkStatusNotReachable && (![JQKUtil isRegistered] || ![JQKSystemConfigModel sharedModel].loaded)) {
+            [UIAlertView bk_showAlertViewWithTitle:@"很抱歉!" message:@"您的应用未连接到网络,请检查您的网络设置" cancelButtonTitle:@"稍后" otherButtonTitles:@[@"设置"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (buttonIndex == 1) {
+                    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                    if([[UIApplication sharedApplication] canOpenURL:url]) {
+                        [[UIApplication sharedApplication] openURL:url];
+                    }
+                }
+            }];
+        }
     };
+
+    
     [[QBNetworkInfo sharedInfo] startMonitoring];
+    [self setupMobStatistics];
+    [self setupCommonStyles];
     
     BOOL requestedSystemConfig = NO;
     //    #ifdef JQK_IMAGE_TOKEN_ENABLED
@@ -207,49 +228,18 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
             [self.window endProgressing];
             self.window.rootViewController = self.rootViewController;
         }];
-//        requestedSystemConfig = [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
-//            [self.window endProgressing];
-//            
+    }
+//    
+//    if (![JQKUtil isRegistered]) {
+//        [[JQKActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
 //            if (success) {
-//                NSString *fetchedToken = [JQKSystemConfigModel sharedModel].imageToken;
-//                [JQKUtil setImageToken:fetchedToken];
-//                if (fetchedToken) {
-//                    [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
-//                }
-//                
+//                [JQKUtil setRegisteredWithUserId:userId];
+//                [[JQKUserAccessModel sharedModel] requestUserAccess];
 //            }
-//            
-//            self.window.rootViewController = self.rootViewController;
-//            
-//            NSUInteger statsTimeInterval = 180;
-//            if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
-//                statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;
-//            }
-//            [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
 //        }];
-    }
-    //    #else
-    //        self.window.rootViewController = self.rootViewController;
-    //        [self.window makeKeyAndVisible];
-    //    #endif
-    
-    
-    
-    //    [self.window makeKeyWindow];
-    //    self.window.hidden = NO;
-//    JQKLaunchView *launchView = [[JQKLaunchView alloc] init];
-//    [launchView show];
-    
-    if (![JQKUtil isRegistered]) {
-        [[JQKActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
-            if (success) {
-                [JQKUtil setRegisteredWithUserId:userId];
-                [[JQKUserAccessModel sharedModel] requestUserAccess];
-            }
-        }];
-    } else {
-        [[JQKUserAccessModel sharedModel] requestUserAccess];
-    }
+//    } else {
+//        [[JQKUserAccessModel sharedModel] requestUserAccess];
+//    }
     if (!requestedSystemConfig) {
         
         [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
