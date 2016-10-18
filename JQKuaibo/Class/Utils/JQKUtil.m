@@ -133,6 +133,11 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
     }
 }
 
++ (BOOL)isIpad {
+    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+}
+
+
 + (NSString *)appVersion {
     return [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
 }

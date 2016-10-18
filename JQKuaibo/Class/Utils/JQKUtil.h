@@ -29,7 +29,7 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSString *)deviceName;
 + (NSString *)appVersion;
 + (JQKDeviceType)deviceType;
-
++ (BOOL)isIpad;
 
 + (NSUInteger)launchSeq;
 + (void)accumateLaunchSeq;

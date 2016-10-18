@@ -196,6 +196,12 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
             [[JQKUserAccessModel sharedModel] requestUserAccess];
         }
         if ([QBNetworkInfo sharedInfo].networkStatus <= QBNetworkStatusNotReachable && (![JQKUtil isRegistered] || ![JQKSystemConfigModel sharedModel].loaded)) {
+            
+            
+            if ([JQKUtil isIpad]) {
+                [UIAlertView bk_showAlertViewWithTitle:@"请检查您的网络连接!" message:nil cancelButtonTitle:@"确认" otherButtonTitles:nil handler:nil];
+                //                [[CRBHudManager manager] showHudWithText:@"请检查您的网络连接!"];
+            }else {
             [UIAlertView bk_showAlertViewWithTitle:@"很抱歉!" message:@"您的应用未连接到网络,请检查您的网络设置" cancelButtonTitle:@"稍后" otherButtonTitles:@[@"设置"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 if (buttonIndex == 1) {
                     NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
@@ -204,7 +210,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
                     }
                 }
             }];
-        }
+            }}
     };
 
     
