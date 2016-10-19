@@ -190,6 +190,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
                 if (success) {
                     [JQKUtil setRegisteredWithUserId:userId];
                     [[JQKUserAccessModel sharedModel] requestUserAccess];
+                       [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:nil];
                 }
             }];
         } else {
@@ -275,7 +276,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].startupInstall]];
         }];
     }
-    [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:nil];
+ 
     return YES;
 }
 
