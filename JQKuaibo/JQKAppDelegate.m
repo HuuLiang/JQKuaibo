@@ -195,6 +195,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
             }];
         } else {
             [[JQKUserAccessModel sharedModel] requestUserAccess];
+             [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:nil];
         }
         if ([QBNetworkInfo sharedInfo].networkStatus <= QBNetworkStatusNotReachable && (![JQKUtil isRegistered] || ![JQKSystemConfigModel sharedModel].loaded)) {
             
