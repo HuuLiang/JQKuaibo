@@ -142,15 +142,15 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
             [_layoutTableView JQK_endPullToRefresh];
         }
     }];
-    [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-        @strongify(self);
-        [self->_layoutTableView JQK_endPullToRefresh];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self->_layoutTableView JQK_triggerPullToRefresh];
-        });
-    }];
-    
+//    [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+//        @strongify(self);
+//        [self->_layoutTableView JQK_endPullToRefresh];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            
+//            [self->_layoutTableView JQK_triggerPullToRefresh];
+//        });
+//    }];
+//    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (self.videos.count == 0) {
             [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
@@ -210,7 +210,6 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     @weakify(self);
     [self.videoModel fetchVideosWithPageNo:page completionHandler:^(BOOL success, JQKVideos *videos) {
         @strongify(self);
-        [self removeCurrentRefreshBtn];
         if (!self) {
             return ;
         }
@@ -218,6 +217,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
         [self->_layoutTableView JQK_endPullToRefresh];
         
         if (success) {
+            [self removeCurrentRefreshBtn];
             if (page == 1) {
                 [self.videos removeAllObjects];
             }
@@ -227,15 +227,15 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
             if (videos.items.unsignedIntegerValue == self.videos.count) {
                 [self->_layoutTableView JQK_pagingRefreshNoMoreData];
             }
-        }else {
-            if (self.videos.count == 0) {
-                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-                    @strongify(self);
-                    [self->_layoutTableView JQK_triggerPullToRefresh];
-                }];
-            }
-            
         }
+//        else {
+//            if (self.videos.count == 0) {
+//                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+//                    @strongify(self);
+//                    [self->_layoutTableView JQK_triggerPullToRefresh];
+//                }];
+//            }
+//        }
     }];
 }
 

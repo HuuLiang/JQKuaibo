@@ -161,10 +161,7 @@
 }
 
 - (void)addRefreshBtnWithCurrentView:(UIView *)view withAction:(JQKAction) action {
-    if (self.refreshBtn) {
-        return;
-    }
-    
+
     UIButton *refreshBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.refreshBtn = refreshBtn;
     refreshBtn.titleLabel.font = [UIFont systemFontOfSize:kWidth(9.)];
@@ -179,9 +176,11 @@
     [refreshBtn bk_addEventHandler:^(id sender) {
         if (action) {
             action(refreshBtn);
-            [refreshBtn removeFromSuperview];
-            [self removeCurrentRefreshBtn];
         }
+        refreshBtn.transform = CGAffineTransformMakeScale(0.56, 0.56);
+        [UIView animateWithDuration:0.4 animations:^{
+            refreshBtn.transform = CGAffineTransformMakeScale(1.8, 1.8);
+        }];
 
         if (![JQKSystemConfigModel sharedModel].loaded) {
             [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:nil];

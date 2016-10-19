@@ -125,7 +125,6 @@ DefineLazyPropertyInitialization(NSArray, fetchedSpreads)
 //获取模型数据
 - (void)loadSpreadModel {
     @weakify(self);
-    [self removeCurrentRefreshBtn];
     [self.appSpreadModel fetchAppSpreadWithCompletionHandler:^(BOOL success, id obj) {
         @strongify(self);
         if (!self) {
@@ -135,16 +134,18 @@ DefineLazyPropertyInitialization(NSArray, fetchedSpreads)
         [self->_layoutCollectionView JQK_endPullToRefresh];
         
         if (success) {
+                [self removeCurrentRefreshBtn];
             _fetchedSpreads = _appSpreadModel.appSpreadResponse.programList;
             [self->_layoutCollectionView reloadData];
-        }else {
-            if (_fetchedSpreads.count == 0) {
-                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-                    @strongify(self);
-                    [self->_layoutCollectionView JQK_triggerPullToRefresh];
-                }];
-            }
         }
+//        else {
+//            if (_fetchedSpreads.count == 0) {
+//                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+//                    @strongify(self);
+//                    [self->_layoutCollectionView JQK_triggerPullToRefresh];
+//                }];
+//            }
+//        }
     }];
 }
 /**

@@ -54,7 +54,8 @@ QBDefineLazyPropertyInitialization(JQKTorrentResponse, reponse)
         if (self.reponse.programList.count == 0) {
             [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
                 @strongify(self);
-                [self loadData];
+//                [self loadData];
+        [self->_layoutTableView JQK_triggerPullToRefresh];
             }];
         }
     });
@@ -72,18 +73,20 @@ QBDefineLazyPropertyInitialization(JQKTorrentResponse, reponse)
     @weakify(self);
     [self.torrentModel fetchTorrentsCompletionHandler:^(BOOL success, JQKTorrentResponse * obj) {
         @strongify(self);
+        [_layoutTableView JQK_endPullToRefresh];
         if (success) {
             self.reponse = obj;
-            [_layoutTableView JQK_endPullToRefresh];
+            [self removeCurrentRefreshBtn];
             [_layoutTableView reloadData];
-        } else {
-            if (self.reponse.programList.count == 0) {
-                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-                    @strongify(self);
-                    [self loadData];
-                }];
-            }
         }
+//        else {
+//            if (self.reponse.programList.count == 0) {
+//                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+//                    @strongify(self);
+//                    [self loadData];
+//                }];
+//            }
+//        }
         
     }];
 }
