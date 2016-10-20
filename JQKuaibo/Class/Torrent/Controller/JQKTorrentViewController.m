@@ -140,10 +140,20 @@ QBDefineLazyPropertyInitialization(JQKTorrentResponse, reponse)
         JQKChannels *channels = [[JQKChannels alloc] init];
         channels.type = @(self.reponse.type);
         channels.realColumnId = @(self.reponse.realColumnId);
-        [[JQKStatsManager sharedManager] statsCPCWithChannel:channels inTabIndex:self.tabBarController.selectedIndex];
+        JQKProgram *programs = [[JQKProgram alloc] init];
+        programs.programId = [NSNumber numberWithInteger:program.programId];
+        programs.type = [NSNumber numberWithInteger:program.type];
+        detailVC.programs = programs;
+        detailVC.channels = channels;
+//        [[JQKStatsManager sharedManager] statsCPCWithChannel:channels inTabIndex:self.tabBarController.selectedIndex];
+        [[JQKStatsManager sharedManager] statsCPCWithProgram:programs programLocation:indexPath.row inChannel:channels andTabIndex:self.tabBarController.selectedIndex subTabIndex:NSNotFound];
         
         [self.navigationController pushViewController:detailVC animated:YES];
     }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:NSNotFound forSlideCount:1];
 }
 
 

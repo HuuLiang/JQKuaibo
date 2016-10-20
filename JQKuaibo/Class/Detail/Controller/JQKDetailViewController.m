@@ -20,9 +20,9 @@
     JQKDetailVideoCell *_videoCell;
     JQKDetailBDCell *_bdCell;
     JQKDetailPhotoCell *_photoCell;
-    NSUInteger _index;
+//    NSUInteger _index;
 }
-
+@property (nonatomic,assign)NSInteger index;
 @end
 
 @implementation JQKDetailViewController
@@ -64,6 +64,7 @@
             
             JQKVideo *video = [[JQKVideo alloc] init];
             video.videoUrl = self->_program.videoUrl;
+            [[JQKStatsManager sharedManager] statsCPCWithProgram:self.programs programLocation:self.index inChannel:self.channels andTabIndex:self.tabBarController.selectedIndex subTabIndex:NSNotFound];
             
             if ([JQKUtil isPaid]) {
                 [self playVideo:video];
@@ -171,6 +172,10 @@
         
         [self setLayoutCell:cell cellHeight:(kScreenWidth - kWidth(30))*1.25 inRow:0 andSection:section++];
     }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:NSNotFound forSlideCount:1];
 }
 
 - (void)didReceiveMemoryWarning {

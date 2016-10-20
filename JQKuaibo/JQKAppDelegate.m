@@ -175,7 +175,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
 #ifdef DEBUG
     //    [QBNetworkingConfiguration defaultConfiguration].logEnabled = YES;
 #endif
-    //    [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];//测试支付
+//        [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];//测试支付
     [[QBPaymentManager sharedManager] registerPaymentWithAppId:JQK_REST_APP_ID
                                                      paymentPv:JQK_PAYMENT_PV
                                                      channelNo:JQK_CHANNEL_NO

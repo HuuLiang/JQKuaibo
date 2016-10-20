@@ -10,6 +10,8 @@
 #import "JQKTorrentModel.h"
 
 @interface JQKDetailViewController : JQKLayoutViewController
+@property (nonatomic,retain) JQKProgram *programs;
+@property (nonatomic,retain) JQKChannels *channels;
 
 - (instancetype)initWithProgramInfo:(JQKTorrentResponse *)column index:(NSUInteger)index;
 

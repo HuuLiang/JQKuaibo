@@ -242,7 +242,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
 
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:0 forSlideCount:1];
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:NSNotFound forSlideCount:1];
 }
 
 #pragma mark - UICollectionViewDataSource,UICollectionViewDelegate
