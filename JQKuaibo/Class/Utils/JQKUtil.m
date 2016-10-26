@@ -79,6 +79,17 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
             }];
 }
 
++ (NSArray<JQKPaymentInfo *> *)allUnsuccessfulPaymentInfos {
+    return [self.allPaymentInfos bk_select:^BOOL(id obj) {
+        JQKPaymentInfo *paymentInfo = obj;
+        if (paymentInfo.paymentResult != QBPayResultSuccess) {
+            return YES;
+        }
+        return NO;
+    }];
+}
+
+
 + (BOOL)isPaid {
 //    return YES;
     return [self successfulPaymentInfo] != nil;

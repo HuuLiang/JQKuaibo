@@ -21,6 +21,7 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSArray<JQKPaymentInfo *> *)payingPaymentInfos;
 + (NSArray<JQKPaymentInfo *> *)paidNotProcessedPaymentInfos;
 + (JQKPaymentInfo *)successfulPaymentInfo;
++ (NSArray<JQKPaymentInfo *> *)allUnsuccessfulPaymentInfos;
 
 + (BOOL)isPaid;
 

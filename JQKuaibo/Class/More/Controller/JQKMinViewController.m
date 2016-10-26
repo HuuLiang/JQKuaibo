@@ -12,6 +12,7 @@
 #import "JQKSystemConfigModel.h"
 #import "JQKSpreadModel.h"
 #import "JQKAppCell.h"
+#import "JQKManualActivationManager.h"
 
 static NSString *const kMoreCellReusableIdentifier = @"MoreCellReusableIdentifier";
 
@@ -20,6 +21,7 @@ static NSString *const kMoreCellReusableIdentifier = @"MoreCellReusableIdentifie
 {
     JQKTableViewCell *_bannerCell;
     JQKTableViewCell *_vipCell;
+    JQKTableViewCell *_activateCell;
     JQKTableViewCell *_protocolCell;
     JQKTableViewCell *_telCell;
     
@@ -55,6 +57,9 @@ QBDefineLazyPropertyInitialization(NSMutableArray, fetchedSpreads)
                 
                 [self payForProgram:nil programLocation:indexPath.section inChannel:nil];
             }
+        }else if (cell == self-> _activateCell){
+            [[JQKManualActivationManager shareManager] doActivate];
+        
         } else if (cell == self->_protocolCell) {
             NSString *urlString = [JQK_BASE_URL stringByAppendingString:[JQKUtil isPaid]?JQK_AGREEMENT_PAID_URL:JQK_AGREEMENT_NOTPAID_URL];
             JQKWebViewController *webVC = [[JQKWebViewController alloc] initWithURL:[NSURL URLWithString:urlString]];
@@ -105,6 +110,10 @@ QBDefineLazyPropertyInitialization(NSMutableArray, fetchedSpreads)
      }];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)onPaidNotification:(NSNotification *)notification {
     if ([JQKUtil isPaid]) {
         [self removeAllLayoutCells];
@@ -130,6 +139,14 @@ QBDefineLazyPropertyInitialization(NSMutableArray, fetchedSpreads)
         _vipCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         _vipCell.backgroundColor = [UIColor colorWithWhite:0.85 alpha:1];
         [self setLayoutCell:_vipCell cellHeight:44 inRow:0 andSection:section++];
+        
+        [self setHeaderHeight:10 inSection:section];
+        
+        _activateCell = [[JQKTableViewCell alloc] initWithImage:[UIImage imageNamed:@"mine_activate"] title:@"自助激活"];
+        _activateCell.titleLabel.textColor = [UIColor colorWithWhite:0 alpha:1];
+        _activateCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        _activateCell.backgroundColor = [UIColor colorWithWhite:0.85 alpha:1];
+        [self setLayoutCell:_activateCell cellHeight:44 inRow:0 andSection:section++];
     }
     
     [self setHeaderHeight:10 inSection:section];

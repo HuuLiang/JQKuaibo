@@ -38,6 +38,7 @@
 		B374B9D51CFD867D0063C1C6 /* JQKApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9D41CFD867D0063C1C6 /* JQKApplication.m */; };
 		B38BD92C1D43545B00AA34EA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B38BD92B1D43545B00AA34EA /* libc++.tbd */; };
 		B393277F1D990D1C00E0EF89 /* JQKVideoTokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B393277E1D990D1C00E0EF89 /* JQKVideoTokenManager.m */; };
+		B3D3A0151DC047E50056DA24 /* JQKManualActivationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D3A0141DC047E50056DA24 /* JQKManualActivationManager.m */; };
 		B3EC58A61CF59AE900AC74F4 /* JQKLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */; };
 		B3FEBD3B1D82BB7900E11407 /* JQKOrderWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEBD3A1D82BB7900E11407 /* JQKOrderWebViewController.m */; };
 		B3FEDAD61D53293B007CBB55 /* JQKHomeBigCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEDAD51D53293B007CBB55 /* JQKHomeBigCell.m */; };
@@ -187,6 +188,8 @@
 		B38BD92B1D43545B00AA34EA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B393277D1D990D1C00E0EF89 /* JQKVideoTokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKVideoTokenManager.h; sourceTree = "<group>"; };
 		B393277E1D990D1C00E0EF89 /* JQKVideoTokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKVideoTokenManager.m; sourceTree = "<group>"; };
+		B3D3A0131DC047E50056DA24 /* JQKManualActivationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKManualActivationManager.h; sourceTree = "<group>"; };
+		B3D3A0141DC047E50056DA24 /* JQKManualActivationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKManualActivationManager.m; sourceTree = "<group>"; };
 		B3EC58A41CF59AE900AC74F4 /* JQKLaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKLaunchView.h; sourceTree = "<group>"; };
 		B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKLaunchView.m; sourceTree = "<group>"; };
 		B3FEBD391D82BB7900E11407 /* JQKOrderWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKOrderWebViewController.h; sourceTree = "<group>"; };
@@ -728,6 +731,8 @@
 				B35BB6541D1AA15F003CF5B6 /* JQKStatsManager.m */,
 				B393277D1D990D1C00E0EF89 /* JQKVideoTokenManager.h */,
 				B393277E1D990D1C00E0EF89 /* JQKVideoTokenManager.m */,
+				B3D3A0131DC047E50056DA24 /* JQKManualActivationManager.h */,
+				B3D3A0141DC047E50056DA24 /* JQKManualActivationManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1157,6 +1162,7 @@
 				B33BCC9D1D052E9800D8E62F /* UITableView+Separator.m in Sources */,
 				EC4872A21DB0B01C00CCCC54 /* JQKAppCell.m in Sources */,
 				BC3873501C2D4BAD00CBE88A /* JQKHomeCollectionViewLayout.m in Sources */,
+				B3D3A0151DC047E50056DA24 /* JQKManualActivationManager.m in Sources */,
 				B3FEDADA1D5330B8007CBB55 /* JQKLayoutViewController.m in Sources */,
 				B35F64651D475B4F00E03202 /* JQKPaymentButton.m in Sources */,
 				BC3872C51C2D2E3E00CBE88A /* UIViewExt.m in Sources */,
