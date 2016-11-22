@@ -130,7 +130,11 @@
         channels.type = @(self->_response.type);
         channels.realColumnId = @(self->_response.realColumnId);
         
-        [self payForProgram:program programLocation:self->_program.payPointType inChannel:channels];
+        if (![JQKUtil isPaid]) {
+            [self payForProgram:program programLocation:self->_program.payPointType inChannel:channels];
+        }else {
+            [[JQKHudManager manager] showHudWithText:@"您已经是VIP用户"];
+        }
     };
     
     _bdCell.bdAction = ^ {
