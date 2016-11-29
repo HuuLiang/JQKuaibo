@@ -191,6 +191,8 @@
         @strongify(self);
         if (success) {
             self.payAmount = @(systemConfigModel.payAmount);
+        }else {
+            self.payAmount = @(systemConfigModel.payAmount);
         }
     }];
 }
