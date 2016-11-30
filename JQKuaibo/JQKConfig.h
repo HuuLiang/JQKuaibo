@@ -14,7 +14,7 @@
 #define JQK_CHANNEL_NO           [JQKConfiguration sharedConfig].channelNo
 #define JQK_REST_APP_ID          @"QUBA_2004"
 #define JQK_REST_PV              @113
-#define JQK_PAYMENT_PV           @"200"//@113//@"103"
+#define JQK_PAYMENT_PV           @201//@113//@"103"
 #define JQK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Beijing Huazhong Hengtai Network Technology Co., Ltd."
 #define JQK_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JQK_REST_APP_ID, JQK_CHANNEL_NO]
 
@@ -38,7 +38,7 @@
 #define JQK_APP_SPREAD_BANNER_URL       @"/iosvideo/appSpreadBanner.htm"
 #define JQK_STANDBY_APP_SPREAD_BANNER_URL   @"/static/iosvideo/appSpreadBanner.json"
 
-#define JQK_STATS_BASE_URL              @"http://stats.iqu8.cn"//@"http://120.24.252.114"//
+#define JQK_STATS_BASE_URL              @"http://stats.dswtg.com"//@"http://120.24.252.114"//
 #define JQK_STATS_CPC_URL               @"/stats/cpcs.service"
 #define JQK_STATS_TAB_URL               @"/stats/tabStat.service"
 #define JQK_STATS_PAY_URL               @"/stats/payRes.service"

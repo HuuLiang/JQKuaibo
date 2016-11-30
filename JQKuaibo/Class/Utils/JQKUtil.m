@@ -14,6 +14,7 @@
 #import "JQKVideo.h"
 #import "JQKApplicationManager.h"
 #import "JQKBaseViewController.h"
+#import "JQKSystemConfigModel.h"
 
 #include <ifaddrs.h>
 #include <arpa/inet.h>
@@ -268,6 +269,11 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
     }
     
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void)setDefaultPrice {
+    [JQKSystemConfigModel sharedModel].payAmount = 35;
+    
 }
 
 @end
