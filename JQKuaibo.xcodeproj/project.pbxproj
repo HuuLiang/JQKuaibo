@@ -81,7 +81,6 @@
 		BC3873541C2D4CD500CBE88A /* JQKHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873531C2D4CD500CBE88A /* JQKHomeCell.m */; };
 		BC3873691C2D56A300CBE88A /* JQKChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873621C2D56A300CBE88A /* JQKChannel.m */; };
 		BC38736A1C2D56A300CBE88A /* JQKChannelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873641C2D56A300CBE88A /* JQKChannelModel.m */; };
-		BC38736B1C2D56A300CBE88A /* JQKChannelProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873661C2D56A300CBE88A /* JQKChannelProgram.m */; };
 		BC38736C1C2D56A300CBE88A /* JQKChannelProgramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873681C2D56A300CBE88A /* JQKChannelProgramModel.m */; };
 		BC3873721C2D7D8000CBE88A /* JQKProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873711C2D7D8000CBE88A /* JQKProgramViewController.m */; };
 		BC3873751C2D80D500CBE88A /* JQKProgramCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873741C2D80D500CBE88A /* JQKProgramCell.m */; };
@@ -282,8 +281,6 @@
 		BC3873621C2D56A300CBE88A /* JQKChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKChannel.m; sourceTree = "<group>"; };
 		BC3873631C2D56A300CBE88A /* JQKChannelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKChannelModel.h; sourceTree = "<group>"; };
 		BC3873641C2D56A300CBE88A /* JQKChannelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKChannelModel.m; sourceTree = "<group>"; };
-		BC3873651C2D56A300CBE88A /* JQKChannelProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKChannelProgram.h; sourceTree = "<group>"; };
-		BC3873661C2D56A300CBE88A /* JQKChannelProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKChannelProgram.m; sourceTree = "<group>"; };
 		BC3873671C2D56A300CBE88A /* JQKChannelProgramModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKChannelProgramModel.h; sourceTree = "<group>"; };
 		BC3873681C2D56A300CBE88A /* JQKChannelProgramModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKChannelProgramModel.m; sourceTree = "<group>"; };
 		BC3873701C2D7D8000CBE88A /* JQKProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKProgramViewController.h; sourceTree = "<group>"; };
@@ -823,8 +820,6 @@
 				BC3873621C2D56A300CBE88A /* JQKChannel.m */,
 				BC3873631C2D56A300CBE88A /* JQKChannelModel.h */,
 				BC3873641C2D56A300CBE88A /* JQKChannelModel.m */,
-				BC3873651C2D56A300CBE88A /* JQKChannelProgram.h */,
-				BC3873661C2D56A300CBE88A /* JQKChannelProgram.m */,
 				BC3873671C2D56A300CBE88A /* JQKChannelProgramModel.h */,
 				BC3873681C2D56A300CBE88A /* JQKChannelProgramModel.m */,
 				BC8A2AB71C8FD06100DF2AE2 /* JQKHomeVideoProgramModel.h */,
@@ -1137,7 +1132,6 @@
 				EC4872BE1DB0E3DF00CCCC54 /* JQKDetailPhotoCell.m in Sources */,
 				BC8A2AC61C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m in Sources */,
 				B34B954A1D5357B700292EEC /* TAAnimatedDotView.m in Sources */,
-				BC38736B1C2D56A300CBE88A /* JQKChannelProgram.m in Sources */,
 				B34DC29F1D51EFCC00D48B12 /* JQKHomeHeaderViewCell.m in Sources */,
 				B3EC58A61CF59AE900AC74F4 /* JQKLaunchView.m in Sources */,
 				B3FEDAE61D5334D1007CBB55 /* JQKWebViewController.m in Sources */,

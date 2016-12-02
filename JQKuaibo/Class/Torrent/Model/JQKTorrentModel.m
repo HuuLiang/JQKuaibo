@@ -33,18 +33,22 @@
 }
 
 - (BOOL)fetchTorrentsCompletionHandler:(QBCompletionHandler)handler {
-    BOOL sucess = [self requestURLPath:JQK_TORRENT_URL
-                            withParams:nil
-                       responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage) {
-                           JQKTorrentResponse *resp = nil;
-                           if (respStatus == QBURLResponseSuccess) {
-                               resp = self.response;
-                           }
-                           if (handler) {
-                               handler(respStatus == QBURLResponseSuccess,resp);
-                           }
+    
+    BOOL success = [self requestURLPath:JQK_TORRENT_URL
+                         standbyURLPath:[JQKUtil getStandByUrlPathWithOriginalUrl:JQK_TORRENT_URL params:nil]
+                        withParams:nil
+                responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage) {
+                    
+        JQKTorrentResponse *resp = nil;
+        if (respStatus == QBURLResponseSuccess) {
+            resp = self.response;
+        }
+        if (handler) {
+            handler(respStatus == QBURLResponseSuccess,resp);
+        }
     }];
-    return sucess;
+    
+    return success;
 }
 
 @end

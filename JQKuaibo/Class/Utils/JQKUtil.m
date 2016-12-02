@@ -273,8 +273,29 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
 
 + (void)setDefaultPrice {
     [JQKSystemConfigModel sharedModel].payAmount = 35;
-
+    
 }
 
++ (NSString *)getStandByUrlPathWithOriginalUrl:(NSString *)url params:(id)params {
+    NSMutableString *standbyUrl = [NSMutableString stringWithString:JQK_STANDBY_BASE_URL];
+    [standbyUrl appendString:[url substringToIndex:url.length-4]];
+    [standbyUrl appendFormat:@"-%@-%@",JQK_REST_APP_ID,JQK_REST_PV];
+    if (params) {
+        if ([params isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)params;
+            for (int i = 0; i<[dic allKeys].count; i++) {
+                [standbyUrl appendFormat:@"-%@",[dic allValues][i]];
+            }
+        }else if ([params isKindOfClass:[NSArray class]]){
+            NSArray *para = (NSArray *)params;
+            for (int i = 0; i< para.count; i++) {
+                [standbyUrl appendFormat:@"-%@",para[i]];
+            }
+        }
+    }
+    [standbyUrl appendString:@".json"];
+    
+    return standbyUrl;
+}
 
 @end

@@ -68,29 +68,32 @@
 
 - (BOOL)fetchProgramsWithCompletionHandler:(JQKCompletionHandler)handler {
     @weakify(self);
-    BOOL success = [self requestURLPath:JQK_HOME_VIDEO_URL
-                             withParams:nil
-                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
-                    {
-                        @strongify(self);
-                        
-                        if (!self) {
-                            return ;
-                        }
-                        
-                        NSArray *programs;
-                        if (respStatus == QBURLResponseSuccess) {
-                            JQKHomeProgramResponse *resp = (JQKHomeProgramResponse *)self.response;
-                            programs = resp.columnList;
-                            self->_fetchedPrograms = programs;
-                            
-                            [self filterProgramTypes];
-                        }
-                        
-                        if (handler) {
-                            handler(respStatus==QBURLResponseSuccess, programs);
-                        }
-                    }];
-    return success;
+    
+  BOOL success = [self requestURLPath:JQK_HOME_VIDEO_URL
+                       standbyURLPath:[JQKUtil getStandByUrlPathWithOriginalUrl:JQK_HOME_VIDEO_URL params:nil]
+                           withParams:nil
+                      responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage) {
+        @strongify(self);
+        
+        if (!self) {
+            return ;
+        }
+        
+        NSArray *programs;
+        if (respStatus == QBURLResponseSuccess) {
+            JQKHomeProgramResponse *resp = (JQKHomeProgramResponse *)self.response;
+            programs = resp.columnList;
+            self->_fetchedPrograms = programs;
+            
+            [self filterProgramTypes];
+        }
+        
+        if (handler) {
+            handler(respStatus==QBURLResponseSuccess, programs);
+        }
+
+    }];
+    
+        return success;
 }
 @end
