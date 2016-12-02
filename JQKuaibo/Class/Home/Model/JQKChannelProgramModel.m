@@ -23,10 +23,13 @@
                          pageSize:(NSUInteger)pageSize
                 completionHandler:(JQKFetchChannelProgramCompletionHandler)handler {
     @weakify(self);
-    NSDictionary *params = @{@"columnId":columnId, @"page":@(pageNo), @"pageSize":@(pageSize),@"scale":[JQKUtil isPaid]?@2:@2};
+    NSDictionary *params = @{@"columnId":columnId,
+                             @"page":@(pageNo),
+                             @"pageSize":@(pageSize),
+                             @"scale":[JQKUtil isPaid]?@2:@2};
     
     BOOL success = [self requestURLPath:JQK_HOME_CHANNEL_PROGRAM_URL
-                         standbyURLPath:[JQKUtil getStandByUrlPathWithOriginalUrl:JQK_HOME_CHANNEL_PROGRAM_URL params:params]
+                         standbyURLPath:[JQKUtil getStandByUrlPathWithOriginalUrl:JQK_HOME_CHANNEL_PROGRAM_URL params:@[columnId,[JQKUtil isPaid]?@2:@2,@(pageNo),@(pageSize)]]
                              withParams:params
                         responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage) {
         @strongify(self);

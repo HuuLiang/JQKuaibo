@@ -29,7 +29,7 @@
 - (BOOL)fetchAppSpreadWithCompletionHandler:(JQKCompletionHandler)handler {
     @weakify(self);
     BOOL ret = [self requestURLPath:JQK_APP_SPREAD_LIST_URL
-                     standbyURLPath:JQK_STANDBY_APP_SPREAD_LIST_URL
+                     standbyURLPath:[JQKUtil getStandByUrlPathWithOriginalUrl:JQK_APP_SPREAD_LIST_URL params:nil]//JQK_STANDBY_APP_SPREAD_LIST_URL
                          withParams:nil
                     responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                 {
