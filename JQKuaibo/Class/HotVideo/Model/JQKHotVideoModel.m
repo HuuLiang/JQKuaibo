@@ -18,10 +18,10 @@
             completionHandler:(JQKFetchVideosCompletionHandler)handler
 {
     @weakify(self);
+    
     BOOL ret = [self requestURLPath:JQK_HOT_VIDEO_URL
-                         withParams:@{@"page":@(pageNo)}
-                    responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
-    {
+                     standbyURLPath:[JQKUtil getStandByUrlPathWithOriginalUrl:JQK_HOT_VIDEO_URL params:@{@"page":@(pageNo)}] withParams:@{@"page":@(pageNo)}
+                    responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage) {
         @strongify(self);
         
         JQKVideos *videos;
@@ -33,7 +33,9 @@
         if (handler) {
             handler(respStatus == QBURLResponseSuccess, videos);
         }
+
     }];
+    
     return ret;
 }
 

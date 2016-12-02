@@ -9,7 +9,6 @@
 #import "JQKProgramViewController.h"
 #import "JQKChannelProgramModel.h"
 #import "JQKChannel.h"
-#import "JQKChannelProgram.h"
 #import "JQKProgramCell.h"
 
 static const NSUInteger kDefaultPageSize = 18;

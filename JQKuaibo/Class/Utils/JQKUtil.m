@@ -276,4 +276,18 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
     
 }
 
++ (NSString *)getStandByUrlPathWithOriginalUrl:(NSString *)url params:(NSDictionary *)params {
+    NSMutableString *standbyUrl = [NSMutableString stringWithString:JQK_STANDBY_BASE_URL];
+    [standbyUrl appendString:[url substringToIndex:url.length-4]];
+    [standbyUrl appendFormat:@"-%@-%@",JQK_REST_APP_ID,JQK_REST_PV];
+    if (params) {
+        for (int i = 0; i<[params allKeys].count; i++) {
+            [standbyUrl appendFormat:@"-%@",[params allValues][i]];
+        }
+    }
+    [standbyUrl appendString:@".json"];
+    
+    return standbyUrl;
+}
+
 @end

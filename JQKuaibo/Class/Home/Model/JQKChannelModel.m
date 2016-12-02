@@ -37,10 +37,10 @@
 
 - (BOOL)fetchChannelsWithCompletionHandler:(JQKFetchChannelsCompletionHandler)handler {
     @weakify(self);
-    BOOL success = [self requestURLPath:JQK_HOME_CHANNEL_URL
-                             withParams:nil
-                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
-    {
+   BOOL success = [self requestURLPath:JQK_HOME_CHANNEL_URL
+                        standbyURLPath:[JQKUtil getStandByUrlPathWithOriginalUrl:JQK_HOME_CHANNEL_URL params:nil]
+                        withParams:nil
+                       responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage) {
         @strongify(self);
         if (respStatus == QBURLResponseSuccess) {
             JQKChannelResponse *channelResp = (JQKChannelResponse *)self.response;
@@ -54,8 +54,9 @@
                 handler(NO, nil);
             }
         }
+
     }];
-    return success;
+       return success;
 }
 
 @end
