@@ -118,7 +118,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
 - (void)loadChannels {
     @weakify(self);
     dispatch_group_enter(self.dataDispatchGroup);
-    [self.channelModel fetchChannelsWithCompletionHandler:^(BOOL success, NSArray<JQKChannel *> *channels) {
+    [self.channelModel fetchChannelsWithCompletionHandler:^(BOOL success, NSArray<JQKChannels *> *channels) {
         @strongify(self);
         if (!self) {
             return ;
@@ -295,7 +295,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
         
         //        
         //        if ( item < self.channelModel.fetchedChannels.count +kHeaderViewOffset) {
-        JQKChannel *channel = self.channelModel.fetchedChannels[item];
+        JQKChannels *channel = self.channelModel.fetchedChannels[item];
         if ( item %5 == 0 && item < ([collectionView numberOfItemsInSection:0]-( kHeaderHotVideoItemOffset+1))/5*5) {
             JQKHomeBigCell *bigCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeBigCellIdentifier forIndexPath:indexPath];
             bigCell.imageURL = [NSURL URLWithString:channel.columnImg];
@@ -335,7 +335,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
             [[JQKStatsManager sharedManager] statsCPCWithProgram:program programLocation:(indexPath.item - kHeaderFreeVideoItemOffset) inChannel:channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
         }
     } else if(indexPath.item -( kHeaderHotVideoItemOffset+1) < self.channelModel.fetchedChannels.count) {
-        JQKChannel *selectedChannel = self.channelModel.fetchedChannels[indexPath.item - ( kHeaderHotVideoItemOffset+1)];
+        JQKChannels *selectedChannel = self.channelModel.fetchedChannels[indexPath.item - ( kHeaderHotVideoItemOffset+1)];
         
         [[JQKStatsManager sharedManager] statsCPCWithChannel:selectedChannel inTabIndex:self.tabBarController.selectedIndex];
         
@@ -353,7 +353,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
 - (BOOL)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout hasAdBannerForItem:(NSUInteger)item {
     
     if (item >= kHeaderViewOffset && item-kHeaderViewOffset < self.channelModel.fetchedChannels.count) {
-        JQKChannel *channel = self.channelModel.fetchedChannels[item-kHeaderViewOffset];
+        JQKChannels *channel = self.channelModel.fetchedChannels[item-kHeaderViewOffset];
         return channel.type.unsignedIntegerValue == JQKChannelTypeSpread && channel.spreadUrl.length > 0;
     }
     return NO;

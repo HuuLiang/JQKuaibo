@@ -6,7 +6,7 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKChannel.h"
+#import "JQKChannels.h"
 
 @implementation JQKChannels
 

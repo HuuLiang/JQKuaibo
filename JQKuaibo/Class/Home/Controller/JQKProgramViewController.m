@@ -8,7 +8,7 @@
 
 #import "JQKProgramViewController.h"
 #import "JQKChannelProgramModel.h"
-#import "JQKChannel.h"
+//#import "JQKChannel.h"
 #import "JQKProgramCell.h"
 
 static const NSUInteger kDefaultPageSize = 18;
@@ -28,7 +28,7 @@ static NSString *const kProgramCellReusableIdentifier = @"ProgramCellReusableIde
 DefineLazyPropertyInitialization(JQKChannelProgramModel, programModel)
 DefineLazyPropertyInitialization(NSMutableArray, programs)
 
-- (instancetype)initWithChannel:(JQKChannel *)channel {
+- (instancetype)initWithChannel:(JQKChannels *)channel {
     self = [super init];
     if (self) {
         _channel = channel;

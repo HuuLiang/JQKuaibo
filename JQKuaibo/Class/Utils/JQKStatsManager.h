@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, JQKStatsPayAction) {
 };
 
 @class JQKStatsInfo;
-@class JQKChannel;
+//@class JQKChannel;
 @interface JQKStatsManager : NSObject
 
 + (instancetype)sharedManager;

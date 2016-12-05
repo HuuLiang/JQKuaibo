@@ -208,7 +208,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
 
 - (void)loadVideosWithPage:(NSUInteger)page {
     @weakify(self);
-    [self.videoModel fetchVideosWithPageNo:page completionHandler:^(BOOL success, JQKVideos *videos) {
+    [self.videoModel fetchVideosWithPageNo:page completionHandler:^(BOOL success, JQKChannels *videos) {
         @strongify(self);
         if (!self) {
             return ;
