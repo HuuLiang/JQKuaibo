@@ -8,12 +8,12 @@
 
 #import "JQKBaseViewController.h"
 
-@class JQKChannel;
+//@class JQKChannel;
 
 @interface JQKProgramViewController : JQKBaseViewController
 
-@property (nonatomic,retain,readonly) JQKChannel *channel;
+@property (nonatomic,retain,readonly) JQKChannels *channel;
 
-- (instancetype)initWithChannel:(JQKChannel *)channel;
+- (instancetype)initWithChannel:(JQKChannels *)channel;
 
 @end

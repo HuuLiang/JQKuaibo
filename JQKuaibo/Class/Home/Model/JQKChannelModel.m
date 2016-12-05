@@ -11,7 +11,7 @@
 @implementation JQKChannelResponse
 
 - (Class)columnListElementClass {
-    return [JQKChannel class];
+    return [JQKChannels class];
 }
 
 @end

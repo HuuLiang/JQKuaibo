@@ -11,7 +11,7 @@
 @implementation JQKHotVideoModel
 
 + (Class)responseClass {
-    return [JQKVideos class];
+    return [JQKChannels class];
 }
 
 - (BOOL)fetchVideosWithPageNo:(NSUInteger)pageNo
@@ -24,7 +24,7 @@
                     responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage) {
         @strongify(self);
         
-        JQKVideos *videos;
+        JQKChannels *videos;
         if (respStatus == QBURLResponseSuccess) {
             videos = self.response;
             self.fetchedVideos = videos;

@@ -7,13 +7,13 @@
 //
 
 #import "QBEncryptedURLRequest.h"
-#import "JQKVideos.h"
 
-typedef void (^JQKFetchVideosCompletionHandler)(BOOL success, JQKVideos *videos);
+
+typedef void (^JQKFetchVideosCompletionHandler)(BOOL success, JQKChannels *videos);
 
 @interface JQKHotVideoModel : QBEncryptedURLRequest
 
-@property (nonatomic,retain) JQKVideos *fetchedVideos;
+@property (nonatomic,retain) JQKChannels *fetchedVideos;
 
 - (BOOL)fetchVideosWithPageNo:(NSUInteger)pageNo
             completionHandler:(JQKFetchVideosCompletionHandler)handler;
