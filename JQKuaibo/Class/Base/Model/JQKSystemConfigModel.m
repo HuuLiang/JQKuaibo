@@ -97,8 +97,10 @@
                 }
                 }];
                         _loaded = YES;
-                        }
-                        
+        }else {
+            self.payAmount = 35;
+        }
+            
                         if (handler) {
                             handler(respStatus==QBURLResponseSuccess);
                         }

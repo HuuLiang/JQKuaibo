@@ -178,7 +178,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
 #endif
 //        [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];//测试支付
 
-    [JQKUtil setDefaultPrice];
+//    [JQKUtil setDefaultPrice];
     [[QBPaymentManager sharedManager] registerPaymentWithAppId:JQK_REST_APP_ID paymentPv:JQK_PAYMENT_PV channelNo:JQK_CHANNEL_NO urlScheme:@"comsimiyingyuan2016appalipayurlscheme" defaultConfig:[self setDefaultPaymentConfig]];
     [[JQKErrorHandler sharedHandler] initialize];
     [QBNetworkInfo sharedInfo].reachabilityChangedAction = ^(BOOL reachable) {
