@@ -45,6 +45,6 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSString *)currentTimeString;
 + (NSString *)imageToken;
 + (void)setImageToken:(NSString *)imageToken;
-+ (void)setDefaultPrice;
+//+ (void)setDefaultPrice;
 + (NSString *)getStandByUrlPathWithOriginalUrl:(NSString *)url params:(id)params;
 @end

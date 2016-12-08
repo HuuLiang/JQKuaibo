@@ -271,10 +271,10 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (void)setDefaultPrice {
-    [JQKSystemConfigModel sharedModel].payAmount = 35;
-    
-}
+//+ (void)setDefaultPrice {
+//    [JQKSystemConfigModel sharedModel].payAmount = 35;
+//    
+//}
 
 + (NSString *)getStandByUrlPathWithOriginalUrl:(NSString *)url params:(id)params {
     NSMutableString *standbyUrl = [NSMutableString stringWithString:JQK_STANDBY_BASE_URL];

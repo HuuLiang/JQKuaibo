@@ -178,7 +178,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
 #endif
 //        [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];//测试支付
 
-    [JQKUtil setDefaultPrice];
+//    [JQKUtil setDefaultPrice];
     [[QBPaymentManager sharedManager] registerPaymentWithAppId:JQK_REST_APP_ID paymentPv:JQK_PAYMENT_PV channelNo:JQK_CHANNEL_NO urlScheme:@"comsimiyingyuan2016appalipayurlscheme" defaultConfig:[self setDefaultPaymentConfig]];
     [[JQKErrorHandler sharedHandler] initialize];
     [QBNetworkInfo sharedInfo].reachabilityChangedAction = ^(BOOL reachable) {
@@ -316,7 +316,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     QBHTPayConfig *htpayConfig = [[QBHTPayConfig alloc] init];
     htpayConfig.mchId = @"10014";
     htpayConfig.key = @"55f4f728b7a01c2e57a9f767fd34cb8e";
-    htpayConfig.appid = @"wxf1fa52ed49c4c7da";//@"wxdea87ffa75dfb0fa";
+      htpayConfig.appid = @"wx2d28c8f27baeef4a";
     htpayConfig.notifyUrl = @"http://phas.zcqcmj.com/pd-has/notifyHtPay.json";
     htpayConfig.payType = @"z";
     configDetails.htpayConfig = htpayConfig;
