@@ -16,6 +16,7 @@
 @end
 
 @implementation JQKHomeVideoProgramModel
+RequestTimeOutInterval
 
 + (Class)responseClass {
     return [JQKHomeProgramResponse class];

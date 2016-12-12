@@ -16,6 +16,6 @@ target 'JQKuaibo' do
     
     pod 'FMDB', '~> 2.6.2'
     pod 'XMLReader-Arc', '~> 1.1'
-    pod 'QBPayment','~> 44', :subspecs => ['VIAPay','IappPay','WJPay','ZhangPay']
+    pod 'QBPayment', '~>44' ,:subspecs => ['VIAPay','IappPay','ZhangPay','WJPay']
     
 end

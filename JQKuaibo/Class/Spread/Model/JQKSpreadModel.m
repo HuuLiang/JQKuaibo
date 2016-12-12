@@ -22,6 +22,8 @@
 @end
 
 @implementation JQKSpreadModel
+RequestTimeOutInterval
+
 + (Class)responseClass {
     return [JQKAppSpreadResponse class];
 }

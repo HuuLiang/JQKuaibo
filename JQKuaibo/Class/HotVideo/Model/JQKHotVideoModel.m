@@ -9,6 +9,7 @@
 #import "JQKHotVideoModel.h"
 
 @implementation JQKHotVideoModel
+RequestTimeOutInterval
 
 + (Class)responseClass {
     return [JQKChannels class];

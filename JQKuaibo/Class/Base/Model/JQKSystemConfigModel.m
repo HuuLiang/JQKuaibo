@@ -94,11 +94,14 @@
                     self.contactName = config.value;
                 }else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_IMAGE_TOKEN]) {
                     self.imageToken = config.value;
+                }else if ([config.name isEqualToString:JQK_SYSTEM_TIME_OUT]){
+                    self.timeOutInterval = config.value.integerValue;
                 }
+                
                 }];
                         _loaded = YES;
         }else {
-            self.payAmount = 35;
+        self.payAmount = 35;
         }
             
                         if (handler) {

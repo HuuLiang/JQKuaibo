@@ -18,6 +18,8 @@
 
 @implementation JQKChannelModel
 
+RequestTimeOutInterval
+
 + (Class)responseClass {
     return [JQKChannelResponse class];
 }
