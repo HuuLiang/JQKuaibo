@@ -27,6 +27,7 @@
 
 
 @implementation JQKTorrentModel
+RequestTimeOutInterval
 
 + (Class)responseClass {
     return [JQKTorrentResponse class];

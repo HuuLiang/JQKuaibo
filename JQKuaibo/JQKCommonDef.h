@@ -75,6 +75,11 @@ _##propertyName = [[propertyType alloc] init]; \
 return _##propertyName; \
 }
 
+#define RequestTimeOutInterval  \
+- (NSTimeInterval)requestTimeInterval {\
+return [JQKSystemConfigModel sharedModel].timeOutInterval;\
+}
+
 #define SafelyCallBlock(block,...) \
 if (block) block(__VA_ARGS__);
 
