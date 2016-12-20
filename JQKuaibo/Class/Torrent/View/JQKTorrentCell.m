@@ -184,9 +184,11 @@
 }
 
 - (void)setUrlsArr:(NSArray *)urlsArr {
-    [_imgVA sd_setImageWithURL:[NSURL URLWithString:urlsArr[0]]];
-    [_imgVB sd_setImageWithURL:[NSURL URLWithString:urlsArr[1]]];
-    [_imgVC sd_setImageWithURL:[NSURL URLWithString:urlsArr[2]]];
+    if (urlsArr.count <= 0) return;
+    
+    [_imgVA sd_setImageWithURL:[NSURL URLWithString:urlsArr.count>0 ? urlsArr[0] : nil]];
+    [_imgVB sd_setImageWithURL:[NSURL URLWithString:urlsArr.count>1 ? urlsArr[1] : nil]];
+    [_imgVC sd_setImageWithURL:[NSURL URLWithString:urlsArr.count>2 ? urlsArr[2] : nil]];
 }
 
 - (void)setUserNameStr:(NSString *)userNameStr {

@@ -34,6 +34,7 @@
 #define JQK_USER_ACCESS_URL             @"/iosvideo/userAccess.htm"
 #define JQK_AGREEMENT_NOTPAID_URL       @"/iosvideo/agreement.html"
 #define JQK_AGREEMENT_PAID_URL          @"/iosvideo/agreement-paid.html"
+#define JQK_VERSION_UPDATE_URL          @"/iosvideo/versionCheck.htm"//更新
 
 #define JQK_APP_SPREAD_LIST_URL         @"/iosvideo/appSpreadList.htm"
 #define JQK_STANDBY_APP_SPREAD_LIST_URL @"/static/iosvideo/appSpreadList.json"
@@ -67,6 +68,8 @@
 #define JQK_SYSTEM_CONFIG_CONTACT_NAME          @"CONTACT_NAME"
 #define JQK_SYSTEM_CONFIG_IMAGE_TOKEN           @"IMG_REFERER"
 #define JQK_SYSTEM_TIME_OUT                        @"TIME_OUT"
+#define JQK_SYSTEM_VIDEO_SIGN_KEY               @"VIDEO_SIGN_KEY"
+#define JQK_SYSTEM_VIDEO_EXPIRE_TIME            @"EXPIRE_TIME"
 
 
 

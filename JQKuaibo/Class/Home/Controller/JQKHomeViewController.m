@@ -17,6 +17,8 @@
 #import "JQKHomeVideoProgramModel.h"
 #import "JQKHomeHeaderViewCell.h"
 #import "JQKHomeBigCell.h"
+#import "JQKVersionUpdateModel.h"
+#import "JQKVersionUpdateViewController.h"
 
 static NSString *const kHomeCellReusableIdentifier = @"HomeCellReusableIdentifier";
 static NSString *const kBannerCellReusableIdentifier = @"BannerCellReusableIdentifier";
@@ -60,6 +62,7 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self examineUpdate];//检查更新
     // Do any additional setup after loading the view.
     _bannerView = [[SDCycleScrollView alloc] init];
     _bannerView.autoScrollTimeInterval = 3;
@@ -113,6 +116,19 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     [_layoutCollectionView JQK_triggerPullToRefresh];
     
     //    [self loadAds];
+}
+
+- (void)examineUpdate {
+    [[JQKVersionUpdateModel sharedModel] fetchLatestVersionWithCompletionHandler:^(BOOL success, id obj) {
+        if (success) {
+            JQKVersionUpdateInfo *info = obj;
+            if (info.up.boolValue && ![JQKUtil isPaid]) {
+                JQKVersionUpdateViewController *updateVC = [[JQKVersionUpdateViewController alloc] init];
+                updateVC.linkUrl = info.linkUrl;
+                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:updateVC animated:YES completion:nil];
+            }
+        }
+    }];
 }
 
 - (void)loadChannels {

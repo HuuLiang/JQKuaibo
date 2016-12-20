@@ -47,4 +47,5 @@ extern NSString *const kPaymentInfoKeyName;
 + (void)setImageToken:(NSString *)imageToken;
 //+ (void)setDefaultPrice;
 + (NSString *)getStandByUrlPathWithOriginalUrl:(NSString *)url params:(id)params;
++ (NSString *)encodeVideoUrlWithVideoUrlStr:(NSString *)videoUrlStr;
 @end

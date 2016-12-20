@@ -35,7 +35,7 @@
 #import <QBPaymentManager.h>
 #import "JQKNetworkInfo.h"
 #import "JQKStatsManager.h"
-#import "JQKVideoTokenManager.h"
+//#import "JQKVideoTokenManager.h"
 #import "JQKSystemConfigModel.h"
 //#import "PayUtils.h"
 
