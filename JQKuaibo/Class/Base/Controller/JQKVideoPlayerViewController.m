@@ -33,19 +33,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blackColor];
-    [self.view beginProgressingWithTitle:@"加载中..." subtitle:nil];
+//    [self.view beginProgressingWithTitle:@"加载中..." subtitle:nil];
     @weakify(self);
-    [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:^(BOOL success, NSString *token, NSString *userId) {
-        @strongify(self);
-        if (!self) {
-            return ;
-        }
-        [self.view endProgressing];
-        if (success) {
-            [self loadVideo:[NSURL URLWithString:[[JQKVideoTokenManager sharedManager] videoLinkWithOriginalLink:self.video.videoUrl]]];
-        }
-        
-    }];
+//    [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:^(BOOL success, NSString *token, NSString *userId) {
+//        @strongify(self);
+//        if (!self) {
+//            return ;
+//        }
+//        [self.view endProgressing];
+//        if (success) {
+//            [self loadVideo:[NSURL URLWithString:[[JQKVideoTokenManager sharedManager] videoLinkWithOriginalLink:self.video.videoUrl]]];
+//        }
+    
+//    }];
+    
+    [self loadVideo:[NSURL URLWithString:[JQKUtil encodeVideoUrlWithVideoUrlStr:self.video.videoUrl]]];
+//    [self loadVideo:[NSURL URLWithString:[JQKUtil encodeVideoUrlWithVideoUrlStr:@"http://7xtjbc.com1.z0.glb.clouddn.com/tnmb/A895389AF31EDA0D5C644DBC87433891.mp4"]]];
     
     _videoPlayer.endPlayAction = ^(id sender) {
         @strongify(self);

@@ -190,12 +190,12 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
                 if (success) {
                     [JQKUtil setRegisteredWithUserId:userId];
                     [[JQKUserAccessModel sharedModel] requestUserAccess];
-                       [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:nil];
+//                       [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:nil];
                 }
             }];
         } else {
             [[JQKUserAccessModel sharedModel] requestUserAccess];
-             [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:nil];
+//             [[JQKVideoTokenManager sharedManager] requestTokenWithCompletionHandler:nil];
         }
         if ([QBNetworkInfo sharedInfo].networkStatus <= QBNetworkStatusNotReachable && (![JQKUtil isRegistered] || ![JQKSystemConfigModel sharedModel].loaded)) {
             
@@ -225,7 +225,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     NSString *imageToken = [JQKUtil imageToken];
     if (imageToken) {
         [[SDWebImageManager sharedManager].imageDownloader setValue:imageToken forHTTPHeaderField:@"Referer"];
-         [[JQKVideoTokenManager sharedManager] setValue:imageToken forVideoHttpHeader:@"Referer"];
+//         [[JQKVideoTokenManager sharedManager] setValue:imageToken forVideoHttpHeader:@"Referer"];
         self.window.rootViewController = self.rootViewController;
         [self.window makeKeyAndVisible];
     } else {
@@ -289,7 +289,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
             [JQKUtil setImageToken:fetchedToken];
             if (fetchedToken) {
                 [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
-                 [[JQKVideoTokenManager sharedManager] setValue:fetchedToken forVideoHttpHeader:@"Referer"];
+//                 [[JQKVideoTokenManager sharedManager] setValue:fetchedToken forVideoHttpHeader:@"Referer"];
             }
             
         }

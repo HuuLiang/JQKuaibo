@@ -37,7 +37,8 @@
 		B374B9D21CFD86690063C1C6 /* JQKApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9D11CFD86690063C1C6 /* JQKApplicationManager.m */; };
 		B374B9D51CFD867D0063C1C6 /* JQKApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = B374B9D41CFD867D0063C1C6 /* JQKApplication.m */; };
 		B38BD92C1D43545B00AA34EA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B38BD92B1D43545B00AA34EA /* libc++.tbd */; };
-		B393277F1D990D1C00E0EF89 /* JQKVideoTokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B393277E1D990D1C00E0EF89 /* JQKVideoTokenManager.m */; };
+		B3CDC08D1E08D32D00F5E255 /* JQKVersionUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3CDC08C1E08D32D00F5E255 /* JQKVersionUpdateModel.m */; };
+		B3CDC0901E08DF7300F5E255 /* JQKVersionUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3CDC08F1E08DF7300F5E255 /* JQKVersionUpdateViewController.m */; };
 		B3D3A0151DC047E50056DA24 /* JQKManualActivationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D3A0141DC047E50056DA24 /* JQKManualActivationManager.m */; };
 		B3EC58A61CF59AE900AC74F4 /* JQKLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EC58A51CF59AE900AC74F4 /* JQKLaunchView.m */; };
 		B3FEBD3B1D82BB7900E11407 /* JQKOrderWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEBD3A1D82BB7900E11407 /* JQKOrderWebViewController.m */; };
@@ -183,8 +184,10 @@
 		B374B9D31CFD867D0063C1C6 /* JQKApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKApplication.h; sourceTree = "<group>"; };
 		B374B9D41CFD867D0063C1C6 /* JQKApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKApplication.m; sourceTree = "<group>"; };
 		B38BD92B1D43545B00AA34EA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		B393277D1D990D1C00E0EF89 /* JQKVideoTokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKVideoTokenManager.h; sourceTree = "<group>"; };
-		B393277E1D990D1C00E0EF89 /* JQKVideoTokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKVideoTokenManager.m; sourceTree = "<group>"; };
+		B3CDC08B1E08D32D00F5E255 /* JQKVersionUpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JQKVersionUpdateModel.h; path = ../../Utils/JQKVersionUpdateModel.h; sourceTree = "<group>"; };
+		B3CDC08C1E08D32D00F5E255 /* JQKVersionUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JQKVersionUpdateModel.m; path = ../../Utils/JQKVersionUpdateModel.m; sourceTree = "<group>"; };
+		B3CDC08E1E08DF7300F5E255 /* JQKVersionUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKVersionUpdateViewController.h; sourceTree = "<group>"; };
+		B3CDC08F1E08DF7300F5E255 /* JQKVersionUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKVersionUpdateViewController.m; sourceTree = "<group>"; };
 		B3D3A0131DC047E50056DA24 /* JQKManualActivationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKManualActivationManager.h; sourceTree = "<group>"; };
 		B3D3A0141DC047E50056DA24 /* JQKManualActivationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKManualActivationManager.m; sourceTree = "<group>"; };
 		B3EC58A41CF59AE900AC74F4 /* JQKLaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKLaunchView.h; sourceTree = "<group>"; };
@@ -601,6 +604,8 @@
 			isa = PBXGroup;
 			children = (
 				B35BB6441D1A9FCA003CF5B6 /* Stats */,
+				B3CDC08B1E08D32D00F5E255 /* JQKVersionUpdateModel.h */,
+				B3CDC08C1E08D32D00F5E255 /* JQKVersionUpdateModel.m */,
 				BC3873291C2D402B00CBE88A /* JQKProgram.h */,
 				BC38732A1C2D402B00CBE88A /* JQKProgram.m */,
 				B35BB6361D1A9EBE003CF5B6 /* JQKChannels.h */,
@@ -634,6 +639,8 @@
 				B3FEDAE51D5334D1007CBB55 /* JQKWebViewController.m */,
 				B3FEBD391D82BB7900E11407 /* JQKOrderWebViewController.h */,
 				B3FEBD3A1D82BB7900E11407 /* JQKOrderWebViewController.m */,
+				B3CDC08E1E08DF7300F5E255 /* JQKVersionUpdateViewController.h */,
+				B3CDC08F1E08DF7300F5E255 /* JQKVersionUpdateViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -718,8 +725,6 @@
 				B35BB6521D1AA15F003CF5B6 /* JQKNetworkInfo.m */,
 				B35BB6531D1AA15F003CF5B6 /* JQKStatsManager.h */,
 				B35BB6541D1AA15F003CF5B6 /* JQKStatsManager.m */,
-				B393277D1D990D1C00E0EF89 /* JQKVideoTokenManager.h */,
-				B393277E1D990D1C00E0EF89 /* JQKVideoTokenManager.m */,
 				B3D3A0131DC047E50056DA24 /* JQKManualActivationManager.h */,
 				B3D3A0141DC047E50056DA24 /* JQKManualActivationManager.m */,
 			);
@@ -1000,7 +1005,7 @@
 					BC3872021C2D273100CBE88A = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 7VHT3KAS56;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					BC38721B1C2D273100CBE88A = {
 						CreatedOnToolsVersion = 7.2;
@@ -1154,6 +1159,7 @@
 				B3FEDAE31D533320007CBB55 /* JQKTableViewCell.m in Sources */,
 				BC3872BE1C2D2E3E00CBE88A /* NSString+meltutils.m in Sources */,
 				B374B9C61CFD6CBA0063C1C6 /* JQKSpreadController.m in Sources */,
+				B3CDC0901E08DF7300F5E255 /* JQKVersionUpdateViewController.m in Sources */,
 				EC9DE28D1DAF8FE7007B0CEE /* JQKTorrentViewController.m in Sources */,
 				EC4872AC1DB0BD5100CCCC54 /* JQKDetailViewController.m in Sources */,
 				BC2C027E1C2E744700D10677 /* JQKPaymentPopView.m in Sources */,
@@ -1167,6 +1173,7 @@
 				EC4872BB1DB0CD2A00CCCC54 /* JQKDetailBDCell.m in Sources */,
 				B35BB6421D1A9F9E003CF5B6 /* DBPersistence.m in Sources */,
 				BC3872081C2D273100CBE88A /* main.m in Sources */,
+				B3CDC08D1E08D32D00F5E255 /* JQKVersionUpdateModel.m in Sources */,
 				EC9DE2931DAF90E5007B0CEE /* JQKTorrentCell.m in Sources */,
 				B35BB6551D1AA15F003CF5B6 /* JQKNetworkInfo.m in Sources */,
 				B3FEBD3B1D82BB7900E11407 /* JQKOrderWebViewController.m in Sources */,
@@ -1176,7 +1183,6 @@
 				BC3873441C2D402B00CBE88A /* JQKVideo.m in Sources */,
 				BC3872C21C2D2E3E00CBE88A /* UIScrollView+Refresh.m in Sources */,
 				BC3873091C2D38D000CBE88A /* JQKErrorHandler.m in Sources */,
-				B393277F1D990D1C00E0EF89 /* JQKVideoTokenManager.m in Sources */,
 				B35BB6501D1A9FCA003CF5B6 /* JQKTabStatsModel.m in Sources */,
 				BC3873391C2D402B00CBE88A /* JQKActivateModel.m in Sources */,
 				BC64E2571C4E171200450C1B /* JQKAdView.m in Sources */,
@@ -1329,7 +1335,7 @@
 				CODE_SIGN_IDENTITY = "Developer ID Installer: Neijiang Fenghuang Enterprise (Group) Co., Ltd. (7VHT3KAS56)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "Developer ID Application: Neijiang Fenghuang Enterprise (Group) Co., Ltd. (7VHT3KAS56)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7VHT3KAS56;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/iAppPay/DependenceSDK",
@@ -1349,10 +1355,10 @@
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/HTPay",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Utils/DunXingTianXia",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.simiyy.new;
+				PRODUCT_BUNDLE_IDENTIFIER = com.simi.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "486b301b-4b77-46e1-a2ac-7933e5941447";
-				PROVISIONING_PROFILE_SPECIFIER = SiMiNewDevProvisioningProfile;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1364,8 +1370,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "Developer ID Installer: Neijiang Fenghuang Enterprise (Group) Co., Ltd. (7VHT3KAS56)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 7VHT3KAS56;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/iAppPay/DependenceSDK",
@@ -1385,10 +1391,10 @@
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/HTPay",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Utils/DunXingTianXia",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.simiyy.new;
+				PRODUCT_BUNDLE_IDENTIFIER = com.simi.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fe5a3b43-8281-44bc-81fd-adda62954622";
-				PROVISIONING_PROFILE_SPECIFIER = SiMiNewInHouseProvisioningProfile;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

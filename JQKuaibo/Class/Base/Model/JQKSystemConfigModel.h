@@ -44,6 +44,9 @@ typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic) NSString *imageToken;
 @property (nonatomic) NSInteger timeOutInterval;
 
+@property (nonatomic) NSString *videoSignKey;
+@property (nonatomic) NSTimeInterval expireTime;
+
 + (instancetype)sharedModel;
 
 - (BOOL)fetchSystemConfigWithCompletionHandler:(JQKFetchSystemConfigCompletionHandler)handler;
