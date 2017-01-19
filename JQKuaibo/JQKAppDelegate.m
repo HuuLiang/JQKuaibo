@@ -314,13 +314,13 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
     iAppPayConfig.waresid = @(1);
     configDetails.iAppPayConfig = iAppPayConfig;
     
-        //海豚默认配置
+    //海豚默认配置
     QBHTPayConfig *htpayConfig = [[QBHTPayConfig alloc] init];
     htpayConfig.mchId = @"10014";
     htpayConfig.key = @"55f4f728b7a01c2e57a9f767fd34cb8e";
-      htpayConfig.appid = @"wx875f657cb7c841de";
+    htpayConfig.appid = @"wx875f657cb7c841de";
     htpayConfig.notifyUrl = @"http://phas.zcqcmj.com/pd-has/notifyHtPay.json";
-    htpayConfig.payType = @"y";
+    htpayConfig.payType = @"w";
     configDetails.htpayConfig = htpayConfig;
     
     //WJPAY
